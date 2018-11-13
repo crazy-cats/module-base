@@ -1,0 +1,16 @@
+{
+    "name": "crazycat/module-index",
+    "description": "CrazyCat Index module",
+    "type": "crazycat-module",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "crazycat/framework": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "CrazyCat\\Index\\": "code/"
+        }
+    }
+}
