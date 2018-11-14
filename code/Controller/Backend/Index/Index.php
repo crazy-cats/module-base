@@ -15,7 +15,7 @@ namespace CrazyCat\Index\Controller\Backend\Index;
  */
 class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAction {
 
-    public function execute()
+    protected function run()
     {
         
     }

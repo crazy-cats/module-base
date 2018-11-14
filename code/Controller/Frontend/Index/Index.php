@@ -13,9 +13,9 @@ namespace CrazyCat\Index\Controller\Frontend\Index;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class Index extends \CrazyCat\Framework\App\Module\Controller\AbstractAction {
+class Index extends \CrazyCat\Framework\App\Module\Controller\Frontend\AbstractAction {
 
-    public function execute()
+    protected function run()
     {
         
     }
