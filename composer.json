@@ -1,6 +1,7 @@
 {
     "name": "crazycat/module-index",
     "description": "CrazyCat Index module",
+    "version": "0.0.1",
     "type": "crazycat-module",
     "license": [
         "proprietary"
