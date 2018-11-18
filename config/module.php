@@ -13,6 +13,7 @@
  */
 return [
     'namespace' => 'CrazyCat\Index',
+    'version' => '1.0.0',
     'depends' => [],
     'routes' => [
         'frontend' => 'index',
