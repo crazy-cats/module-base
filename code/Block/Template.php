@@ -5,7 +5,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Index\Controller\Backend\Index;
+namespace CrazyCat\Index\Block;
 
 /**
  * @category CrazyCat
@@ -13,11 +13,6 @@ namespace CrazyCat\Index\Controller\Backend\Index;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAction {
-
-    protected function run()
-    {
-        
-    }
-
+class Template extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
+    
 }

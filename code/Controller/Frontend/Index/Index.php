@@ -17,7 +17,7 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Frontend\AbstractA
 
     protected function run()
     {
-        
+        $this->render();
     }
 
 }

@@ -16,8 +16,6 @@ return [
     'version' => '1.0.0',
     'depends' => [],
     'routes' => [
-        'frontend' => 'index',
-        'backend' => 'index',
-        'cli' => 'index'
+        'frontend' => 'index'
     ]
 ];
