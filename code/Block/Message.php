@@ -7,11 +7,8 @@
 
 namespace CrazyCat\Index\Block;
 
-use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\EventManager;
-use CrazyCat\Framework\App\Module\Manager as ModuleManager;
-use CrazyCat\Framework\App\Theme\Manager as ThemeManager;
 use CrazyCat\Framework\App\Session\Messenger;
+use CrazyCat\Framework\App\Theme\Block\Context;
 
 /**
  * @category CrazyCat
@@ -28,9 +25,9 @@ class Message extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
      */
     protected $messenger;
 
-    public function __construct( Messenger $messenger, Area $area, ModuleManager $moduleManager, ThemeManager $themeManager, EventManager $eventManager, array $data = [] )
+    public function __construct( Messenger $messenger, Context $context, array $data = [] )
     {
-        parent::__construct( $area, $moduleManager, $themeManager, $eventManager, $data );
+        parent::__construct( $context, $data );
 
         $this->messenger = $messenger;
     }
