@@ -9,7 +9,7 @@ $messages = $this->getMessages();
 ?>
 <div class="messages">
     <?php foreach ( $messages as $messageType => $messageGroup ) : ?>
-        <div class="message-group <?php $messageType ?>">
+        <div class="message-group <?php echo $messageType ?>">
             <ul>
                 <?php foreach ( $messageGroup as $message ) : ?>
                     <li><?php echo $message ?></li>
