@@ -9,6 +9,7 @@ namespace CrazyCat\Index\Controller\Backend;
 
 use CrazyCat\Framework\App\Io\Http\Response;
 use CrazyCat\Framework\App\Module\Controller\Backend\Context;
+use CrazyCat\Index\Block\Backend\AbstractGrid;
 
 /**
  * @category CrazyCat
@@ -49,11 +50,36 @@ abstract class AbstractGridAction extends \CrazyCat\Framework\App\Module\Control
     /**
      * @return void
      */
+    protected function addFilters( $filters )
+    {
+        foreach ( $this->block->getFields() as $field ) {
+            switch ( $field['filter'] ) {
+
+                case AbstractGrid::FIELD_TYPE_SELECT :
+
+                    break;
+
+                case AbstractGrid::FIELD_TYPE_TEXT :
+                    if ( !empty( $filter = trim( $filters[$field['name']] ) ) ) {
+                        $this->collection->addFieldToFilter( $field['name'], [ 'like' => '%' . $filter . '%' ] );
+                    }
+                    break;
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
     protected function run()
     {
-        $this->collection->setPageSize( $this->request->getParams( 'limit' ) ?: self::DEFAULT_PAGE_SIZE  );
+        if ( !empty( $filters = $this->request->getParam( 'filter' ) ) ) {
+            $this->addFilters( $filters );
+        }
 
-        if ( ( $page = $this->request->getParams( 'p' ) ) ) {
+        $this->collection->setPageSize( $this->request->getParam( 'limit' ) ?: self::DEFAULT_PAGE_SIZE  );
+
+        if ( ( $page = $this->request->getParam( 'p' ) ) ) {
             $this->collection->setCurrentPage( $page );
         }
 

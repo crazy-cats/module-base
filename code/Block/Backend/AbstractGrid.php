@@ -21,6 +21,12 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
     const BOOKMARK_FILTER = 'filter';
     const BOOKMARK_SORTING = 'sorting';
 
+    /**
+     * field types
+     */
+    const FIELD_TYPE_SELECT = 'select';
+    const FIELD_TYPE_TEXT = 'text';
+
     protected $template = 'CrazyCat\Index::grid';
 
     /**
