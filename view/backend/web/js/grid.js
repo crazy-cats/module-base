@@ -15,6 +15,9 @@ define( [ 'jquery' ], function( $ ) {
                 view: function( action ) {
                     window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
                 },
+                edit: function( action ) {
+                    window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
+                },
                 delete: function( action ) {
                     $.ajax( {
                         url: action.url,
