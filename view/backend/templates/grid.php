@@ -15,20 +15,22 @@ $sourceUrl = $this->getSourceUrl();
 ?>
 <div class="list">
     <form id="grid-form" method="get" action="<?php echo getUrl( $sourceUrl ) ?>">
-        <div class="navigation">
-            <div class="page-limit">
-                <select name="limit">
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                <span><?php echo __( 'items per page' ) ?></span>
-            </div>
-            <div class="pagination">
-                <?php echo __( 'Total %1 items, page %2 of %3', [ '<span class="total"></span>', '<span class="current"></span>', '<span class="pages"></span>' ] ) ?>
-            </div>
-            <div class="actions">
-                <button type="submit" class="button"><span><?php echo __( 'Search' ) ?></span></button>
+        <div class="navigation-wrapper">
+            <div class="navigation">
+                <div class="page-limit">
+                    <select name="limit">
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span><?php echo __( 'items per page' ) ?></span>
+                </div>
+                <div class="pagination">
+                    <?php echo __( 'Total %1 items, page %2 of %3', [ '<span class="total"></span>', '<span class="current"></span>', '<span class="pages"></span>' ] ) ?>
+                </div>
+                <div class="actions">
+                    <button type="submit" class="button"><span><?php echo __( 'Search' ) ?></span></button>
+                </div>
             </div>
         </div>
         <table>

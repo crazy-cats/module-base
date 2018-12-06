@@ -43,7 +43,12 @@ define( [ 'jquery' ], function( $ ) {
             form.find( '.pagination .pages' ).html( totalPages );
         };
 
-        form.find( '.navigation' ).on( 'change', 'select', function() {
+        form.find( '[name="limit"]' ).on( 'change', function() {
+            form.find( '[name="p"]' ).val( 1 );
+            form.submit();
+        } );
+
+        form.on( 'change', '[name="p"]', function() {
             form.submit();
         } );
 
@@ -88,14 +93,6 @@ define( [ 'jquery' ], function( $ ) {
         var tableHeader = table.find( '> thead' );
         var fixedHeader = $( '<div class="fixed-head"><table><thead>' + tableHeader.html() + '</thead></table></div>' );
         form.after( fixedHeader );
-        var fixedTop = form.find( '.navigation' ).offset().top - parseInt( form.find( '.navigation' ).css( 'marginBottom' ) );
-        $( document ).on( 'scroll', function() {
-            if ( body.scrollTop() >= fixedTop ) {
-                fixedHeader.show();
-            } else {
-                fixedHeader.hide();
-            }
-        } );
 
         /**
          * Sync value between table filter and fixed filter
