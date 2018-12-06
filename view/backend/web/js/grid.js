@@ -47,24 +47,29 @@ define( [ 'jquery' ], function( $ ) {
             var totalPages = Math.max( Math.ceil( result.total / result.pageSize ), 1 );
 
             var bodyHtml = '';
-            for ( var i = 0; i < result.items.length; i++ ) {
-                var item = result.items[i];
-                bodyHtml += '<tr>';
-                for ( var k = 0; k < opts.fields.length; k++ ) {
-                    var field = opts.fields[k];
-                    if ( field.actions ) {
-                        bodyHtml += '<td class="actions"><select><option></option>';
-                        for ( var a = 0; a < field.actions.length; a++ ) {
-                            var action = field.actions[a];
-                            action.item = item;
-                            bodyHtml += '<option value="' + encodeAttr( JSON.stringify( action ) ) + '">' + field.actions[a].label + '</option>';
+            if ( result.items.length !== 0 ) {
+                for ( var i = 0; i < result.items.length; i++ ) {
+                    var item = result.items[i];
+                    bodyHtml += '<tr>';
+                    for ( var k = 0; k < opts.fields.length; k++ ) {
+                        var field = opts.fields[k];
+                        if ( field.actions ) {
+                            bodyHtml += '<td class="actions"><select><option></option>';
+                            for ( var a = 0; a < field.actions.length; a++ ) {
+                                var action = field.actions[a];
+                                action.item = item;
+                                bodyHtml += '<option value="' + encodeAttr( JSON.stringify( action ) ) + '">' + field.actions[a].label + '</option>';
+                            }
+                            bodyHtml += '</select></td>';
+                        } else {
+                            bodyHtml += '<td>' + item[field.name] + '</td>';
                         }
-                        bodyHtml += '</select></td>';
-                    } else {
-                        bodyHtml += '<td>' + item[field.name] + '</td>';
                     }
+                    bodyHtml += '</tr>';
                 }
-                bodyHtml += '</tr>';
+            }
+            else {
+                bodyHtml = '<tr><td class="no-record" colspan="' + opts.fields.length + '">' + 'No matched record found.' + '</td></tr>';
             }
 
             var currentPageHtml = '<select name="p">';
