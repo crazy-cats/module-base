@@ -18,6 +18,8 @@ define( [ 'jquery' ], function( $ ) {
         var table = form.find( 'table' );
 
         var updateList = function( result ) {
+            var totalPages = Math.max( Math.ceil( result.total / result.pageSize ), 1 );
+
             var bodyHtml = '';
             for ( var i = 0; i < result.items.length; i++ ) {
                 var item = result.items[i];
@@ -28,11 +30,22 @@ define( [ 'jquery' ], function( $ ) {
                 }
                 bodyHtml += '</tr>';
             }
+
+            var currentPageHtml = '<select name="p">';
+            for ( var p = 1; p <= totalPages; p++ ) {
+                currentPageHtml += '<option value="' + p + '"' + (p === result.currentPage ? ' selected="selected"' : '') + '>' + p + '</option>';
+            }
+            currentPageHtml += '</select>';
+
             form.find( 'table tbody' ).html( bodyHtml );
             form.find( '.pagination .total' ).html( result.total );
-            form.find( '.pagination .current' ).html( result.currentPage );
-            form.find( '.pagination .pages' ).html( Math.max( Math.ceil( result.total / result.pageSize ), 1 ) );
+            form.find( '.pagination .current' ).html( currentPageHtml );
+            form.find( '.pagination .pages' ).html( totalPages );
         };
+
+        form.find( '.navigation' ).on( 'change', 'select', function() {
+            form.submit();
+        } );
 
         form.on( 'submit', function() {
             $.ajax( {
