@@ -4,9 +4,10 @@
  * See COPYRIGHT.txt for license details.
  */
 
-use CrazyCat\Index\Block\Backend\AbstractGrid;
+use CrazyCat\Admin\Block\AbstractGrid;
+use CrazyCat\Framework\Utility\StaticVariable;
 
-/* @var $this \CrazyCat\Index\Block\Backend\AbstractGrid */
+/* @var $this \CrazyCat\Admin\Block\AbstractGrid */
 $fields = $this->getFields();
 $filters = $this->getFilters();
 $sorting = $this->getSorting();
@@ -41,7 +42,7 @@ $sourceUrl = $this->getSourceUrl();
                     <?php foreach ( $fields as $field ) : ?>
                         <th>
                             <?php
-                            switch ( $field['filter'] ) :
+                            switch ( $field['filter']['type'] ) :
 
                                 case AbstractGrid::FIELD_TYPE_TEXT :
                                     ?>
@@ -52,6 +53,7 @@ $sourceUrl = $this->getSourceUrl();
                                 case AbstractGrid::FIELD_TYPE_SELECT :
                                     ?>
                                     <select name="filter[<?php echo $field['name'] ?>]">
+                                        <option value="<?php echo StaticVariable::NO_SELECTION ?>"></option>
                                         <?php
                                         if ( !empty( $field['filter_options'] ) ) :
                                             foreach ( $field['filter_options'] as $option ) :
@@ -98,7 +100,7 @@ $sourceUrl = $this->getSourceUrl();
             var bodyHtml = '';
             for ( var i = 0; i < result.items.length; i++ ) {
                 var item = result.items[i];
-                bodyHtml += '<tr class="' + (i % 2 ? 'double' : 'single') + '">';
+                bodyHtml += '<tr>';
                 for ( var k = 0; k < fields.length; k++ ) {
                     var field = fields[k];
                     bodyHtml += '<td>' + item[field.name] + '</td>';
