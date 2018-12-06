@@ -4,10 +4,10 @@
  * See COPYRIGHT.txt for license details.
  */
 
-use CrazyCat\Admin\Block\AbstractGrid;
+use CrazyCat\Framework\App\Module\Block\Backend\AbstractGrid;
 use CrazyCat\Framework\Utility\StaticVariable;
 
-/* @var $this \CrazyCat\Admin\Block\AbstractGrid */
+/* @var $this \CrazyCat\Framework\App\Module\Block\Backend\AbstractGrid */
 $fields = $this->getFields();
 $filters = $this->getFilters();
 $sorting = $this->getSorting();
