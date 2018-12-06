@@ -55,13 +55,16 @@ define( [ 'jquery' ], function( $ ) {
             var updated = false;
             for ( var i = 0; i < opts.sortings.length; i++ ) {
                 if ( opts.sortings[i].field === fieldName ) {
-                    form.find( 'input[name="sorting"]' ).val( fieldName + (opts.sortings[i].dir === 'ASC' ? ' DESC' : 'ASC') );
+                    var dir = (opts.sortings[i].dir === 'ASC' ? 'DESC' : 'ASC');
+                    form.find( 'input[name="sorting"]' ).val( fieldName + ',' + dir );
+                    opts.sortings[i].dir = dir;
                     updated = true;
                     break;
                 }
             }
             if ( !updated ) {
-                form.find( 'input[name="sorting"]' ).val( fieldName + ' ASC' );
+                form.find( 'input[name="sorting"]' ).val( fieldName + ',ASC' );
+                opts.sortings.unshift( {field: fieldName, dir: 'ASC'} );
             }
             form.submit();
         } );
