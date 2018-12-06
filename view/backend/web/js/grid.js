@@ -20,7 +20,6 @@ define( [ 'jquery' ], function( $ ) {
                         url: action.url,
                         data: {id: action.item.id},
                         success: function( response ) {
-                            console.log( response );
                             form.submit();
                         }
                     } );
