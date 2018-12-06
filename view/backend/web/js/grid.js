@@ -10,12 +10,34 @@ define( [ 'jquery' ], function( $ ) {
             form: null,
             sourceUrl: null,
             fields: [ ],
-            sortings: [ ]
+            sortings: [ ],
+            actions: {
+                view: function( action ) {
+                    window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
+                },
+                delete: function( action ) {
+                    $.ajax( {
+                        url: action.url,
+                        data: {id: action.item.id},
+                        success: function( response ) {
+                            console.log( response );
+                            form.submit();
+                        }
+                    } );
+                }
+            }
         }, options );
 
-        var body = $( 'html,body' );
         var form = $( opts.form );
         var table = form.find( 'table' );
+
+        var encodeAttr = function( str ) {
+            return str.replace( /&/g, '&amp;' )
+                    .replace( /</g, '&lt;' )
+                    .replace( />/g, '&gt;' )
+                    .replace( /"/g, '&quot;' )
+                    .replace( /'/g, '&apos;' );
+        };
 
         var updateList = function( result ) {
             var totalPages = Math.max( Math.ceil( result.total / result.pageSize ), 1 );
@@ -26,7 +48,17 @@ define( [ 'jquery' ], function( $ ) {
                 bodyHtml += '<tr>';
                 for ( var k = 0; k < opts.fields.length; k++ ) {
                     var field = opts.fields[k];
-                    bodyHtml += '<td>' + item[field.name] + '</td>';
+                    if ( field.actions ) {
+                        bodyHtml += '<td class="actions"><select><option></option>';
+                        for ( var a = 0; a < field.actions.length; a++ ) {
+                            var action = field.actions[a];
+                            action.item = item;
+                            bodyHtml += '<option value="' + encodeAttr( JSON.stringify( action ) ) + '">' + field.actions[a].label + '</option>';
+                        }
+                        bodyHtml += '</select></td>';
+                    } else {
+                        bodyHtml += '<td>' + item[field.name] + '</td>';
+                    }
                 }
                 bodyHtml += '</tr>';
             }
@@ -50,6 +82,20 @@ define( [ 'jquery' ], function( $ ) {
 
         form.on( 'change', '[name="p"]', function() {
             form.submit();
+        } );
+
+        form.on( 'change', 'tbody .actions select', function() {
+            var el = $( this );
+            if ( !el.val() ) {
+                return;
+            }
+            var action = JSON.parse( el.val() );
+            if ( action.confirm && !confirm( action.confirm ) ) {
+                return;
+            }
+            if ( typeof (opts.actions[action.name]) === 'function' ) {
+                opts.actions[action.name]( action );
+            }
         } );
 
         form.on( 'submit', function() {

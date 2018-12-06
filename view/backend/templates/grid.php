@@ -13,7 +13,7 @@ $filters = $this->getFilters();
 $sortings = $this->getSortings();
 $sourceUrl = $this->getSourceUrl();
 ?>
-<div class="list">
+<div class="backend-grid">
     <form id="grid-form" method="get" action="<?php echo getUrl( $sourceUrl ) ?>">
         <div class="navigation-wrapper">
             <div class="navigation">
@@ -37,7 +37,7 @@ $sourceUrl = $this->getSourceUrl();
             <thead>
                 <tr class="field-name">
                     <?php foreach ( $fields as $field ) : ?>
-                        <th>
+                        <th<?php echo isset( $field['actions'] ) ? ' class="actions"' : '' ?>>
                             <?php
                             if ( !empty( $field['sort'] ) ) :
                                 $sorting = $this->getSorting( $field['name'] );
@@ -54,8 +54,12 @@ $sourceUrl = $this->getSourceUrl();
                 </tr>
                 <tr class="field-filter">
                     <?php foreach ( $fields as $field ) : ?>
-                        <th>
+                        <th<?php echo isset( $field['actions'] ) ? ' class="actions"' : '' ?>>
                             <?php
+                            if ( isset( $field['actions'] ) ) {
+                                echo '&nbsp;';
+                                continue;
+                            }
                             switch ( $field['filter']['type'] ) :
 
                                 case AbstractGrid::FIELD_TYPE_TEXT :
