@@ -10,11 +10,11 @@ use CrazyCat\Framework\Utility\StaticVariable;
 /* @var $this \CrazyCat\Framework\App\Module\Block\Backend\AbstractGrid */
 $fields = $this->getFields();
 $filters = $this->getFilters();
-$sorting = $this->getSorting();
+$sortings = $this->getSortings();
 $sourceUrl = $this->getSourceUrl();
 ?>
 <div class="list">
-    <form id="list-form" method="get" action="<?php echo getUrl( $sourceUrl ) ?>">
+    <form id="grid-form" method="get" action="<?php echo getUrl( $sourceUrl ) ?>">
         <div class="navigation">
             <div class="pagination">
                 <?php echo __( 'Total %1 items, page %2 of %3', [ '<span class="total"></span>', '<span class="current"></span>', '<span class="pages"></span>' ] ) ?>
@@ -28,8 +28,12 @@ $sourceUrl = $this->getSourceUrl();
                 <tr class="field-name">
                     <?php foreach ( $fields as $field ) : ?>
                         <th>
-                            <?php if ( !empty( $field['sort'] ) ) : ?>
-                                <a href="javascript:;" data-sorting="<?php echo (!empty( $sorting[$field['name']] ) ) ? $sorting[$field['name']] : null ?>">
+                            <?php
+                            if ( !empty( $field['sort'] ) ) :
+                                $sorting = $this->getSorting( $field['name'] );
+                                ?>
+                                <a href="javascript:;" data-field="<?php echo $field['name'] ?>"
+                                   <?php $sorting ? ( 'class="' . strtolower( $sorting ) . '"' ) : '' ?>>
                                     <span><?php echo htmlEscape( $field['label'] ) ?></span>
                                 </a>
                             <?php else : ?>
@@ -79,7 +83,9 @@ $sourceUrl = $this->getSourceUrl();
             <tbody></tbody>
             <tfoot>
                 <tr>
-                    <td colspan="<?php echo count( $fields ) ?>">&nbsp;</td>
+                    <td colspan="<?php echo count( $fields ) ?>">
+                        <input type="hidden" name="sorting" value="" />
+                    </td>
                 </tr>
             </tfoot>
         </table>
@@ -88,93 +94,13 @@ $sourceUrl = $this->getSourceUrl();
 
 <script type="text/javascript">
     // <!CDATA[
-    require( [ 'jquery' ], function( $ ) {
-
-        var sourceUrl = '<?php echo $sourceUrl ?>';
-        var fields = <?php echo json_encode( $fields ); ?>;
-        var body = $( 'html,body' );
-        var form = $( '#list-form' );
-        var table = form.find( 'table' );
-
-        var updateList = function( result ) {
-            var bodyHtml = '';
-            for ( var i = 0; i < result.items.length; i++ ) {
-                var item = result.items[i];
-                bodyHtml += '<tr>';
-                for ( var k = 0; k < fields.length; k++ ) {
-                    var field = fields[k];
-                    bodyHtml += '<td>' + item[field.name] + '</td>';
-                }
-                bodyHtml += '</tr>';
-            }
-            form.find( 'table tbody' ).html( bodyHtml );
-            form.find( '.pagination .total' ).html( result.total );
-            form.find( '.pagination .current' ).html( result.currentPage );
-            form.find( '.pagination .pages' ).html( Math.ceil( result.total / result.pageSize ) );
-        };
-
-        form.on( 'submit', function() {
-            $.ajax( {
-                url: sourceUrl,
-                type: 'get',
-                dataType: 'json',
-                data: form.serializeArray(),
-                success: function( response ) {
-                    updateList( response );
-                }
-            } );
-            return false;
+    require( [ 'CrazyCat/Index/js/grid' ], function( grid ) {
+        grid( {
+            form: '#grid-form',
+            fields: <?php echo json_encode( $fields ); ?>,
+            sortings: <?php echo json_encode( $sortings ); ?>,
+            sourceUrl: '<?php echo $sourceUrl ?>'
         } );
-
-        form.find( '.field-name a' ).on( 'click', function( e ) {
-            console.log( $( e.target ).data( 'sorting' ) );
-            form.submit();
-        } );
-
-        form.submit();
-
-        var tableHeader = table.find( '> thead' );
-        var fixedHeader = $( '<div class="fixed-head"><table><thead>' + tableHeader.html() + '</thead></table></div>' );
-        form.after( fixedHeader );
-
-        // sync value of filter
-        var fixedInputs = fixedHeader.find( 'input, select' );
-        var filterInputs = tableHeader.find( 'input, select' );
-        fixedInputs.on( {
-            input: function( evt ) {
-                var el = $( evt.target );
-                filterInputs.eq( fixedInputs.index( el ) ).val( el.val() );
-            },
-            change: function( evt ) {
-                var el = $( evt.target );
-                filterInputs.eq( fixedInputs.index( el ) ).val( el.val() );
-            },
-            keyup: function( evt ) {
-                if ( evt.key === 'Enter' ) {
-                    form.submit();
-                }
-            }
-        } );
-        filterInputs.on( {
-            input: function( evt ) {
-                var el = $( evt.target );
-                fixedInputs.eq( filterInputs.index( el ) ).val( el.val() );
-            },
-            change: function( evt ) {
-                var el = $( evt.target );
-                fixedInputs.eq( filterInputs.index( el ) ).val( el.val() );
-            }
-        } );
-
-        var fixedTop = form.find( '.navigation' ).offset().top - parseInt( form.find( '.navigation' ).css( 'marginBottom' ) );
-        $( document ).on( 'scroll', function() {
-            if ( body.scrollTop() >= fixedTop ) {
-                fixedHeader.show();
-            } else {
-                fixedHeader.hide();
-            }
-        } );
-
     } );
     // ]]>
 </script>
