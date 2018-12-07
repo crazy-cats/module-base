@@ -64,7 +64,7 @@ $sourceUrl = $this->getSourceUrl();
 
                                 case AbstractGrid::FIELD_TYPE_TEXT :
                                     ?>
-                                    <input type="text" class="input-box" name="filter[<?php echo $field['name'] ?>]" value="<?php echo htmlEscape( empty( $filters[$field['name']] ) ? '' : $filters[$field['name']]  ) ?>" />
+                                    <input type="text" class="input-text" name="filter[<?php echo $field['name'] ?>]" value="<?php echo htmlEscape( empty( $filters[$field['name']] ) ? '' : $filters[$field['name']]  ) ?>" />
                                     <?php
                                     break;
 
@@ -73,8 +73,8 @@ $sourceUrl = $this->getSourceUrl();
                                     <select name="filter[<?php echo $field['name'] ?>]">
                                         <option value="<?php echo StaticVariable::NO_SELECTION ?>"></option>
                                         <?php
-                                        if ( !empty( $field['filter_options'] ) ) :
-                                            foreach ( $field['filter_options'] as $option ) :
+                                        if ( !empty( $field['options'] ) ) :
+                                            foreach ( $field['options'] as $option ) :
                                                 ?>
                                                 <option value="<?php echo htmlEscape( $option['value'] ) ?>"
                                                         <?php echo ( isset( $filters[$field['name']] ) && $filters[$field['name']] === $option['value'] ) ? 'selected="selected"' : '' ?>>

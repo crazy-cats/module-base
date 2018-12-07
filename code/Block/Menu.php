@@ -38,7 +38,11 @@ class Menu extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
 
         $html = '<ul class="level-' . $level . '">';
         foreach ( $menuData as $menuItem ) {
-            $html .= sprintf( '<li class="level-%s %s"><a href="%s"><span>%s</span></a>%s</li>', $level, $menuItem['identifier'], ( empty( $menuItem['url'] ) ? 'javascript:;' : $menuItem['url'] ), $menuItem['label'], !empty( $menuItem['children'] ) ? $this->getMenuHtml( $menuItem['children'], $level + 1 ) : '' );
+            $itemClass = 'level-' . $level . ' item-' . $menuItem['identifier'];
+            $linkClass = ( ( isset( $menuItem['url'] ) && $this->url->isCurrent( $menuItem['url'] ) ) ? 'class="current"' : '' );
+            $href = ( empty( $menuItem['url'] ) ? 'javascript:;' : $menuItem['url'] );
+            $childHtml = !empty( $menuItem['children'] ) ? $this->getMenuHtml( $menuItem['children'], $level + 1 ) : '';
+            $html .= sprintf( '<li class="%s"><a %s href="%s"><span>%s</span></a>%s</li>', $itemClass, $linkClass, $href, $menuItem['label'], $childHtml );
         }
         $html .= '</ul>';
 
