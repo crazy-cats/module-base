@@ -2,7 +2,7 @@
  * Copyright © 2018 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
-define( [ 'jquery' ], function( $ ) {
+define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
 
     return function( options ) {
 
@@ -19,6 +19,7 @@ define( [ 'jquery' ], function( $ ) {
                     window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
                 },
                 delete: function( action ) {
+                    utility.loading( true );
                     $.ajax( {
                         url: action.url,
                         data: {id: action.item.id},
@@ -26,6 +27,9 @@ define( [ 'jquery' ], function( $ ) {
                             if ( response.success ) {
                                 form.submit();
                             }
+                        },
+                        complete: function() {
+                            utility.loading( false );
                         }
                     } );
                 }
@@ -34,14 +38,6 @@ define( [ 'jquery' ], function( $ ) {
 
         var form = $( opts.form );
         var table = form.find( 'table' );
-
-        var encodeAttr = function( str ) {
-            return str.replace( /&/g, '&amp;' )
-                    .replace( /</g, '&lt;' )
-                    .replace( />/g, '&gt;' )
-                    .replace( /"/g, '&quot;' )
-                    .replace( /'/g, '&apos;' );
-        };
 
         var updateList = function( result ) {
             var totalPages = Math.max( Math.ceil( result.total / result.pageSize ), 1 );
@@ -58,7 +54,7 @@ define( [ 'jquery' ], function( $ ) {
                             for ( var a = 0; a < field.actions.length; a++ ) {
                                 var action = field.actions[a];
                                 action.item = item;
-                                bodyHtml += '<option value="' + encodeAttr( JSON.stringify( action ) ) + '">' + field.actions[a].label + '</option>';
+                                bodyHtml += '<option value="' + utility.encodeAttr( JSON.stringify( action ) ) + '">' + field.actions[a].label + '</option>';
                             }
                             bodyHtml += '</select></td>';
                         } else {
@@ -67,8 +63,7 @@ define( [ 'jquery' ], function( $ ) {
                     }
                     bodyHtml += '</tr>';
                 }
-            }
-            else {
+            } else {
                 bodyHtml = '<tr><td class="no-record" colspan="' + opts.fields.length + '">' + 'No matched record found.' + '</td></tr>';
             }
 
@@ -108,6 +103,7 @@ define( [ 'jquery' ], function( $ ) {
         } );
 
         form.on( 'submit', function() {
+            utility.loading( true );
             $.ajax( {
                 url: opts.sourceUrl,
                 type: 'get',
@@ -115,6 +111,9 @@ define( [ 'jquery' ], function( $ ) {
                 data: form.serializeArray(),
                 success: function( response ) {
                     updateList( response );
+                },
+                complete: function() {
+                    utility.loading( false );
                 }
             } );
             return false;
