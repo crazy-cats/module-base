@@ -15,26 +15,28 @@ $sourceUrl = $this->getSourceUrl();
 ?>
 <div class="backend-grid">
     <form id="grid-form" method="get" action="<?php echo getUrl( $sourceUrl ) ?>">
-        <div class="navigation-wrapper">
-            <div class="navigation">
-                <div class="page-limit">
-                    <select name="limit">
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    <span><?php echo __( 'items per page' ) ?></span>
-                </div>
-                <div class="pagination">
-                    <?php echo __( 'Total %1 items, page %2 of %3', [ '<span class="total"></span>', '<span class="current"></span>', '<span class="pages"></span>' ] ) ?>
-                </div>
-                <div class="actions">
-                    <button type="submit" class="button"><span><?php echo __( 'Search' ) ?></span></button>
-                </div>
-            </div>
-        </div>
         <table>
             <thead>
+                <tr>
+                    <th class="navigation-wrapper" colspan="<?php echo count( $fields ) ?>">
+                        <div class="navigation">
+                            <div class="page-limit">
+                                <select name="limit" class="toolbar-page-limit" data-selector=".toolbar-page-limit">
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <span><?php echo __( 'items per page' ) ?></span>
+                            </div>
+                            <div class="pagination">
+                                <?php echo __( 'Total %1 items, page %2 of %3', [ '<span class="total"></span>', '<span class="current"></span>', '<span class="pages"></span>' ] ) ?>
+                            </div>
+                            <div class="actions">
+                                <button type="submit" class="button"><span><?php echo __( 'Search' ) ?></span></button>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
                 <tr class="field-name">
                     <?php foreach ( $fields as $field ) : ?>
                         <th<?php echo isset( $field['actions'] ) ? ' class="actions"' : '' ?>>
@@ -64,13 +66,13 @@ $sourceUrl = $this->getSourceUrl();
 
                                 case AbstractGrid::FIELD_TYPE_TEXT :
                                     ?>
-                                    <input type="text" class="input-text" name="filter[<?php echo $field['name'] ?>]" value="<?php echo htmlEscape( empty( $filters[$field['name']] ) ? '' : $filters[$field['name']]  ) ?>" />
+                                    <input type="text" class="input-text filter-<?php echo $field['name'] ?>" data-selector=".filter-<?php echo $field['name'] ?>" name="filter[<?php echo $field['name'] ?>]" value="<?php echo htmlEscape( empty( $filters[$field['name']] ) ? '' : $filters[$field['name']]  ) ?>" />
                                     <?php
                                     break;
 
                                 case AbstractGrid::FIELD_TYPE_SELECT :
                                     ?>
-                                    <select name="filter[<?php echo $field['name'] ?>]">
+                                    <select name="filter[<?php echo $field['name'] ?>]" class="filter-<?php echo $field['name'] ?>" data-selector=".filter-<?php echo $field['name'] ?>">
                                         <option value="<?php echo StaticVariable::NO_SELECTION ?>"></option>
                                         <?php
                                         if ( !empty( $field['options'] ) ) :

@@ -36,8 +36,19 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
             }
         }, options );
 
+        var body = $( 'html, body' );
         var form = $( opts.form );
         var table = form.find( 'table' );
+        var toolbar = table.find( '> thead' );
+        var toolbarInputs = toolbar.find( 'input, select' );
+
+        var updateFixedHeader = function() {
+            fixedHeader.html( '<table><thead>' + toolbar.html() + '</thead></table>' );
+            toolbarInputs.each( function() {
+                var el = $( this );
+                fixedHeader.find( el.data( 'selector' ) ).val( el.val() );
+            } );
+        };
 
         var updateList = function( result ) {
             var totalPages = Math.max( Math.ceil( result.total / result.pageSize ), 1 );
@@ -67,7 +78,7 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
                 bodyHtml = '<tr><td class="no-record" colspan="' + opts.fields.length + '">' + 'No matched record found.' + '</td></tr>';
             }
 
-            var currentPageHtml = '<select name="p">';
+            var currentPageHtml = '<select name="p" class="toolbarInputs-pagination" data-selector=".toolbarInputs-pagination">';
             for ( var p = 1; p <= totalPages; p++ ) {
                 currentPageHtml += '<option value="' + p + '"' + (p === result.currentPage ? ' selected="selected"' : '') + '>' + p + '</option>';
             }
@@ -77,14 +88,63 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
             form.find( '.pagination .total' ).html( result.total );
             form.find( '.pagination .current' ).html( currentPageHtml );
             form.find( '.pagination .pages' ).html( totalPages );
+
+            updateFixedHeader();
         };
+
+        /**
+         * Build fixed header for the list
+         */
+        form.after( '<div class="fixed-head"></div>' );
+        var fixedHeader = $( '.fixed-head' );
+        var tableTop = table.offset().top;
+        var fixedTop = $( '.main' ).offset().top + parseInt( $( '.main' ).css( 'paddingTop' ) );
+        $( document ).on( 'scroll', function() {
+            if ( tableTop - body.scrollTop() <= fixedTop ) {
+                fixedHeader.show();
+            } else {
+                fixedHeader.hide();
+            }
+        } );
+
+        /**
+         * Sync value between table filter and fixed filter
+         */
+        fixedHeader.on( 'input', 'input, select', function( evt ) {
+            var el = $( evt.target );
+            toolbar.find( el.data( 'selector' ) ).val( el.val() );
+        } ).on( 'change', 'input, select', function( evt ) {
+            var el = $( evt.target );
+            toolbar.find( el.data( 'selector' ) ).val( el.val() );
+        } ).on( 'keyup', 'input, select', function( evt ) {
+            if ( evt.key === 'Enter' ) {
+                form.submit();
+            }
+        } );
+        toolbarInputs.on( {
+            input: function( evt ) {
+                var el = $( evt.target );
+                fixedHeader.find( el.data( 'selector' ) ).val( el.val() );
+            },
+            change: function( evt ) {
+                var el = $( evt.target );
+                fixedHeader.find( el.data( 'selector' ) ).val( el.val() );
+            }
+        } );
 
         form.find( '[name="limit"]' ).on( 'change', function() {
             form.find( '[name="p"]' ).val( 1 );
             form.submit();
         } );
-
         form.on( 'change', '[name="p"]', function() {
+            form.submit();
+        } );
+        
+        fixedHeader.on( 'change', '[name="limit"]', function() {
+            form.find( '[name="p"]' ).val( 1 );
+            form.submit();
+        } );
+        fixedHeader.on( 'change', '[name="p"]', function() {
             form.submit();
         } );
 
@@ -139,44 +199,6 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
                 opts.sortings.unshift( {field: fieldName, dir: 'ASC'} );
             }
             form.submit();
-        } );
-
-        /**
-         * Build fixed header for the list
-         */
-        var tableHeader = table.find( '> thead' );
-        var fixedHeader = $( '<div class="fixed-head"><table><thead>' + tableHeader.html() + '</thead></table></div>' );
-        form.after( fixedHeader );
-
-        /**
-         * Sync value between table filter and fixed filter
-         */
-        var fixedInputs = fixedHeader.find( 'input, select' );
-        var filterInputs = tableHeader.find( 'input, select' );
-        fixedInputs.on( {
-            input: function( evt ) {
-                var el = $( evt.target );
-                filterInputs.eq( fixedInputs.index( el ) ).val( el.val() );
-            },
-            change: function( evt ) {
-                var el = $( evt.target );
-                filterInputs.eq( fixedInputs.index( el ) ).val( el.val() );
-            },
-            keyup: function( evt ) {
-                if ( evt.key === 'Enter' ) {
-                    form.submit();
-                }
-            }
-        } );
-        filterInputs.on( {
-            input: function( evt ) {
-                var el = $( evt.target );
-                fixedInputs.eq( filterInputs.index( el ) ).val( el.val() );
-            },
-            change: function( evt ) {
-                var el = $( evt.target );
-                fixedInputs.eq( filterInputs.index( el ) ).val( el.val() );
-            }
         } );
 
         form.submit();
