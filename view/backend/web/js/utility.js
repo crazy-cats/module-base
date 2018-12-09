@@ -11,6 +11,30 @@ define( [ 'jquery' ], function( $ ) {
             var opts = $.extend( {
                 wrapper: null,
                 actions: {
+                    massDelete: function( params ) {
+                        self.loading( true );
+                        var form = $( params.target );
+                        var ids = [ ];
+                        form.find( '.ids input:checked' ).each( function() {
+                            ids.push( this.value );
+                        } );
+                        $.ajax( {
+                            url: params.action,
+                            type: 'post',
+                            dataType: 'json',
+                            data: {ids: ids},
+                            success: function( response ) {
+                                if ( response.success ) {
+                                    form.submit();
+                                } else {
+                                    alert( response.message );
+                                }
+                            },
+                            complete: function() {
+                                self.loading( false );
+                            }
+                        } );
+                    },
                     redirect: function( params ) {
                         self.loading( true );
                         window.location.href = params.url;
@@ -30,7 +54,11 @@ define( [ 'jquery' ], function( $ ) {
                 var button = $( this );
                 if ( opts.actions[button.data( 'action' ).type] ) {
                     button.on( 'click', function() {
-                        opts.actions[button.data( 'action' ).type]( button.data( 'action' ).params );
+                        var action = button.data( 'action' );
+                        if ( action.confirm && !confirm( action.confirm ) ) {
+                            return;
+                        }
+                        opts.actions[action.type]( action.params );
                     } );
                 }
             } );

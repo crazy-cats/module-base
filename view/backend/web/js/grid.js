@@ -11,7 +11,7 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
             sourceUrl: null,
             fields: [ ],
             sortings: [ ],
-            actions: {
+            rowActions: {
                 view: function( action ) {
                     utility.loading( true );
                     window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
@@ -191,8 +191,8 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
             if ( action.confirm && !confirm( action.confirm ) ) {
                 return;
             }
-            if ( typeof (opts.actions[action.name]) === 'function' ) {
-                opts.actions[action.name]( action );
+            if ( typeof (opts.rowActions[action.name]) === 'function' ) {
+                opts.rowActions[action.name]( action );
             }
         } );
 

@@ -22,6 +22,30 @@ $model = $this->getModel();
                     <?php
                     break;
 
+                case AbstractEdit::FIELD_TYPE_MULTISELECT :
+                    ?>
+                    <div class="row">
+                        <label class="field-name" for="data_<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
+                        <div class="field-content">
+                            <select id="data_<?php echo $field['name']; ?>" name="data[<?php echo $field['name'] ?>]" multiple="true">
+                                <?php
+                                if ( !empty( $field['options'] ) ) :
+                                    foreach ( $field['options'] as $option ) :
+                                        ?>
+                                        <option value="<?php echo htmlEscape( $option['value'] ) ?>"
+                                                <?php echo ( is_array( $model->getData( $field['name'] ) ) && in_array( $option['value'], $model->getData( $field['name'] ) ) ) ? 'selected="selected"' : '' ?>>
+                                                    <?php echo htmlEscape( $option['label'] ) ?>
+                                        </option>
+                                        <?php
+                                    endforeach;
+                                endif;
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <?php
+                    break;
+
                 case AbstractEdit::FIELD_TYPE_PASSWORD :
                     ?>
                     <div class="row">
