@@ -20,8 +20,8 @@ if ( empty( $buttons = $this->getData( 'buttons' ) ) ) {
 
 <script type="text/javascript">
 // <![CDATA[
-    require( [ 'CrazyCat/Index/js/act-button' ], function( actButton ) {
-        actButton( {wrapper: '.header-buttons'} );
+    require( [ 'utility' ], function( utility ) {
+        utility.actButton( {wrapper: '.header-buttons'} );
     } );
 // ]]>
 </script>

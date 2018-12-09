@@ -13,7 +13,8 @@
         waitSeconds: 0,
         paths: {
             jquery: '<?php echo getStaticUrl( 'CrazyCat\Index::js/jquery' ); ?>',
-            text: '<?php echo getStaticUrl( 'CrazyCat\Index::js/text' ); ?>'
+            text: '<?php echo getStaticUrl( 'CrazyCat\Index::js/text' ); ?>',
+            utility: '<?php echo getStaticUrl( 'CrazyCat\Index::js/utility' ); ?>'
         }
     } );
 </script>

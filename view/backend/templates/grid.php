@@ -39,9 +39,11 @@ $sourceUrl = $this->getSourceUrl();
                 </tr>
                 <tr class="field-name">
                     <?php foreach ( $fields as $field ) : ?>
-                        <th<?php echo isset( $field['actions'] ) ? ' class="actions"' : '' ?>>
-                            <?php
-                            if ( !empty( $field['sort'] ) ) :
+                        <th class="<?php echo isset( $field['actions'] ) ? 'actions' : ( isset( $field['ids'] ) ? 'ids' : 'item' ) ?>">
+                            <?php if ( !empty( $field['ids'] ) ) : ?>
+                                &nbsp;
+                                <?php
+                            elseif ( !empty( $field['sort'] ) ) :
                                 $sorting = $this->getSorting( $field['name'] );
                                 ?>
                                 <a href="javascript:;" data-field="<?php echo $field['name'] ?>"
@@ -56,8 +58,12 @@ $sourceUrl = $this->getSourceUrl();
                 </tr>
                 <tr class="field-filter">
                     <?php foreach ( $fields as $field ) : ?>
-                        <th<?php echo isset( $field['actions'] ) ? ' class="actions"' : '' ?>>
+                        <th class="<?php echo isset( $field['actions'] ) ? 'actions' : ( isset( $field['ids'] ) ? 'ids' : 'item' ) ?>">
                             <?php
+                            if ( isset( $field['ids'] ) ) {
+                                echo '<input type="checkbox" class="input-ids" data-selector=".input-ids" />';
+                                continue;
+                            }
                             if ( isset( $field['actions'] ) ) {
                                 echo '&nbsp;';
                                 continue;

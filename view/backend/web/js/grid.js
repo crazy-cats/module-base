@@ -2,7 +2,7 @@
  * Copyright © 2018 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
-define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
+define( [ 'jquery', 'utility' ], function( $, utility ) {
 
     return function( options ) {
 
@@ -13,9 +13,11 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
             sortings: [ ],
             actions: {
                 view: function( action ) {
+                    utility.loading( true );
                     window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
                 },
                 edit: function( action ) {
+                    utility.loading( true );
                     window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
                 },
                 delete: function( action ) {
@@ -60,7 +62,9 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
                     bodyHtml += '<tr>';
                     for ( var k = 0; k < opts.fields.length; k++ ) {
                         var field = opts.fields[k];
-                        if ( field.actions ) {
+                        if ( field.ids ) {
+                            bodyHtml += '<td class="ids"><input type="checkbox" name="id" value="' + item.id + '" /></td>';
+                        } else if ( field.actions ) {
                             bodyHtml += '<td class="actions"><select><option></option>';
                             for ( var a = 0; a < field.actions.length; a++ ) {
                                 var action = field.actions[a];
@@ -112,7 +116,9 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
          */
         fixedHeader.on( 'input', 'input, select', function( evt ) {
             var el = $( evt.target );
-            toolbar.find( el.data( 'selector' ) ).val( el.val() );
+            var toolbarEl = toolbar.find( el.data( 'selector' ) );
+            toolbarEl.val( el.val() );
+            toolbarEl.get( 0 ).checked = evt.target.checked;
         } ).on( 'change', 'input, select', function( evt ) {
             var el = $( evt.target );
             toolbar.find( el.data( 'selector' ) ).val( el.val() );
@@ -124,7 +130,9 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
         toolbarInputs.on( {
             input: function( evt ) {
                 var el = $( evt.target );
-                fixedHeader.find( el.data( 'selector' ) ).val( el.val() );
+                var fixedHeaderEl = fixedHeader.find( el.data( 'selector' ) );
+                fixedHeaderEl.val( el.val() );
+                fixedHeaderEl.get( 0 ).checked = evt.target.checked;
             },
             change: function( evt ) {
                 var el = $( evt.target );
@@ -132,6 +140,23 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
             }
         } );
 
+        /**
+         * Select all
+         */
+        fixedHeader.on( 'input', 'input.input-ids', function( evt ) {
+            form.find( 'tbody .ids input' ).each( function( i, el ) {
+                el.checked = evt.target.checked;
+            } );
+        } );
+        toolbar.find( 'input.input-ids' ).on( 'input', function( evt ) {
+            form.find( 'tbody .ids input' ).each( function( i, el ) {
+                el.checked = evt.target.checked;
+            } );
+        } );
+
+        /**
+         * Actions of select in the toolbar
+         */
         form.find( '[name="limit"]' ).on( 'change', function() {
             form.find( '[name="p"]' ).val( 1 );
             form.submit();
@@ -139,7 +164,6 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
         form.on( 'change', '[name="p"]', function() {
             form.submit();
         } );
-        
         fixedHeader.on( 'change', '[name="limit"]', function() {
             form.find( '[name="p"]' ).val( 1 );
             form.submit();
@@ -148,6 +172,16 @@ define( [ 'jquery', 'CrazyCat/Index/js/utility' ], function( $, utility ) {
             form.submit();
         } );
 
+        form.on( 'click', 'tbody tr', function( evt ) {
+            var el = $( this ).find( '.ids input' ).get( 0 );
+            if ( evt.target !== el ) {
+                el.checked = !el.checked;
+            }
+        } );
+
+        /**
+         * Actions of each line in the list
+         */
         form.on( 'change', 'tbody .actions select', function() {
             var el = $( this );
             if ( !el.val() ) {
