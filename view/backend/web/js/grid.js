@@ -104,7 +104,7 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
         var tableTop = table.offset().top;
         var fixedTop = $( '.main' ).offset().top + parseInt( $( '.main' ).css( 'paddingTop' ) );
         $( document ).on( 'scroll', function() {
-            if ( tableTop - body.scrollTop() <= fixedTop ) {
+            if ( tableTop - body.scrollTop() < fixedTop ) {
                 fixedHeader.show();
             } else {
                 fixedHeader.hide();
@@ -196,27 +196,10 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
             }
         } );
 
-        form.on( 'submit', function() {
-            utility.loading( true );
-            $.ajax( {
-                url: opts.sourceUrl,
-                type: 'get',
-                dataType: 'json',
-                data: form.serializeArray(),
-                success: function( response ) {
-                    updateList( response );
-                },
-                complete: function() {
-                    utility.loading( false );
-                }
-            } );
-            return false;
-        } );
-
         /**
          * Sort by specified field
          */
-        form.find( '.field-name a' ).on( 'click', function() {
+        var sortOrder = function() {
             var fieldName = $( this ).data( 'field' );
             var updated = false;
             for ( var i = 0; i < opts.sortings.length; i++ ) {
@@ -233,8 +216,26 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
                 opts.sortings.unshift( {field: fieldName, dir: 'ASC'} );
             }
             form.submit();
-        } );
+        };
+        form.find( '.field-name a' ).on( 'click', sortOrder );
+        fixedHeader.on( 'click', '.field-name a', sortOrder );
 
+        form.on( 'submit', function() {
+            utility.loading( true );
+            $.ajax( {
+                url: opts.sourceUrl,
+                type: 'get',
+                dataType: 'json',
+                data: form.serializeArray(),
+                success: function( response ) {
+                    updateList( response );
+                },
+                complete: function() {
+                    utility.loading( false );
+                }
+            } );
+            return false;
+        } );
         form.submit();
 
     };
