@@ -27,7 +27,7 @@ $model = $this->getModel();
                     <div class="row">
                         <label class="field-name" for="data_<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
                         <div class="field-content">
-                            <select id="data_<?php echo $field['name']; ?>" name="data[<?php echo $field['name'] ?>]" multiple="true">
+                            <select id="data_<?php echo $field['name']; ?>" name="data[<?php echo $field['name'] ?>]" multiple="true" size="8">
                                 <?php
                                 if ( !empty( $field['options'] ) ) :
                                     foreach ( $field['options'] as $option ) :
