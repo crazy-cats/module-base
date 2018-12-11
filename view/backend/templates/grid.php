@@ -82,14 +82,7 @@ $sourceUrl = $this->getSourceUrl();
                                         <option value="<?php echo StaticVariable::NO_SELECTION ?>"></option>
                                         <?php
                                         if ( !empty( $field['options'] ) ) :
-                                            foreach ( $field['options'] as $option ) :
-                                                ?>
-                                                <option value="<?php echo htmlEscape( $option['value'] ) ?>"
-                                                        <?php echo ( isset( $filters[$field['name']] ) && $filters[$field['name']] === $option['value'] ) ? 'selected="selected"' : '' ?>>
-                                                            <?php echo htmlEscape( $option['label'] ) ?>
-                                                </option>
-                                                <?php
-                                            endforeach;
+                                            echo selectOptionsHtml( $field['options'], isset( $filters[$field['name']] ) ? $filters[$field['name']] : null  );
                                         endif;
                                         ?>
                                     </select>
