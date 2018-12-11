@@ -174,7 +174,7 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
 
         form.on( 'click', 'tbody tr', function( evt ) {
             var el = $( this ).find( '.ids input' ).get( 0 );
-            if ( evt.target !== el ) {
+            if ( el && evt.target !== el ) {
                 el.checked = !el.checked;
             }
         } );
