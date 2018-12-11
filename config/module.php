@@ -15,6 +15,9 @@ return [
     'namespace' => 'CrazyCat\Index',
     'version' => '1.0.0',
     'depends' => [],
+    'events' => [
+        'verify_api_token' => 'CrazyCat\Index\Observer\VerifyApiToken'
+    ],
     'routes' => [
         'frontend' => 'index'
     ]
