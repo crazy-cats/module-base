@@ -16,6 +16,9 @@
     "require": {
         "crazycat/framework": "~1.0"
     },
+    "require-dev": {
+        "crazycat/framework": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "CrazyCat\\Index\\": "code/"
