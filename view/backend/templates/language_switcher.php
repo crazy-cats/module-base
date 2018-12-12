@@ -6,23 +6,27 @@
 
 /* @var $this \CrazyCat\Index\Block\LanguageSwitcher */
 $languages = $this->getLanguages();
-$currentUrl = getCurrentUrl();
+$currentLangCode = $this->getCurrentLangCode();
+
+$langOpts = [];
+foreach ( $languages as $language ) {
+    $langOpts[] = [ 'label' => $language['name'], 'value' => $language['code'] ];
+}
 ?>
 <div class="block block-language-switcher">
     <div class="block-content">
-        <ul>
-            <?php
-            foreach ( $languages as $language ) :
-                $url = $currentUrl . ( strpos( $currentUrl, '?' ) === false ? '?' : '&' ) . 'lang=' . $language['code'];
-                ?>
-                <li>
-                    <?php if ( $language['code'] == $currentLangCode ) : ?>
-                        <a class="<?php echo $language['code'] ?>" href="<?php echo $url ?>"><span><?php echo $language['name'] ?></span></a>
-                    <?php else : ?>
-                        <span class="current"><?php echo $language['name'] ?></span>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <select>
+            <?php echo selectOptionsHtml( $langOpts, $currentLangCode ) ?>
+        </select>
+        <script type="text/javascript">
+            // <!CDATA[
+            require( [ 'jquery' ], function( $ ) {
+                var url = '<?php echo getCurrentUrl(); ?>';
+                $( '.block-language-switcher select' ).on( 'change', function(  ) {
+                    window.location.href = url + (url.indexOf( '?' ) === -1 ? '?' : '&') + 'lang=' + $( this ).val();
+                } );
+            } );
+            // ]]>
+        </script>
     </div>
 </div>

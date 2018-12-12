@@ -32,14 +32,20 @@ class LanguageSwitcher extends \CrazyCat\Framework\App\Module\Block\AbstractBloc
         $this->translator = $translator;
     }
 
+    /**
+     * @return array
+     */
     public function getLanguages()
     {
-        
+        return $this->translator->getLanguages();
     }
 
+    /**
+     * @return string
+     */
     public function getCurrentLangCode()
     {
-        
+        return $this->translator->getLangCode();
     }
 
 }
