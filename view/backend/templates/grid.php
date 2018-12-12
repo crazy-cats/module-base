@@ -14,7 +14,7 @@ $sortings = $this->getSortings();
 $sourceUrl = $this->getSourceUrl();
 ?>
 <div class="backend-grid">
-    <form id="grid-form" method="get" action="<?php echo getUrl( $sourceUrl ) ?>">
+    <form id="grid-form" method="get" action="<?php echo $sourceUrl ?>">
         <table>
             <thead>
                 <tr>
@@ -100,6 +100,7 @@ $sourceUrl = $this->getSourceUrl();
                 <tr>
                     <td colspan="<?php echo count( $fields ) ?>">
                         <input type="hidden" name="sorting" value="" />
+                        <input type="hidden" name="ajax" value="1" />
                     </td>
                 </tr>
             </tfoot>
