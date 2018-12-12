@@ -38,7 +38,7 @@ class Menu extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
 
         $html = '<ul class="level-' . $level . '">';
         foreach ( $menuData as $menuItem ) {
-            $itemClass = 'level-' . $level . ' item-' . $menuItem['identifier'];
+            $itemClass = 'level-' . $level . ' item-' . preg_replace( '/[^A-Za-z\d]+/', '-', $menuItem['identifier'] );
             $linkClass = ( ( isset( $menuItem['url'] ) && $this->url->isCurrent( $menuItem['url'] ) ) ? 'class="current"' : '' );
             $href = ( empty( $menuItem['url'] ) ? 'javascript:;' : $menuItem['url'] );
             $childHtml = !empty( $menuItem['children'] ) ? $this->getMenuHtml( $menuItem['children'], $level + 1 ) : '';
