@@ -82,6 +82,22 @@ define( [ 'jquery' ], function( $ ) {
             } else {
                 $( 'body > .loader' ).hide();
             }
+        },
+
+        mainMenu: function( options ) {
+            var opts = $.extend( {
+                el: null
+            }, options );
+            var menu = $( opts.el );
+            menu.find( 'a.current' ).parents( 'li' ).addClass( 'active' );
+            menu.find( 'li' ).not( '.active' ).on( {
+                mouseenter: function() {
+                    $( this ).find( '> ul' ).slideDown();
+                },
+                mouseleave: function() {
+                    $( this ).find( '> ul' ).slideUp();
+                }
+            } );
         }
 
     };
