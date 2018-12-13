@@ -39,7 +39,7 @@ $sourceUrl = $this->getSourceUrl();
                 </tr>
                 <tr class="field-name">
                     <?php foreach ( $fields as $field ) : ?>
-                        <th class="<?php echo isset( $field['actions'] ) ? 'actions' : ( isset( $field['ids'] ) ? 'ids' : 'item' ) ?>">
+                        <th class="<?php echo isset( $field['actions'] ) ? 'actions' : ( isset( $field['ids'] ) ? 'ids' : 'item' ) ?>"<?php echo isset( $field['width'] ) ? sprintf( ' style="width:%d%s;"', $field['width'], strpos( $field['width'], '%' ) !== false ? '%' : 'px'  ) : ''; ?>>
                             <?php if ( !empty( $field['ids'] ) ) : ?>
                                 &nbsp;
                                 <?php
