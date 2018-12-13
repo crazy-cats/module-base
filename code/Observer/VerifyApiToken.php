@@ -28,9 +28,12 @@ class VerifyApiToken {
         $this->config = $config;
     }
 
-    public function execute( &$data )
+    /**
+     * @param \CrazyCat\Framework\Data\Object $observer
+     */
+    public function execute( $observer )
     {
-        $data['verify_object']->setData( 'token_validated', $data['token'] == $this->config[Area::CODE_API]['token'] );
+        $observer['verify_object']->setData( 'token_validated', $observer['token'] == $this->config[Area::CODE_API]['token'] );
     }
 
 }
