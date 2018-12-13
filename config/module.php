@@ -16,9 +16,11 @@ return [
     'version' => '1.0.0',
     'depends' => [],
     'events' => [
+        'controller_execute_before' => 'CrazyCat\Index\Observer\MergeDbConfig',
         'verify_api_token' => 'CrazyCat\Index\Observer\VerifyApiToken'
     ],
     'routes' => [
-        'frontend' => 'index'
+        'frontend' => 'index',
+        'backend' => 'index'
     ]
 ];
