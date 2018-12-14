@@ -17,10 +17,8 @@ class Logout extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractA
 
     protected function run()
     {
-        if ( $this->session->isLoggedIn() ) {
-            $this->session->destroy();
-            $this->messenger->addSuccess( __( 'Logged out successfully.' ) );
-        }
+        $this->eventManager->dispatch( 'process_backend_logout' );
+        $this->messenger->addSuccess( __( 'Logged out successfully.' ) );
         $this->redirect( 'system/index/login' );
     }
 

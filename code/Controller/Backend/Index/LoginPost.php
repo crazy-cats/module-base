@@ -7,8 +7,6 @@
 
 namespace CrazyCat\Core\Controller\Backend\Index;
 
-use CrazyCat\Admin\Model\Admin;
-
 /**
  * @category CrazyCat
  * @package CrazyCat\Admin
@@ -21,8 +19,7 @@ class LoginPost extends \CrazyCat\Framework\App\Module\Controller\Backend\Abstra
     {
         try {
             $post = $this->request->getPost();
-            $admin = $this->objectManager->create( Admin::class )->login( $post['username'], $post['password'] );
-            $this->session->setAdminId( $admin->getData( 'id' ) );
+            $this->eventManager->dispatch( 'process_backend_login', [ 'post' => $post ] );
             $this->messenger->addSuccess( __( 'Logged in successfully.' ) );
         }
         catch ( \Exception $e ) {
