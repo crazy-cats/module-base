@@ -81,8 +81,8 @@ $sourceUrl = $this->getSourceUrl();
                                     <select name="filter[<?php echo $field['name'] ?>]" class="filter-<?php echo $field['name'] ?>" data-selector=".filter-<?php echo $field['name'] ?>">
                                         <option value="<?php echo StaticVariable::NO_SELECTION ?>"></option>
                                         <?php
-                                        if ( !empty( $field['options'] ) ) :
-                                            echo selectOptionsHtml( $field['options'], isset( $filters[$field['name']] ) ? $filters[$field['name']] : null  );
+                                        if ( !empty( $field['filter']['options'] ) ) :
+                                            echo selectOptionsHtml( $field['filter']['options'], isset( $filters[$field['name']] ) ? $filters[$field['name']] : null  );
                                         endif;
                                         ?>
                                     </select>

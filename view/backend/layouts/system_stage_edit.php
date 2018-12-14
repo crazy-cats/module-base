@@ -7,7 +7,7 @@
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
+ * @package CrazyCat\Admin
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
@@ -18,12 +18,14 @@ return [
                 [ 'class' => 'CrazyCat\Core\Block\Template', 'data' => [
                     'template' => 'CrazyCat\Core::header_buttons',
                     'buttons' => [
-                        'new' => [ 'label' => __( 'Create New' ), 'action' => [ 'type' => 'redirect', 'params' => [ 'url' => getUrl( 'system/stage/edit' ) ] ] ]
+                        'back' => [ 'label' => __( 'Back' ), 'action' => [ 'type' => 'redirect', 'params' => [ 'url' => getUrl( 'system/stage' ) ] ] ],
+                        'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#edit-form' ] ] ],
+                        'save_continue' => [ 'label' => __( 'Save and Continue' ), 'action' => [ 'type' => 'saveContinue', 'params' => [ 'target' => '#edit-form' ] ] ]
                     ]
                 ] ]
         ],
         'main' => [
-                [ 'class' => 'CrazyCat\Core\Block\Backend\Stage\Grid' ]
+                [ 'class' => 'CrazyCat\Core\Block\Backend\Stage\Edit' ]
         ]
     ]
 ];

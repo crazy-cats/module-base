@@ -33,8 +33,8 @@ class Edit extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAct
         $this->registry->register( 'current_model', $model );
 
         $pageTitle = $model->getId() ?
-                __( 'Edit Stage `%1` [ ID: %2 ]', [ $model->getData( 'name' ), $model->getId() ] ) :
-                __( 'Create Stage' );
+                __( 'Edit Front Stage `%1` [ ID: %2 ]', [ $model->getData( 'name' ), $model->getId() ] ) :
+                __( 'Create Front Stage' );
 
         $this->setPageTitle( $pageTitle )->render();
     }

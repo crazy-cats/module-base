@@ -13,7 +13,7 @@
  */
 return [
     'system/stage/index' => [
-        'label' => __( 'Stage' ),
+        'label' => __( 'Front Stage' ),
         'url' => getUrl( 'system/stage' ),
         'sort_order' => 3
     ],

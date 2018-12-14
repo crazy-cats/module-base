@@ -7,6 +7,9 @@
 
 namespace CrazyCat\Core\Block\Backend\Stage;
 
+use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
+use CrazyCat\Framework\App\Theme\Block\Context;
+
 /**
  * @category CrazyCat
  * @package CrazyCat\Core
@@ -14,6 +17,18 @@ namespace CrazyCat\Core\Block\Backend\Stage;
  * @link http://crazy-cat.co
  */
 class Edit extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit {
+
+    /**
+     * @var \CrazyCat\Core\Model\Source\YesNo
+     */
+    protected $sourceYesNo;
+
+    public function __construct( SourceYesNo $sourceYesNo, Context $context, $data )
+    {
+        parent::__construct( $context, $data );
+
+        $this->sourceYesNo = $sourceYesNo;
+    }
 
     /**
      * @return array
@@ -24,7 +39,8 @@ class Edit extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit {
                 [ 'name' => 'id', 'label' => __( 'ID' ), 'type' => 'hidden' ],
                 [ 'name' => 'name', 'label' => __( 'Stage Name' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
                 [ 'name' => 'code', 'label' => __( 'Code' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
-                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'options' => [ [ 'value' => '1', 'label' => __( 'Yes' ) ], [ 'value' => '0', 'label' => __( 'No' ) ] ] ]
+                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray( true ) ],
+                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray( true ) ]
         ];
     }
 

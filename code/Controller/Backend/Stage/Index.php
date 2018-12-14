@@ -17,7 +17,7 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAc
 
     protected function run()
     {
-        $this->setPageTitle( __( 'Stage List' ) )->render();
+        $this->setPageTitle( __( 'Front Stage List' ) )->render();
     }
 
 }
