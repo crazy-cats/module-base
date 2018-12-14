@@ -23,5 +23,18 @@ return [
     'routes' => [
         'backend' => 'system',
         'frontend' => 'index'
+    ],
+    'settings' => [
+        'general' => [
+            'label' => __( 'General' ),
+            'sort_order' => 1,
+            'fields' => [
+                'timezone' => [
+                    'label' => __( 'Timezone' ),
+                    'type' => 'select',
+                    'source' => 'CrazyCat\Core\Model\Source\Timezone'
+                ]
+            ]
+        ]
     ]
 ];
