@@ -42,7 +42,7 @@ class Upgrade extends \CrazyCat\Framework\App\Module\Setup\AbstractUpgrade {
                 [ 'name' => 'is_default', 'type' => MySql::COL_TYPE_TINYINT, 'length' => 1, 'unsign' => true, 'null' => false, 'default' => 0 ]
         ];
         $indexes = [
-                [ 'columns' => [ 'code' ], 'type' => MySql::INDEX_NORMAL ],
+                [ 'columns' => [ 'code' ], 'type' => MySql::INDEX_UNIQUE ],
                 [ 'columns' => [ 'enabled' ], 'type' => MySql::INDEX_NORMAL ],
                 [ 'columns' => [ 'is_default' ], 'type' => MySql::INDEX_NORMAL ],
                 [ 'columns' => [ 'name' ], 'type' => MySql::INDEX_FULLTEXT ]

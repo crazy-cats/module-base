@@ -43,6 +43,7 @@ class Grid extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractGrid {
                 [ 'name' => 'name', 'label' => __( 'Stage Name' ), 'sort' => true, 'filter' => [ 'type' => 'text', 'condition' => 'like' ] ],
                 [ 'name' => 'code', 'label' => __( 'Code' ), 'sort' => true, 'filter' => [ 'type' => 'text', 'condition' => 'like' ] ],
                 [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'sort' => true, 'width' => 130, 'filter' => [ 'type' => 'select', 'condition' => 'eq', 'options' => $this->sourceYesNo->toOptionsArray() ] ],
+                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'sort' => true, 'width' => 130, 'filter' => [ 'type' => 'select', 'condition' => 'eq', 'options' => $this->sourceYesNo->toOptionsArray() ] ],
                 [ 'label' => __( 'Actions' ), 'actions' => [
                         [ 'name' => 'edit', 'label' => __( 'Edit' ), 'url' => getUrl( 'system/stage/edit' ) ],
                         [ 'name' => 'delete', 'label' => __( 'Delete' ), 'confirm' => __( 'Sure you want to remove this item?' ), 'url' => getUrl( 'system/stage/delete' ) ]

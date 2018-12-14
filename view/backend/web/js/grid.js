@@ -28,6 +28,8 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
                         success: function( response ) {
                             if ( response.success ) {
                                 form.submit();
+                            } else {
+                                alert( response.message );
                             }
                         },
                         complete: function() {

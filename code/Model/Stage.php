@@ -23,4 +23,13 @@ class Stage extends \CrazyCat\Framework\App\Module\Model\AbstractModel {
         $this->init( 'stage', 'stage' );
     }
 
+    protected function beforeDelete()
+    {
+        if ( $this->conn->fetchOne( sprintf( 'SELECT COUNT(*) FROM `%s`', $this->conn->getTableName( $this->mainTable ) ) ) == 1 ) {
+            throw new \Exception( 'At least one front stage need to exist in the system.' );
+        }
+
+        parent::beforeDelete();
+    }
+
 }
