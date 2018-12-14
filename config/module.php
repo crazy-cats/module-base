@@ -7,20 +7,21 @@
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Index
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
 return [
-    'namespace' => 'CrazyCat\Index',
+    'namespace' => 'CrazyCat\Core',
     'version' => '1.0.0',
     'depends' => [],
     'events' => [
-        'controller_execute_before' => 'CrazyCat\Index\Observer\MergeDbConfig',
-        'verify_api_token' => 'CrazyCat\Index\Observer\VerifyApiToken'
+        'controller_execute_before' => 'CrazyCat\Core\Observer\MergeDbConfig',
+        'verify_api_token' => 'CrazyCat\Core\Observer\VerifyApiToken',
+        'theme_init_after' => 'CrazyCat\Core\Observer\InitStage'
     ],
     'routes' => [
-        'frontend' => 'index',
-        'backend' => 'index'
+        'backend' => 'system',
+        'frontend' => 'index'
     ]
 ];

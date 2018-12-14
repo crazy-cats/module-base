@@ -96,7 +96,7 @@ $model = $this->getModel();
 
     <script type="text/javascript">
         // <![CDATA[
-        require( [ 'jquery', 'utility', 'CrazyCat/Index/js/validation' ], function( $, utility ) {
+        require( [ 'jquery', 'utility', 'CrazyCat/Core/js/validation' ], function( $, utility ) {
             var fields = <?php echo json_encode( $fields ); ?>;
             var multiValueTypes = [ '<?php echo AbstractEdit::FIELD_TYPE_MULTISELECT; ?>' ];
             var options = {

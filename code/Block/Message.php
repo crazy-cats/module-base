@@ -5,20 +5,20 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Index\Block;
+namespace CrazyCat\Core\Block;
 
 use CrazyCat\Framework\App\Session\Messenger;
 use CrazyCat\Framework\App\Theme\Block\Context;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Index
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
 class Message extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
 
-    protected $template = 'CrazyCat\Index::message';
+    protected $template = 'CrazyCat\Core::message';
 
     /**
      * @var \CrazyCat\Framework\App\Session\Messenger

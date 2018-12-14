@@ -5,7 +5,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Index\Observer;
+namespace CrazyCat\Core\Observer;
 
 use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Config;
@@ -13,7 +13,7 @@ use CrazyCat\Framework\App\Db\Manager as DbManager;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Index
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */

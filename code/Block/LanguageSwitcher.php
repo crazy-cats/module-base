@@ -5,20 +5,20 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Index\Block;
+namespace CrazyCat\Core\Block;
 
 use CrazyCat\Framework\App\Theme\Block\Context;
 use CrazyCat\Framework\App\Translator;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Index
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
 class LanguageSwitcher extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
 
-    protected $template = 'CrazyCat\Index::language_switcher';
+    protected $template = 'CrazyCat\Core::language_switcher';
 
     /**
      * @var \CrazyCat\Framework\App\Translator

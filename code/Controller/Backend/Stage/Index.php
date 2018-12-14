@@ -5,11 +5,11 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Backend\Config;
+namespace CrazyCat\Core\Controller\Backend\Stage;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Admin
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
@@ -17,7 +17,7 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAc
 
     protected function run()
     {
-        $this->setPageTitle( __( 'Configuration' ) )->render();
+        $this->setPageTitle( __( 'Stage List' ) )->render();
     }
 
 }

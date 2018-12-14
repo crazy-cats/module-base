@@ -4,7 +4,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Index\Block\LanguageSwitcher */
+/* @var $this \CrazyCat\Core\Block\LanguageSwitcher */
 $languages = $this->getLanguages();
 $currentLangCode = $this->getCurrentLangCode();
 

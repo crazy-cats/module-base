@@ -7,14 +7,19 @@
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Index
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
 return [
+    'appfront/view/index' => [
+        'label' => __( 'Stage' ),
+        'url' => getUrl( 'system/stage' ),
+        'sort_order' => 3
+    ],
     'index/config/index' => [
         'label' => __( 'Configuration' ),
-        'url' => getUrl( 'index/config' ),
+        'url' => getUrl( 'system/config' ),
         'sort_order' => 998
     ]
 ];

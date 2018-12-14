@@ -5,11 +5,11 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Index\Controller\Frontend\Index;
+namespace CrazyCat\Core\Controller\Frontend\Index;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Index
+ * @package CrazyCat\Core
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */

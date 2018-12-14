@@ -5,5 +5,5 @@
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Index\Block\Backend\Config */
+/* @var $this \CrazyCat\Core\Block\Backend\Config */
 ?>

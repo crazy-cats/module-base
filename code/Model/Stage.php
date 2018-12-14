@@ -5,7 +5,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block\Backend;
+namespace CrazyCat\Core\Model;
 
 /**
  * @category CrazyCat
@@ -13,8 +13,14 @@ namespace CrazyCat\Core\Block\Backend;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class Config extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
+class Stage extends \CrazyCat\Framework\App\Module\Model\AbstractModel {
 
-    protected $template = 'CrazyCat\Core::config';
+    /**
+     * @return void
+     */
+    protected function construct()
+    {
+        $this->init( 'stage', 'stage' );
+    }
 
 }

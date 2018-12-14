@@ -16,15 +16,21 @@ use CrazyCat\Framework\App\Config;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class VerifyApiToken {
+class InitStage {
+
+    /**
+     * @var \CrazyCat\Framework\App\Area
+     */
+    private $area;
 
     /**
      * @var \CrazyCat\Framework\App\Config
      */
     private $config;
 
-    public function __construct( Config $config )
+    public function __construct( Area $area, Config $config )
     {
+        $this->area = $area;
         $this->config = $config;
     }
 
@@ -33,7 +39,9 @@ class VerifyApiToken {
      */
     public function execute( $observer )
     {
-        $observer['verify_object']->setData( 'token_validated', $observer['token'] == $this->config[Area::CODE_API]['token'] );
+        if ( isset( $this->config->getData( $this->area->getCode() )['theme'] ) ) {
+            $observer->getThemeManager()->setCurrentTheme( $this->config->getData( $this->area->getCode() )['theme'] );
+        }
     }
 
 }

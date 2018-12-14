@@ -110,7 +110,7 @@ $sourceUrl = $this->getSourceUrl();
 
 <script type="text/javascript">
     // <!CDATA[
-    require( [ 'CrazyCat/Index/js/grid' ], function( grid ) {
+    require( [ 'CrazyCat/Core/js/grid' ], function( grid ) {
         grid( {
             form: '#grid-form',
             fields: <?php echo json_encode( $fields ); ?>,

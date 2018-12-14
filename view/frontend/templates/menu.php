@@ -5,7 +5,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Index\Block\Menu */
+/* @var $this \CrazyCat\Core\Block\Menu */
 ?>
 <div class="menu">
 </div>

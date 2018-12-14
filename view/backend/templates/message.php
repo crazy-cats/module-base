@@ -4,7 +4,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Index\Block\Message */
+/* @var $this \CrazyCat\Core\Block\Message */
 $messages = $this->getMessages();
 ?>
 <div class="messages">

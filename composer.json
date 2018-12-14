@@ -1,6 +1,6 @@
 {
-    "name": "crazycat/module-index",
-    "description": "CrazyCat Index module",
+    "name": "crazycat/module-core",
+    "description": "CrazyCat Core module",
     "type": "crazycat-module",
     "license": [
         "proprietary"
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CrazyCat\\Index\\": "code/"
+            "CrazyCat\\Core\\": "code/"
         },
         "files": [
             "registration.php"

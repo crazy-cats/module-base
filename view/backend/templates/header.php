@@ -4,7 +4,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Index\Block\Template */
+/* @var $this \CrazyCat\Core\Block\Template */
 ?>
 <h1 class="page-title">
     <?php echo $this->getPage()->getPageTitle(); ?>
