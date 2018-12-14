@@ -26,6 +26,18 @@ class Stage extends \CrazyCat\Framework\App\Module\Model\AbstractModel {
     /**
      * @return void
      */
+    protected function afterSave()
+    {
+        parent::afterSave();
+
+        if ( $this->getData( 'is_default' ) ) {
+            $this->conn->update( $this->mainTable, [ 'is_default' => 0 ], [ 'id <> ?' => $this->getId() ] );
+        }
+    }
+
+    /**
+     * @return void
+     */
     protected function beforeDelete()
     {
         if ( $this->conn->fetchOne( sprintf( 'SELECT COUNT(*) FROM `%s`', $this->conn->getTableName( $this->mainTable ) ) ) == 1 ) {
@@ -38,12 +50,12 @@ class Stage extends \CrazyCat\Framework\App\Module\Model\AbstractModel {
     /**
      * @return void
      */
-    protected function afterSave()
+    protected function afterDelete()
     {
-        parent::afterSave();
+        parent::afterDelete();
 
-        if ( $this->getData( 'is_default' ) ) {
-            $this->conn->update( $this->mainTable, [ 'is_default' => 0 ], [ 'id <> ?' => $this->getId() ] );
+        if ( $this->conn->fetchOne( sprintf( 'SELECT COUNT(*) FROM `%s`', $this->conn->getTableName( $this->mainTable ) ) ) == 1 ) {
+            $this->conn->update( $this->mainTable, [ 'is_default' => 1 ] );
         }
     }
 
