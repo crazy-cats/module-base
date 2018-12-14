@@ -24,6 +24,10 @@ class Save extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAct
         $model = $this->objectManager->create( Model::class );
 
         $data = $this->request->getPost( 'data' );
+        if ( empty( $data[$model->getIdFieldName()] ) ) {
+            unset( $data[$model->getIdFieldName()] );
+        }
+
         try {
             $id = $model->addData( $data )->save()->getId();
             $this->messenger->addSuccess( __( 'Successfully saved.' ) );
