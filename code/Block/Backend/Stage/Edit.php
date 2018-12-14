@@ -39,8 +39,8 @@ class Edit extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit {
                 [ 'name' => 'id', 'label' => __( 'ID' ), 'type' => 'hidden' ],
                 [ 'name' => 'name', 'label' => __( 'Stage Name' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
                 [ 'name' => 'code', 'label' => __( 'Code' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
-                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray( true ) ],
-                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray( true ) ]
+                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray() ],
+                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray() ]
         ];
     }
 
