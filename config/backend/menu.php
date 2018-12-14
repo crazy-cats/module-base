@@ -12,14 +12,19 @@
  * @link http://crazy-cat.co
  */
 return [
-    'appfront/view/index' => [
+    'system/stage/index' => [
         'label' => __( 'Stage' ),
         'url' => getUrl( 'system/stage' ),
         'sort_order' => 3
     ],
-    'index/config/index' => [
+    'system/config/index' => [
         'label' => __( 'Configuration' ),
         'url' => getUrl( 'system/config' ),
         'sort_order' => 998
+    ],
+    'system/index/logout' => [
+        'label' => __( 'Logout' ),
+        'url' => getUrl( 'system/index/logout' ),
+        'sort_order' => 999
     ]
 ];
