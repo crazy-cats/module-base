@@ -17,8 +17,7 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAc
 
     protected function run()
     {
-        $this->setLayoutFile( 'admin_index_index_admin' )
-                ->setPageTitle( __( 'Dashboard' ) )
+        $this->setPageTitle( __( 'Dashboard' ) )
                 ->setMetaKeywords( [ 'CrazyCat', 'CMS', __( 'dynamic portal' ) ] )
                 ->setMetaDescription( __( 'CrazyCat Platform' ) )
                 ->render();
