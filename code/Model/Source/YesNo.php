@@ -16,6 +16,7 @@ namespace CrazyCat\Core\Model\Source;
 class YesNo {
 
     /**
+     * @param boolean $withEmpty
      * @return array
      */
     public function toOptionsArray( $withEmpty = false )

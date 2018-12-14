@@ -15,15 +15,21 @@ return [
     'template' => '2columns_left',
     'blocks' => [
         'header' => [
-                [ 'class' => 'CrazyCat\Core\Block\Template', 'data' => [
+            'scopes' => [
+                'class' => 'CrazyCat\Core\Block\Backend\Scopes'
+            ],
+            'buttons' => [
+                'class' => 'CrazyCat\Core\Block\Template',
+                'data' => [
                     'template' => 'CrazyCat\Core::header_buttons',
                     'buttons' => [
                         'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#config-form' ] ] ],
                     ]
-                ] ]
+                ]
+            ]
         ],
         'main' => [
-                [ 'class' => 'CrazyCat\Core\Block\Backend\Config' ]
+            'main-content' => [ 'class' => 'CrazyCat\Core\Block\Backend\Config' ]
         ]
     ]
 ];
