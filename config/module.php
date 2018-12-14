@@ -26,11 +26,11 @@ return [
     ],
     'settings' => [
         'general' => [
-            'label' => __( 'General' ),
+            'label' => 'General',
             'sort_order' => 1,
             'fields' => [
                 'timezone' => [
-                    'label' => __( 'Timezone' ),
+                    'label' => 'Timezone',
                     'type' => 'select',
                     'source' => 'CrazyCat\Core\Model\Source\Timezone'
                 ]
