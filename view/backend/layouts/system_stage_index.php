@@ -18,7 +18,7 @@ return [
                 [ 'class' => 'CrazyCat\Core\Block\Template', 'data' => [
                     'template' => 'CrazyCat\Core::header_buttons',
                     'buttons' => [
-                        'new' => [ 'label' => __( 'Create New' ), 'action' => [ 'type' => 'redirect', 'params' => [ 'url' => getUrl( 'appfront/view/edit' ) ] ] ]
+                        'new' => [ 'label' => __( 'Create New' ), 'action' => [ 'type' => 'redirect', 'params' => [ 'url' => getUrl( 'system/view/edit' ) ] ] ]
                     ]
                 ] ]
         ],

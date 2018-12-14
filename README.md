@@ -1,3 +1,3 @@
-# CrazyCat Index module
+# CrazyCat Core Module
 
-Index module base on CrazyCat platform
+Core module of CrazyCat platform
