@@ -9,13 +9,15 @@ if ( empty( $buttons = $this->getData( 'buttons' ) ) ) {
     return;
 }
 ?>
-<div class="header-buttons">
-    <?php foreach ( $buttons as $name => $button ) : ?>
-        <button class="button btn-<?php echo $name ?>"
-                data-action="<?php echo htmlEscape( json_encode( $button['action'] ) ) ?>">
-            <span><?php echo $button['label'] ?></span>
-        </button>
-    <?php endforeach; ?>
+<div class="block block-header-buttons">
+    <div class="block-content">
+        <?php foreach ( $buttons as $name => $button ) : ?>
+            <button class="button btn-<?php echo $name ?>"
+                    data-action="<?php echo htmlEscape( json_encode( $button['action'] ) ) ?>">
+                <span><?php echo $button['label'] ?></span>
+            </button>
+        <?php endforeach; ?>
+    </div>
 </div>
 
 <script type="text/javascript">

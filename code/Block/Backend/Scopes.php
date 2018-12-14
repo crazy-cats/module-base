@@ -33,11 +33,17 @@ class Scopes extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
         $this->sourceScope = $sourceScope;
     }
 
+    /**
+     * return array
+     */
     public function getScopeOptions()
     {
         return $this->sourceScope->toOptionsArray();
     }
 
+    /**
+     * return string
+     */
     public function getCurrentScope()
     {
         return $this->request->getParam( 'scope', Area::CODE_GLOBAL );

@@ -18,6 +18,8 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAc
     protected function run()
     {
         $this->setPageTitle( __( 'Configuration' ) )->render();
+
+        $scope = $this->request->getParam( 'scope' );
     }
 
 }

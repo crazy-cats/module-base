@@ -15,9 +15,6 @@ return [
     'template' => '2columns_left',
     'blocks' => [
         'header' => [
-            'scopes' => [
-                'class' => 'CrazyCat\Core\Block\Backend\Scopes'
-            ],
             'buttons' => [
                 'class' => 'CrazyCat\Core\Block\Template',
                 'data' => [
@@ -26,6 +23,9 @@ return [
                         'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#config-form' ] ] ],
                     ]
                 ]
+            ],
+            'scopes' => [
+                'class' => 'CrazyCat\Core\Block\Backend\Scopes'
             ]
         ],
         'main' => [

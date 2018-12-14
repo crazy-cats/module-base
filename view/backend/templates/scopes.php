@@ -6,12 +6,22 @@
 
 /* @var $this \CrazyCat\Core\Block\Backend\Scopes */
 ?>
-<div class="block block-scope">
+<div class="block block-scopes">
     <div class="block-content">
-        <form method="get" action="<?php echo getUrl( 'system/config/scope' ) ?>">
+        <form method="get" action="<?php echo getUrl( 'system/config/index' ) ?>">
             <select name="scope">
                 <?php echo selectOptionsHtml( $this->getScopeOptions(), $this->getCurrentScope() ); ?>
             </select>
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+// <![CDATA[
+    require( [ 'jquery' ], function( $ ) {
+        $( '.block-scopes select' ).on( 'change', function() {
+            $( this ).closest( 'form' ).submit();
+        } );
+    } );
+// ]]>
+</script>
