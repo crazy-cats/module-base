@@ -23,7 +23,7 @@ if ( empty( $buttons = $this->getData( 'buttons' ) ) ) {
 <script type="text/javascript">
 // <![CDATA[
     require( [ 'utility' ], function( utility ) {
-        utility.actButton( {wrapper: '.header-buttons'} );
+        utility.actButton( {wrapper: '.block-header-buttons'} );
     } );
 // ]]>
 </script>

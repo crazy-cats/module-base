@@ -20,7 +20,9 @@ class Timezone {
      */
     public function toOptionArray()
     {
-        return [];
+        return [
+            [ 'label' => 'Shanghai', 'value' => 'shanghai' ]
+        ];
     }
 
 }
