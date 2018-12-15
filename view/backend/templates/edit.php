@@ -14,7 +14,7 @@ $model = $this->getModel();
     <form id="edit-form" method="post" action="<?php echo $this->getActionUrl(); ?>" enctype="multipart/form-data">
         <?php
         foreach ( $fields as $field ) :
-            echo $this->renderField( $field, $model );
+            echo $this->renderField( $field );
         endforeach;
         ?>
     </form>

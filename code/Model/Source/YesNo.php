@@ -19,7 +19,7 @@ class YesNo {
      * @param boolean $withEmpty
      * @return array
      */
-    public function toOptionsArray( $withEmpty = false )
+    public function toOptionArray( $withEmpty = false )
     {
         $options = [
                 [ 'value' => '1', 'label' => __( 'Yes' ) ],

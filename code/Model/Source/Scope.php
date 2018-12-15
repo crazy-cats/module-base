@@ -37,7 +37,7 @@ class Scope {
     /**
      * @return array
      */
-    public function toOptionsArray()
+    public function toOptionArray()
     {
         if ( $this->options === null ) {
             $frontendOptions = [];

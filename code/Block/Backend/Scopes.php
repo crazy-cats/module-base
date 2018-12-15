@@ -38,7 +38,7 @@ class Scopes extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
      */
     public function getScopeOptions()
     {
-        return $this->sourceScope->toOptionsArray();
+        return $this->sourceScope->toOptionArray();
     }
 
     /**

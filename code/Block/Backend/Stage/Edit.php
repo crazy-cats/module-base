@@ -8,7 +8,6 @@
 namespace CrazyCat\Core\Block\Backend\Stage;
 
 use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
-use CrazyCat\Framework\App\Module\Block\Backend\Context;
 
 /**
  * @category CrazyCat
@@ -19,18 +18,6 @@ use CrazyCat\Framework\App\Module\Block\Backend\Context;
 class Edit extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit {
 
     /**
-     * @var \CrazyCat\Core\Model\Source\YesNo
-     */
-    protected $sourceYesNo;
-
-    public function __construct( SourceYesNo $sourceYesNo, Context $context, $data )
-    {
-        parent::__construct( $context, $data );
-
-        $this->sourceYesNo = $sourceYesNo;
-    }
-
-    /**
      * @return array
      */
     public function getFields()
@@ -39,8 +26,8 @@ class Edit extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit {
                 [ 'name' => 'id', 'label' => __( 'ID' ), 'type' => 'hidden' ],
                 [ 'name' => 'name', 'label' => __( 'Stage Name' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
                 [ 'name' => 'code', 'label' => __( 'Code' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
-                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray() ],
-                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'options' => $this->sourceYesNo->toOptionsArray() ]
+                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'source' => SourceYesNo::class ],
+                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'source' => SourceYesNo::class ]
         ];
     }
 
