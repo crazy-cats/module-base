@@ -202,11 +202,13 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
          * Sort by specified field
          */
         var sortOrder = function() {
-            var fieldName = $( this ).data( 'field' );
-            var updated = false;
+            var el = $( this ), fieldName = el.data( 'field' ), updated = false, dirCyc = [ '', 'asc', 'desc' ], dir;
+            for ( var i = 0; i < dirCyc.length; i++ ) {
+                el.removeClass( dirCyc[i] );
+            }
             for ( var i = 0; i < opts.sortings.length; i++ ) {
                 if ( opts.sortings[i].field === fieldName ) {
-                    var dir = (opts.sortings[i].dir === 'ASC' ? 'DESC' : 'ASC');
+                    dir = (opts.sortings[i].dir === 'asc' ? 'desc' : 'asc');
                     form.find( 'input[name="sorting"]' ).val( fieldName + ',' + dir );
                     opts.sortings[i].dir = dir;
                     updated = true;
@@ -214,9 +216,11 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
                 }
             }
             if ( !updated ) {
-                form.find( 'input[name="sorting"]' ).val( fieldName + ',ASC' );
-                opts.sortings.unshift( {field: fieldName, dir: 'ASC'} );
+                dir = 'asc';
+                form.find( 'input[name="sorting"]' ).val( fieldName + ',' + dir );
+                opts.sortings.unshift( {field: fieldName, dir: dir} );
             }
+            el.addClass( dir );
             form.submit();
         };
         form.find( '.field-name a' ).on( 'click', sortOrder );
