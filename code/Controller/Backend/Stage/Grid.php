@@ -8,6 +8,7 @@
 namespace CrazyCat\Core\Controller\Backend\Stage;
 
 use CrazyCat\Core\Block\Backend\Stage\Grid as GridBlock;
+use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
 use CrazyCat\Core\Model\Stage\Collection;
 
 /**
@@ -21,6 +22,20 @@ class Grid extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractGri
     protected function construct()
     {
         $this->init( Collection::class, GridBlock::class );
+    }
+
+    /**
+     * @param array $collectionData
+     * @return array
+     */
+    protected function processData( $collectionData )
+    {
+        $sourceYesNo = $this->objectManager->get( SourceYesNo::class );
+        foreach ( $collectionData['items'] as &$item ) {
+            $item['enabled'] = $sourceYesNo->getLabel( $item['enabled'] );
+            $item['is_default'] = $sourceYesNo->getLabel( $item['is_default'] );
+        }
+        return $collectionData;
     }
 
 }

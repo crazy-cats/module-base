@@ -13,15 +13,12 @@ namespace CrazyCat\Core\Model\Source;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class Timezone {
+class Timezone extends \CrazyCat\Framework\App\Module\Model\Source\AbstractSource {
 
-    /**
-     * @return array
-     */
-    public function toOptionArray()
+    public function __construct()
     {
-        return [
-            [ 'label' => 'Shanghai', 'value' => 'shanghai' ]
+        $this->sourceData = [
+            'Shanghai' => 'shanghai'
         ];
     }
 

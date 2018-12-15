@@ -13,24 +13,14 @@ namespace CrazyCat\Core\Model\Source;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class YesNo {
+class YesNo extends \CrazyCat\Framework\App\Module\Model\Source\AbstractSource {
 
-    /**
-     * @param boolean $withEmpty
-     * @return array
-     */
-    public function toOptionArray( $withEmpty = false )
+    public function __construct()
     {
-        $options = [
-                [ 'value' => '1', 'label' => __( 'Yes' ) ],
-                [ 'value' => '0', 'label' => __( 'No' ) ]
+        $this->sourceData = [
+            __( 'Yes' ) => '1',
+            __( 'No' ) => '0',
         ];
-
-        if ( $withEmpty ) {
-            array_unshift( $options, [ 'value' => '', 'label' => '' ] );
-        }
-
-        return $options;
     }
 
 }

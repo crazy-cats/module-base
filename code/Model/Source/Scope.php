@@ -17,43 +17,18 @@ use CrazyCat\Framework\App\ObjectManager;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class Scope {
-
-    /**
-     * @var \CrazyCat\Framework\App\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var array
-     */
-    private $options;
+class Scope extends \CrazyCat\Framework\App\Module\Model\Source\AbstractSource {
 
     public function __construct( ObjectManager $objectManager )
     {
-        $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @return array
-     */
-    public function toOptionArray()
-    {
-        if ( $this->options === null ) {
-            $frontendOptions = [];
-            foreach ( $this->objectManager->create( StageCollection::class ) as $frontStage ) {
-                $frontendOptions[] = [ 'label' => $frontStage->getData( 'name' ), 'value' => Area::CODE_FRONTEND . '-' . $frontStage->getId() ];
-            }
-            $this->options = [
-                    [ 'label' => __( 'Global' ), 'value' => Area::CODE_GLOBAL ],
-                //[ 'label' => __( 'CLI' ), 'value' => Area::CODE_CLI ],
-                //[ 'label' => __( 'CRON' ), 'value' => Area::CODE_CRON ],
-                //[ 'label' => __( 'API' ), 'value' => Area::CODE_API ],
-                //[ 'label' => __( 'Backend' ), 'value' => Area::CODE_BACKEND ],
-                [ 'label' => __( 'Frontend' ), 'value' => $frontendOptions ]
-            ];
+        $frontendOptions = [];
+        foreach ( $objectManager->create( StageCollection::class ) as $frontStage ) {
+            $frontendOptions[$frontStage->getData( 'name' )] = Area::CODE_FRONTEND . '-' . $frontStage->getId();
         }
-        return $this->options;
+        $this->sourceData = [
+            __( 'Global' ) => Area::CODE_GLOBAL,
+            __( 'Frontend' ) => $frontendOptions
+        ];
     }
 
 }
