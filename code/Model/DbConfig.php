@@ -18,6 +18,8 @@ use CrazyCat\Framework\App\Db\Manager as DbManager;
  */
 class DbConfig {
 
+    private $mainTable = 'config';
+
     /**
      * @var \CrazyCat\Framework\App\Db\AbstractAdapter
      */
@@ -40,7 +42,7 @@ class DbConfig {
      */
     public function getFromDb( $scope, $scopeId = null )
     {
-        $sql = sprintf( 'SELECT `path`, `value` FROM `%s` WHERE `scope` = ? AND `scope_id` = ?', $this->conn->getTableName( 'config' ) );
+        $sql = sprintf( 'SELECT `path`, `value` FROM `%s` WHERE `scope` = ? AND `scope_id` = ?', $this->conn->getTableName( $this->mainTable ) );
         return $this->conn->fetchPairs( $sql, [ $scope, $scopeId ] );
     }
 
@@ -68,6 +70,28 @@ class DbConfig {
             }
         }
         return isset( $this->configurations[$key][$path] ) ? json_decode( $this->configurations[$key][$path], true ) : null;
+    }
+
+    /**
+     * @param string $scope
+     * @param int|null $scopeId
+     * @param array $configData
+     * @return $this
+     */
+    public function saveConfig( $scope, $scopeId, $configData )
+    {
+        $data = [];
+        foreach ( $configData as $path => $value ) {
+            $data[] = [
+                'scope' => $scope,
+                'scope_id' => $scopeId,
+                'path' => $path,
+                'value' => $value
+            ];
+        }
+        $this->conn->insertUpdate( $this->conn->getTableName( $this->mainTable ), $data, [ 'path', 'value' ] );
+
+        return $this;
     }
 
 }

@@ -21,7 +21,7 @@ class Upgrade extends \CrazyCat\Framework\App\Module\Setup\AbstractUpgrade {
     {
         $columns = [
                 [ 'name' => 'scope', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 8, 'null' => false ],
-                [ 'name' => 'scope_id', 'type' => MySql::COL_TYPE_INT, 'unsign' => true, 'null' => false ],
+                [ 'name' => 'scope_id', 'type' => MySql::COL_TYPE_INT, 'unsign' => true ],
                 [ 'name' => 'path', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 64, 'null' => false ],
                 [ 'name' => 'value', 'type' => MySql::COL_TYPE_TEXT, 'null' => false ]
         ];

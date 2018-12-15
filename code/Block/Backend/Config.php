@@ -7,6 +7,7 @@
 
 namespace CrazyCat\Core\Block\Backend;
 
+use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\ObjectManager;
 use CrazyCat\Framework\App\Theme\Block\Context;
 
@@ -67,6 +68,14 @@ class Config extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
     public function getSettings()
     {
         return $this->registry->registry( 'settings' );
+    }
+
+    /**
+     * @return string
+     */
+    public function getScope()
+    {
+        return $this->request->getParam( 'scope', Area::CODE_GLOBAL );
     }
 
 }

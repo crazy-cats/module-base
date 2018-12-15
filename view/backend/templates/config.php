@@ -9,6 +9,7 @@ $settings = $this->getSettings();
 ?>
 <div class="settings">
     <form id="config-form" method="post" action="<?php echo getUrl( 'system/config/save' ) ?>">
+        <input type="hidden" name="scope" value="<?php echo $this->getScope() ?>" />
         <?php foreach ( $settings as $groupName => $settingGroup ) : ?>
             <div class="setting-group group-<?php echo $groupName ?>">
                 <div class="setting-group-label">
