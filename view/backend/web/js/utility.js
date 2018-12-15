@@ -90,13 +90,8 @@ define( [ 'jquery' ], function( $ ) {
             }, options );
             var menu = $( opts.el );
             menu.find( 'a.current' ).parents( 'li' ).addClass( 'active' );
-            menu.find( 'li' ).not( '.active' ).on( {
-                mouseenter: function() {
-                    $( this ).find( '> ul' ).slideDown();
-                },
-                mouseleave: function() {
-                    $( this ).find( '> ul' ).slideUp();
-                }
+            menu.find( 'li' ).not( '.active' ).on( 'click', function() {
+                $( this ).find( '> ul' ).slideToggle();
             } );
         }
 

@@ -8,7 +8,7 @@
 namespace CrazyCat\Core\Block\Backend\Stage;
 
 use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
-use CrazyCat\Framework\App\Theme\Block\Context;
+use CrazyCat\Framework\App\Module\Block\Backend\Context;
 
 /**
  * @category CrazyCat
