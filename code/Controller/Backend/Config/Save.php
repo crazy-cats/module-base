@@ -39,9 +39,17 @@ class Save extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAct
 
     protected function run()
     {
-        list( $scope, $scopeId ) = array_pad( explode( '-', $this->request->getPost( 'scope' ) ), 2, null );
-        $data = $this->request->getPost( 'data' );
-        $this->dbConfig->saveConfig( $scope, $scopeId, $data );
+        try {
+            list( $scope, $scopeId ) = array_pad( explode( '-', $this->request->getPost( 'scope' ) ), 2, 0 );
+            $data = $this->request->getPost( 'data' );
+            $this->dbConfig->saveConfig( $data, $scope, $scopeId );
+            $this->messenger->addSuccess( __( 'Configurations saved successfully.' ) );
+        }
+        catch ( \Exception $e ) {
+            $this->messenger->addError( $e->getMessage() );
+        }
+
+        $this->redirect( 'system/config' );
     }
 
 }

@@ -49,10 +49,10 @@ class DbConfig {
     /**
      * @param string $path
      * @param string $scope
-     * @param int|null $scopeId
+     * @param int $scopeId
      * @return mixed
      */
-    public function getValue( $path, $scope = Area::CODE_GLOBAL, $scopeId = null )
+    public function getValue( $path, $scope = Area::CODE_GLOBAL, $scopeId = 0 )
     {
         if ( !isset( $this->configurations[Area::CODE_GLOBAL] ) ) {
             $this->configurations[Area::CODE_GLOBAL] = $this->getFromDb( Area::CODE_GLOBAL );
@@ -61,7 +61,7 @@ class DbConfig {
             $key = $scope;
         }
         else {
-            if ( $scopeId === null ) {
+            if ( $scopeId === 0 ) {
                 throw new \Exception( __( 'Scope ID is required.' ) );
             }
             $key = $scope . '-' . $scopeId;
@@ -73,12 +73,12 @@ class DbConfig {
     }
 
     /**
-     * @param string $scope
-     * @param int|null $scopeId
      * @param array $configData
+     * @param string $scope
+     * @param int $scopeId
      * @return $this
      */
-    public function saveConfig( $scope, $scopeId, $configData )
+    public function saveConfig( $configData, $scope, $scopeId = 0 )
     {
         $data = [];
         foreach ( $configData as $path => $value ) {
