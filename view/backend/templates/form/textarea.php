@@ -13,7 +13,7 @@ $value = $this->getValue();
 <?php if ( $this->withWrapper() ) : ?>
     <div class="field-content">
     <?php endif; ?>
-    <textarea class="input-text"
+    <textarea class="input-text" rows="8"
               id="<?php echo $this->getFieldId(); ?>"
               name="<?php echo $this->getFieldName(); ?>"
               <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?>><?php echo htmlEscape( $value ) ?></textarea>

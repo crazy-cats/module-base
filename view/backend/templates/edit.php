@@ -38,7 +38,12 @@ $model = $this->getModel();
     require( [ 'CrazyCat/Core/js/form' ], function( form ) {
         form( {
             el: '#edit-form',
-            fields: <?php echo json_encode( $fields ); ?>
+            fields: <?php echo json_encode( $fields ); ?>,
+            editor: {
+                baseUrl: '<?php echo getBaseUrl() ?>',
+                imageUploadUrl: '<?php echo $this->getImageUploadUrl() ?>',
+                skinUrl: '<?php echo getStaticUrl( 'CrazyCat\Core::css/tinymce/skins/lightgray' ) ?>'
+            }
         } );
     } );
     // ]]>

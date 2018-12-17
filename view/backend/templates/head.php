@@ -14,7 +14,13 @@
         paths: {
             jquery: '<?php echo getStaticUrl( 'CrazyCat\Core::js/jquery' ); ?>',
             text: '<?php echo getStaticUrl( 'CrazyCat\Core::js/text' ); ?>',
-            utility: '<?php echo getStaticUrl( 'CrazyCat\Core::js/utility' ); ?>'
+            utility: '<?php echo getStaticUrl( 'CrazyCat\Core::js/utility' ); ?>',
+            editor: '<?php echo getStaticUrl( 'CrazyCat/Core/js/tinymce/tinymce.min' ); ?>'
+        },
+        shim: {
+            editor: {
+                exports: 'tinymce'
+            }
         }
     } );
 </script>

@@ -8,7 +8,7 @@ define( [ 'jquery' ], function( $ ) {
 
         actButton: function( options ) {
 
-            var opts = $.extend( {
+            var opts = $.extend( true, {
                 wrapper: null,
                 actions: {
                     massDelete: function( params ) {
@@ -85,7 +85,7 @@ define( [ 'jquery' ], function( $ ) {
         },
 
         mainMenu: function( options ) {
-            var opts = $.extend( {
+            var opts = $.extend( true, {
                 el: null
             }, options );
             var menu = $( opts.el );

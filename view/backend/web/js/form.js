@@ -6,9 +6,15 @@ define( [ 'jquery', 'utility', 'CrazyCat/Core/js/validation' ], function( $, uti
 
     return function( options ) {
 
-        var opts = $.extend( {
+        var opts = $.extend( true, {
             el: null,
             fields: [ ],
+            editor: {
+                baseUrl: null,
+                imageUploadUrl: null,
+                skinUrl: null,
+                height: 400
+            },
             validation: {
                 rules: {},
                 invalidHandler: function() {
@@ -23,6 +29,22 @@ define( [ 'jquery', 'utility', 'CrazyCat/Core/js/validation' ], function( $, uti
         for ( var groupName in opts.fields ) {
             var fields = opts.fields[groupName].fields;
             for ( var i = 0; i < fields.length; i++ ) {
+                if ( fields[i].type === 'editor' ) {
+                    var fieldName = fields[i].name;
+                    require( [ 'editor' ], function( editor ) {
+                        editor.init( {
+                            selector: '#data_' + fieldName,
+                            height: opts.editor.height,
+                            theme: 'modern',
+                            plugins: 'searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help code',
+                            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | link image | removeformat code',
+                            document_base_url: opts.editor.baseUrl,
+                            images_upload_url: opts.editor.imageUploadUrl,
+                            skin_url: opts.editor.skinUrl,
+                            images_upload_credentials: true
+                        } );
+                    } );
+                }
                 if ( fields[i].validation ) {
                     var fieldName = multiValueTypes.indexOf( fields[i].type ) ? ('data[' + fields[i].name + ']') : ('data[' + fields[i].name + '][]');
                     opts.validation.rules[ fieldName ] = fields[i].validation;

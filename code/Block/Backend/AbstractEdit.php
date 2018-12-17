@@ -24,6 +24,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
     /**
      * field types
      */
+    const FIELD_TYPE_EDITOR = 'editor';
     const FIELD_TYPE_HIDDEN = 'hidden';
     const FIELD_TYPE_MULTISELECT = 'multiselect';
     const FIELD_TYPE_PASSWORD = 'password';
@@ -102,6 +103,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
                 break;
 
             case self::FIELD_TYPE_TEXTAREA :
+            case self::FIELD_TYPE_EDITOR :
                 $renderer = $this->objectManager->create( TextareaRenderer::class );
                 break;
         }

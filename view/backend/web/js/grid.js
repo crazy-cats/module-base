@@ -6,7 +6,7 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
 
     return function( options ) {
 
-        var opts = $.extend( {
+        var opts = $.extend( true, {
             form: null,
             sourceUrl: null,
             fields: [ ],
