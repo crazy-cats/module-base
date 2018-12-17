@@ -20,8 +20,9 @@ class Stage extends \CrazyCat\Framework\App\Module\Model\Source\AbstractSource {
 
     public function __construct( ObjectManager $objectManager )
     {
+        $this->sourceData[__( 'All' )] = 0;
         foreach ( $objectManager->create( StageCollection::class ) as $frontStage ) {
-            $this->sourceData[$frontStage->getData( 'name' )] = $frontStage->getId();
+            $this->sourceData[sprintf( '%s ( ID: %d )', $frontStage->getData( 'name' ), $frontStage->getId() )] = $frontStage->getId();
         }
     }
 
