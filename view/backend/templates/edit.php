@@ -4,9 +4,9 @@
  * See COPYRIGHT.txt for license details.
  */
 
-use CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit;
+use CrazyCat\Core\Block\Backend\AbstractEdit;
 
-/* @var $this \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit */
+/* @var $this \CrazyCat\Core\Block\Backend\AbstractEdit */
 $fields = $this->getFields();
 $model = $this->getModel();
 ?>

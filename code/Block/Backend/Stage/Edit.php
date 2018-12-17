@@ -15,7 +15,7 @@ use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class Edit extends \CrazyCat\Framework\App\Module\Block\Backend\AbstractEdit {
+class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
 
     /**
      * @return array
