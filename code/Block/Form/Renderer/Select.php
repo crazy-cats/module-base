@@ -17,4 +17,23 @@ class Select extends abstractRenderer {
 
     protected $template = 'CrazyCat\Core::form/select';
 
+    /**
+     * @var boolean
+     */
+    protected $isMultiple = false;
+
+    /**
+     * @param boolean|null $isMultiple
+     * @return boolean|$this
+     */
+    public function isMultiple( $isMultiple = null )
+    {
+        if ( $isMultiple === null ) {
+            return $this->isMultiple;
+        }
+
+        $this->isMultiple = $isMultiple;
+        return $this;
+    }
+
 }

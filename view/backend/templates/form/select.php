@@ -15,7 +15,7 @@ $value = $this->getValue();
     <?php endif; ?>
     <select id="<?php echo $this->getFieldId(); ?>"
             name="<?php echo $this->getFieldName(); ?>"
-            <?php if ( $this->getIsMultiple() ) : ?>multiple="true" size="8"<?php endif; ?>>
+            <?php if ( $this->isMultiple() ) : ?>multiple="true" size="8"<?php endif; ?>>
                 <?php
                 if ( !empty( $field['options'] ) ) :
                     echo selectOptionsHtml( $field['options'], $value );
