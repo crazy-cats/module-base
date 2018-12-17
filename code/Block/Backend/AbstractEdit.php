@@ -52,7 +52,11 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
      */
     protected function getFieldValue( array $field, $value = null )
     {
-        return ( $value === null ) ? $this->getModel()->getData( $field['name'] ) : $value;
+        return ( $value === null ) ?
+                ( $this->getModel()->hasData( $field['name'] ) ?
+                $this->getModel()->getData( $field['name'] ) :
+                ( isset( $field['default_value'] ) ? $field['default_value'] : null ) ) :
+                $value;
     }
 
     /**

@@ -2,7 +2,7 @@
  * Copyright © 2018 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
-define( [ 'jquery', 'utility', 'CrazyCat/Core/js/validation' ], function( $, utility ) {
+define( [ 'jquery', 'utility', 'editor', 'CrazyCat/Core/js/validation' ], function( $, utility, editor ) {
 
     return function( options ) {
 
@@ -30,19 +30,16 @@ define( [ 'jquery', 'utility', 'CrazyCat/Core/js/validation' ], function( $, uti
             var fields = opts.fields[groupName].fields;
             for ( var i = 0; i < fields.length; i++ ) {
                 if ( fields[i].type === 'editor' ) {
-                    var fieldName = fields[i].name;
-                    require( [ 'editor' ], function( editor ) {
-                        editor.init( {
-                            selector: '#data_' + fieldName,
-                            height: opts.editor.height,
-                            theme: 'modern',
-                            plugins: 'searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help code',
-                            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | link image | removeformat code',
-                            document_base_url: opts.editor.baseUrl,
-                            images_upload_url: opts.editor.imageUploadUrl,
-                            skin_url: opts.editor.skinUrl,
-                            images_upload_credentials: true
-                        } );
+                    editor.init( {
+                        selector: '#data_' + fields[i].name,
+                        height: opts.editor.height,
+                        theme: 'modern',
+                        plugins: 'searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help code',
+                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | link image | removeformat code',
+                        document_base_url: opts.editor.baseUrl,
+                        images_upload_url: opts.editor.imageUploadUrl,
+                        skin_url: opts.editor.skinUrl,
+                        images_upload_credentials: true
                     } );
                 }
                 if ( fields[i].validation ) {
