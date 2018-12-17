@@ -29,11 +29,11 @@ $settings = $this->getFields();
 
 <script type="text/javascript">
 // <![CDATA[
-    require( [ 'jquery' ], function( $ ) {
-        $( '.field-group-label' ).on( 'click', function() {
-            $( this ).siblings( '.field-group-content' ).slideDown();
-            $( this ).closest( '.field-group' ).siblings().find( '.field-group-content' ).slideUp();
-        } ).eq( 0 ).click();
+    require( [ 'CrazyCat/Core/js/form' ], function( form ) {
+        form( {
+            el: '#edit-form',
+            fields: <?php echo json_encode( $fields ); ?>
+        } );
     } );
 // ]]>
 </script>

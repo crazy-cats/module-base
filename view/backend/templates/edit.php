@@ -35,27 +35,11 @@ $model = $this->getModel();
 
 <script type="text/javascript">
     // <![CDATA[
-    require( [ 'jquery', 'utility', 'CrazyCat/Core/js/validation' ], function( $, utility ) {
-        var fields = <?php echo json_encode( $fields ); ?>;
-        var multiValueTypes = [ '<?php echo AbstractEdit::FIELD_TYPE_MULTISELECT; ?>' ];
-        var options = {
-            rules: {},
-            invalidHandler: function() {
-                utility.loading( false );
-            }
-        };
-        for ( var i = 0; i < fields.length; i++ ) {
-            if ( fields[i].validation ) {
-                var fieldName = multiValueTypes.indexOf( fields[i].type ) ? ('data[' + fields[i].name + ']') : ('data[' + fields[i].name + '][]');
-                options.rules[ fieldName ] = fields[i].validation;
-            }
-        }
-        $( '#edit-form' ).validate( options );
-
-        $( '.field-group-label' ).on( 'click', function() {
-            $( this ).siblings( '.field-group-content' ).slideDown();
-            $( this ).closest( '.field-group' ).siblings().find( '.field-group-content' ).slideUp();
-        } ).eq( 0 ).click();
+    require( [ 'CrazyCat/Core/js/form' ], function( form ) {
+        form( {
+            el: '#edit-form',
+            fields: <?php echo json_encode( $fields ); ?>
+        } );
     } );
     // ]]>
 </script>
