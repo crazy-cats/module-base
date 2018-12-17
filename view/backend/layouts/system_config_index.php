@@ -20,7 +20,7 @@ return [
                 'data' => [
                     'template' => 'CrazyCat\Core::header_buttons',
                     'buttons' => [
-                        'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#config-form' ] ] ],
+                        'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#edit-form' ] ] ],
                     ]
                 ]
             ],
@@ -29,7 +29,7 @@ return [
             ]
         ],
         'main' => [
-            'main-content' => [ 'class' => 'CrazyCat\Core\Block\Backend\Config' ]
+            'main-content' => [ 'class' => 'CrazyCat\Core\Block\Backend\Config\Edit' ]
         ]
     ]
 ];

@@ -46,6 +46,15 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
     }
 
     /**
+     * @param array $field
+     * @return mixed
+     */
+    protected function getFieldValue( array $field, $value = null )
+    {
+        return ( $value === null ) ? $this->getModel()->getData( $field['name'] ) : $value;
+    }
+
+    /**
      * @return \CrazyCat\Framework\App\Module\Model\AbstractModel
      */
     public function getModel()
@@ -55,10 +64,10 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
 
     /**
      * @param array $field
-     * @param \CrazyCat\Framework\Data\Object $model
+     * @param mixed $value
      * @return string
      */
-    public function renderField( $field )
+    public function renderField( $field, $value = null )
     {
         if ( isset( $field['renderer'] ) ) {
             $renderer = $this->objectManager->create( $field['renderer'] );
@@ -97,7 +106,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
                 break;
         }
 
-        return $renderer->addData( [ 'field' => $field, 'value' => $this->getModel()->getData( $field['name'] ) ] )
+        return $renderer->addData( [ 'field' => $field, 'value' => $this->getFieldValue( $field, $value ) ] )
                         ->setFieldNamePrefix( 'data' )
                         ->withLabel( true )
                         ->withWrapper( true )

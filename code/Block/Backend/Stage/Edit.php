@@ -23,11 +23,16 @@ class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
     public function getFields()
     {
         return [
-                [ 'name' => 'id', 'label' => __( 'ID' ), 'type' => 'hidden' ],
-                [ 'name' => 'name', 'label' => __( 'Stage Name' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
-                [ 'name' => 'code', 'label' => __( 'Code' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
-                [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'source' => SourceYesNo::class ],
-                [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'source' => SourceYesNo::class ]
+            'general' => [
+                'label' => __( 'General' ),
+                'fields' => [
+                        [ 'name' => 'id', 'label' => __( 'ID' ), 'type' => 'hidden' ],
+                        [ 'name' => 'name', 'label' => __( 'Stage Name' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
+                        [ 'name' => 'code', 'label' => __( 'Code' ), 'type' => 'text', 'validation' => [ 'required' => true ] ],
+                        [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'type' => 'select', 'source' => SourceYesNo::class ],
+                        [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'type' => 'select', 'source' => SourceYesNo::class ]
+                ]
+            ]
         ];
     }
 
