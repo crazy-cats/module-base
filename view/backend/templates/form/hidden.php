@@ -8,6 +8,6 @@ $field = $this->getField();
 $value = $this->getValue();
 ?>
 <input type="hidden"
-       id="data_<?php echo $field['name']; ?>"
-       name="data[<?php echo $field['name']; ?>]"
+       id="<?php echo $this->getFieldId(); ?>"
+       name="<?php echo $this->getFieldName(); ?>"
        value="<?php echo htmlEscape( $value ); ?>" />

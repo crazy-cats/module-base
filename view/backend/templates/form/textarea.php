@@ -7,13 +7,16 @@
 $field = $this->getField();
 $value = $this->getValue();
 ?>
-<?php if ( $this->getWithLabel() ) : ?>
+<?php if ( $this->withLabel() ) : ?>
     <label class="field-name" for="data_<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
 <?php endif; ?>
-<?php if ( $this->getWithWrapper() ) : ?>
+<?php if ( $this->withWrapper() ) : ?>
     <div class="field-content">
-        <textarea class="input-text" id="data_<?php echo $field['name']; ?>"
-                  name="data[<?php echo $field['name']; ?>]"
-                  <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?>><?php echo htmlEscape( $value ) ?></textarea>
+    <?php endif; ?>
+    <textarea class="input-text"
+              id="<?php echo $this->getFieldId(); ?>"
+              name="<?php echo $this->getFieldName(); ?>"
+              <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?>><?php echo htmlEscape( $value ) ?></textarea>
+              <?php if ( $this->withWrapper() ) : ?>
     </div>
 <?php endif; ?>
