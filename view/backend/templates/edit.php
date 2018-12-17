@@ -12,11 +12,11 @@ $model = $this->getModel();
 ?>
 <div class="backend-edit">
     <form id="edit-form" method="post" action="<?php echo $this->getActionUrl(); ?>" enctype="multipart/form-data">
-        <?php
-        foreach ( $fields as $field ) :
-            echo $this->renderField( $field );
-        endforeach;
-        ?>
+        <?php foreach ( $fields as $field ) : ?>
+        <div class="row">
+            <?php echo $this->renderField( $field ); ?>
+        </div>
+        <?php endforeach; ?>
     </form>
 
     <script type="text/javascript">

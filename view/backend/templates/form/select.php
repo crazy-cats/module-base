@@ -7,8 +7,10 @@
 $field = $this->getField();
 $value = $this->getValue();
 ?>
-<div class="row">
+<?php if ( $this->getWithLabel() ) : ?>
     <label class="field-name" for="data_<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
+<?php endif; ?>
+<?php if ( $this->getWithWrapper() ) : ?>
     <div class="field-content">
         <select id="data_<?php echo $field['name']; ?>"
                 name="data[<?php echo $field['name'] ?>]"
@@ -20,4 +22,4 @@ $value = $this->getValue();
                     ?>
         </select>
     </div>
-</div>
+<?php endif; ?>

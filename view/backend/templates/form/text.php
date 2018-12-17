@@ -7,9 +7,15 @@
 $field = $this->getField();
 $value = $this->getValue();
 ?>
-<div class="row">
+<?php if ( $this->getWithLabel() ) : ?>
     <label class="field-name" for="data_<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
+<?php endif; ?>
+<?php if ( $this->getWithWrapper() ) : ?>
     <div class="field-content">
-        <input type="text" class="input-text" id="data_<?php echo $field['name']; ?>" name="data[<?php echo $field['name']; ?>]" value="<?php echo htmlEscape( $value ) ?>" />
+        <input type="text" class="input-text"
+               id="data_<?php echo $field['name']; ?>"
+               name="data[<?php echo $field['name']; ?>]"
+               value="<?php echo htmlEscape( $value ) ?>"
+               <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?> />
     </div>
-</div>
+<?php endif; ?>
