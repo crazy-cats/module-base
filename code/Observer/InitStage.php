@@ -7,8 +7,11 @@
 
 namespace CrazyCat\Core\Observer;
 
+use CrazyCat\Core\Model\DbConfig;
+use CrazyCat\Core\Model\Stage\Manager as StageManager;
 use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Config;
+use CrazyCat\Framework\App\Cookies;
 
 /**
  * @category CrazyCat
@@ -19,29 +22,42 @@ use CrazyCat\Framework\App\Config;
 class InitStage {
 
     /**
-     * @var \CrazyCat\Framework\App\Area
-     */
-    private $area;
-
-    /**
      * @var \CrazyCat\Framework\App\Config
      */
     private $config;
 
-    public function __construct( Area $area, Config $config )
+    /**
+     * @var \CrazyCat\Framework\App\Cookies
+     */
+    private $cookies;
+
+    /**
+     * @var \CrazyCat\Core\Model\DbConfig
+     */
+    private $dbConfig;
+
+    /**
+     * @var \CrazyCat\Core\Model\Stage\Manager
+     */
+    private $stageManager;
+
+    public function __construct( Cookies $cookies, StageManager $stageManager, DbConfig $dbConfig, Config $config )
     {
-        $this->area = $area;
         $this->config = $config;
+        $this->cookies = $cookies;
+        $this->dbConfig = $dbConfig;
+        $this->stageManager = $stageManager;
     }
 
     /**
-     * @param \CrazyCat\Framework\Data\Object $observer
+     * @return void
      */
     public function execute( $observer )
     {
-        if ( isset( $this->config->getData( $this->area->getCode() )['theme'] ) ) {
-            $observer->getThemeManager()->setCurrentTheme( $this->config->getData( $this->area->getCode() )['theme'] );
+        if ( ( $stageCode = $observer->getAction()->getRequest()->getParam( 'stage', $this->cookies->getData( 'stage' ) ) ) ) {
+            $this->stageManager->setCurrentStageCode( $stageCode );
         }
+        $this->config->addData( [ Area::CODE_FRONTEND => $this->dbConfig->getFromDb( Area::CODE_FRONTEND, $this->stageManager->getCurrentStage()->getId() ) ] );
     }
 
 }

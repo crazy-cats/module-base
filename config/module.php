@@ -17,9 +17,9 @@ return [
     'depends' => [],
     'events' => [
         'controller_execute_before' => 'CrazyCat\Core\Observer\MergeDbConfig',
-        'frontend_controller_execute_before' => 'CrazyCat\Core\Observer\MergeFrontendDbConfig',
+        'frontend_controller_execute_before' => 'CrazyCat\Core\Observer\InitStage',
         'verify_api_token' => 'CrazyCat\Core\Observer\VerifyApiToken',
-        'themes_init_after' => 'CrazyCat\Core\Observer\InitStage'
+        'themes_init_after' => 'CrazyCat\Core\Observer\PrepareForView'
     ],
     'routes' => [
         'backend' => 'system',
