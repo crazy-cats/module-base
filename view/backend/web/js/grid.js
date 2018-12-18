@@ -234,6 +234,12 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
                 dataType: 'json',
                 data: form.serializeArray(),
                 success: function( response ) {
+                    if ( response.error ) {
+                        alert( response.message );
+                        response.items = [ ];
+                        response.total = 0;
+                        response.pageSize = form.find( '[name="limit"]' ).val();
+                    }
                     updateList( response );
                 },
                 complete: function() {
