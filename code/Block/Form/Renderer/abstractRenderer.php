@@ -23,6 +23,11 @@ abstract class abstractRenderer extends \CrazyCat\Core\Block\Template {
     /**
      * @var boolean
      */
+    protected $isMultiple = false;
+
+    /**
+     * @var boolean
+     */
     protected $withLabel = false;
 
     /**
@@ -46,10 +51,10 @@ abstract class abstractRenderer extends \CrazyCat\Core\Block\Template {
     public function getFieldName()
     {
         if ( $this->fieldNamePrefix !== null ) {
-            return sprintf( '%s[%s]', $this->fieldNamePrefix, $this->getField()['name'] );
+            return sprintf( '%s[%s]%s', $this->fieldNamePrefix, $this->getField()['name'], ( $this->isMultiple ? '[]' : '' ) );
         }
         else {
-            return $this->getField()['name'];
+            return $this->getField()['name'] . ( $this->isMultiple ? '[]' : '' );
         }
     }
 
@@ -58,12 +63,27 @@ abstract class abstractRenderer extends \CrazyCat\Core\Block\Template {
      */
     public function getFieldId()
     {
+        $fieldName = preg_replace( '/\W/', '_', $this->getField()['name'] );
         if ( $this->fieldNamePrefix !== null ) {
-            return sprintf( '%s_%s', $this->fieldNamePrefix, $this->getField()['name'] );
+            return sprintf( '%s_%s', $this->fieldNamePrefix, $fieldName );
         }
         else {
-            return $this->getField()['name'];
+            return $fieldName;
         }
+    }
+
+    /**
+     * @param boolean|null $isMultiple
+     * @return boolean|$this
+     */
+    public function isMultiple( $isMultiple = null )
+    {
+        if ( $isMultiple === null ) {
+            return $this->isMultiple;
+        }
+
+        $this->isMultiple = $isMultiple;
+        return $this;
     }
 
     /**

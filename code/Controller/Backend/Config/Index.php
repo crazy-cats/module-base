@@ -8,6 +8,7 @@
 namespace CrazyCat\Core\Controller\Backend\Config;
 
 use CrazyCat\Core\Model\DbConfig;
+use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Module\Controller\Backend\Context;
 
 /**
@@ -35,7 +36,7 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAc
      */
     protected function getConfigurations()
     {
-        list( $scope, $scopeId ) = array_pad( explode( '-', $this->request->getParam( 'scope' ) ), 2, null );
+        list( $scope, $scopeId ) = array_pad( explode( '-', $this->request->getParam( 'scope', Area::CODE_GLOBAL ) ), 2, 0 );
         return $this->dbConfig->getFromDb( $scope, $scopeId );
     }
 

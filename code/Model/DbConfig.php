@@ -36,6 +36,24 @@ class DbConfig {
     }
 
     /**
+     * @param mixed $value
+     * @return string
+     */
+    private function encodeValue( $value )
+    {
+        return json_encode( $value );
+    }
+
+    /**
+     * @param string $value
+     * @return mixed
+     */
+    private function decodeValue( $value )
+    {
+        return json_decode( $value, true );
+    }
+
+    /**
      * @param string $scope
      * @param int|null $scopeId
      * @return array
@@ -43,7 +61,11 @@ class DbConfig {
     public function getFromDb( $scope, $scopeId = null )
     {
         $sql = sprintf( 'SELECT `path`, `value` FROM `%s` WHERE `scope` = ? AND `scope_id` = ?', $this->conn->getTableName( $this->mainTable ) );
-        return $this->conn->fetchPairs( $sql, [ $scope, $scopeId ] );
+        $stageConfig = $this->conn->fetchPairs( $sql, [ $scope, $scopeId ] );
+        foreach ( $stageConfig as &$value ) {
+            $value = $this->decodeValue( $value );
+        }
+        return $stageConfig;
     }
 
     /**
@@ -86,7 +108,7 @@ class DbConfig {
                 'scope' => $scope,
                 'scope_id' => $scopeId,
                 'path' => $path,
-                'value' => $value
+                'value' => $this->encodeValue( $value )
             ];
         }
         $this->conn->insertUpdate( $this->conn->getTableName( $this->mainTable ), $data, [ 'path', 'value' ] );

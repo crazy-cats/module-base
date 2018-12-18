@@ -8,7 +8,7 @@ $field = $this->getField();
 $value = $this->getValue();
 ?>
 <?php if ( $this->withLabel() ) : ?>
-    <label class="field-name" for="data_<?php echo $field['name']; ?>"><?php echo $field['label']; ?></label>
+    <label class="field-name" for="<?php echo $this->getFieldId(); ?>"><?php echo $field['label']; ?></label>
 <?php endif; ?>
 <?php if ( $this->withWrapper() ) : ?>
     <div class="field-content">

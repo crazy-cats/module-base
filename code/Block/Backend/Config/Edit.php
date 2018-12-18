@@ -17,6 +17,8 @@ use CrazyCat\Framework\App\Area;
  */
 class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
 
+    protected $template = 'CrazyCat\Core::config';
+
     /**
      * @param array $field
      * @return mixed
@@ -57,7 +59,7 @@ class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
                         $settings[$groupName]['sort_order'] = $settingGroup['sort_order'];
                     }
                     foreach ( $settingGroup['fields'] as $fieldName => &$field ) {
-                        $field['name'] = $fieldName;
+                        $field['name'] = $groupName . '/' . $fieldName;
                     }
                     $settings[$groupName]['fields'] = array_merge( $settings[$groupName]['fields'], $settingGroup['fields'] );
                 }

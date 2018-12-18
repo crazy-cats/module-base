@@ -4,7 +4,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Core\Block\Backend\Config */
+/* @var $this \CrazyCat\Core\Block\Backend\Config\Edit */
 $settings = $this->getFields();
 ?>
 <div class="backend-edit">
@@ -16,9 +16,9 @@ $settings = $this->getFields();
                     <?php echo __( $settingGroup['label'] ) ?>
                 </div>
                 <div class="field-group-content">
-                    <?php foreach ( $settingGroup['fields'] as $fieldName => $field ) : ?>
+                    <?php foreach ( $settingGroup['fields'] as $field ) : ?>
                         <div class="row">
-                            <?php echo $this->renderField( $field, $this->getConfig( $groupName . '/' . $fieldName ) ); ?>
+                            <?php echo $this->renderField( $field, $this->getConfig( $field['name'] ) ); ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -32,7 +32,12 @@ $settings = $this->getFields();
     require( [ 'CrazyCat/Core/js/form' ], function( form ) {
         form( {
             el: '#edit-form',
-            fields: <?php echo json_encode( $fields ); ?>
+            fields: <?php echo json_encode( $settings ); ?>,
+            editor: {
+                baseUrl: '<?php echo getBaseUrl() ?>',
+                imageUploadUrl: '<?php echo $this->getImageUploadUrl() ?>',
+                skinUrl: '<?php echo getStaticUrl( 'CrazyCat\Core::css/tinymce/skins/lightgray' ) ?>'
+            }
         } );
     } );
 // ]]>
