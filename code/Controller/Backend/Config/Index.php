@@ -37,7 +37,8 @@ class Index extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAc
     protected function getConfigurations()
     {
         list( $scope, $scopeId ) = array_pad( explode( '-', $this->request->getParam( 'scope', Area::CODE_GLOBAL ) ), 2, 0 );
-        return $this->dbConfig->getFromDb( $scope, $scopeId );
+
+        return $this->dbConfig->getConfigurations( $scope, $scopeId );
     }
 
     protected function run()

@@ -35,6 +35,7 @@ class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
     public function getConfig( $path )
     {
         $configurations = $this->registry->registry( 'configurations' );
+
         return isset( $configurations[$path] ) ? $configurations[$path] : null;
     }
 

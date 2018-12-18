@@ -55,10 +55,10 @@ class DbConfig {
 
     /**
      * @param string $scope
-     * @param int|null $scopeId
+     * @param int $scopeId
      * @return array
      */
-    public function getFromDb( $scope, $scopeId = null )
+    public function getFromDb( $scope, $scopeId = 0 )
     {
         $sql = sprintf( 'SELECT `path`, `value` FROM `%s` WHERE `scope` = ? AND `scope_id` = ?', $this->conn->getTableName( $this->mainTable ) );
         $stageConfig = $this->conn->fetchPairs( $sql, [ $scope, $scopeId ] );
@@ -69,12 +69,11 @@ class DbConfig {
     }
 
     /**
-     * @param string $path
      * @param string $scope
      * @param int $scopeId
-     * @return mixed
+     * @return array
      */
-    public function getValue( $path, $scope = Area::CODE_GLOBAL, $scopeId = 0 )
+    public function getConfigurations( $scope = Area::CODE_GLOBAL, $scopeId = 0 )
     {
         if ( !isset( $this->configurations[Area::CODE_GLOBAL] ) ) {
             $this->configurations[Area::CODE_GLOBAL] = $this->getFromDb( Area::CODE_GLOBAL );
@@ -91,7 +90,20 @@ class DbConfig {
                 $this->configurations[$key] = array_merge( $this->configurations[Area::CODE_GLOBAL], $this->getFromDb( $scope, $scopeId ) );
             }
         }
-        return isset( $this->configurations[$key][$path] ) ? json_decode( $this->configurations[$key][$path], true ) : null;
+        return $this->configurations[$key];
+    }
+
+    /**
+     * @param string $path
+     * @param string $scope
+     * @param int $scopeId
+     * @return mixed
+     */
+    public function getValue( $path, $scope = Area::CODE_GLOBAL, $scopeId = 0 )
+    {
+        $configurations = $this->getConfigurations( $scope, $scopeId );
+
+        return isset( $configurations[$path] ) ? json_decode( $configurations[$path], true ) : null;
     }
 
     /**

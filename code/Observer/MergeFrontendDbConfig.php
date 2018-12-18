@@ -7,9 +7,9 @@
 
 namespace CrazyCat\Core\Observer;
 
+use CrazyCat\Core\Model\DbConfig;
 use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Config;
-use CrazyCat\Framework\App\Db\Manager as DbManager;
 
 /**
  * @category CrazyCat
@@ -25,24 +25,24 @@ class MergeFrontendDbConfig {
     private $config;
 
     /**
-     * @var \CrazyCat\Framework\App\Db\AbstractAdapter
+     * @var \CrazyCat\Core\Model\DbConfig
      */
-    private $conn;
+    private $dbConfig;
 
-    public function __construct( DbManager $dbManager, Config $config )
+    public function __construct( DbConfig $dbConfig, Config $config )
     {
         $this->config = $config;
-        $this->conn = $dbManager->getConnection();
+        $this->dbConfig = $dbConfig;
     }
 
     /**
      * @return void
      */
-    public function execute()
+    public function execute( $observer )
     {
-        $sql = sprintf( 'SELECT `path`, `value` FROM `%s` WHERE `scope` = ?', $this->conn->getTableName( 'config' ) );
-        $config = $this->conn->fetchPairs( $sql, [ Area::CODE_GLOBAL ] );
-        $this->config->addData( [ Area::CODE_GLOBAL => $config ] );
+        $observer->getAction()->getRequest();
+
+        $this->config->addData( [ Area::CODE_FRONTEND => $this->dbConfig->getFromDb( Area::CODE_FRONTEND, $stageId ) ] );
     }
 
 }
