@@ -77,39 +77,35 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
         if ( isset( $field['renderer'] ) ) {
             $renderer = $this->objectManager->create( $field['renderer'] );
         }
+        else {
+            switch ( $field['type'] ) {
 
-        switch ( $field['type'] ) {
+                case self::FIELD_TYPE_HIDDEN :
+                    $renderer = $this->objectManager->create( HiddenRenderer::class );
+                    break;
 
-            case self::FIELD_TYPE_HIDDEN :
-                $renderer = $this->objectManager->create( HiddenRenderer::class );
-                break;
+                case self::FIELD_TYPE_PASSWORD :
+                    $renderer = $this->objectManager->create( PasswordRenderer::class );
+                    break;
 
-            case self::FIELD_TYPE_PASSWORD :
-                $renderer = $this->objectManager->create( PasswordRenderer::class );
-                break;
+                case self::FIELD_TYPE_SELECT :
+                case self::FIELD_TYPE_MULTISELECT :
+                    $renderer = $this->objectManager->create( SelectRenderer::class )
+                            ->isMultiple( $field['type'] == self::FIELD_TYPE_MULTISELECT );
+                    $options = isset( $field['options'] ) ? $field['options'] :
+                            ( isset( $field['source'] ) ? $this->objectManager->create( $field['source'] )->toOptionArray() : [] );
+                    $renderer->setData( 'options', $options );
+                    break;
 
-            case self::FIELD_TYPE_SELECT :
-                $renderer = $this->objectManager->create( SelectRenderer::class );
-                if ( isset( $field['source'] ) ) {
-                    $field['options'] = $this->objectManager->create( $field['source'] )->toOptionArray();
-                }
-                break;
+                case self::FIELD_TYPE_TEXT :
+                    $renderer = $this->objectManager->create( TextRenderer::class );
+                    break;
 
-            case self::FIELD_TYPE_MULTISELECT :
-                $renderer = $this->objectManager->create( SelectRenderer::class )->isMultiple( true );
-                if ( isset( $field['source'] ) ) {
-                    $field['options'] = $this->objectManager->create( $field['source'] )->toOptionArray();
-                }
-                break;
-
-            case self::FIELD_TYPE_TEXT :
-                $renderer = $this->objectManager->create( TextRenderer::class );
-                break;
-
-            case self::FIELD_TYPE_TEXTAREA :
-            case self::FIELD_TYPE_EDITOR :
-                $renderer = $this->objectManager->create( TextareaRenderer::class );
-                break;
+                case self::FIELD_TYPE_TEXTAREA :
+                case self::FIELD_TYPE_EDITOR :
+                    $renderer = $this->objectManager->create( TextareaRenderer::class );
+                    break;
+            }
         }
 
         return $renderer->addData( [ 'field' => $field, 'value' => $this->getFieldValue( $field, $value ) ] )

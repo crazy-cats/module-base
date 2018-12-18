@@ -10,4 +10,11 @@ $value = $this->getValue();
 <input type="hidden"
        id="<?php echo $this->getFieldId(); ?>"
        name="<?php echo $this->getFieldName(); ?>"
-       value="<?php echo htmlEscape( $value ); ?>" />
+       class="<?php echo $this->getClasses(); ?>"
+       value="<?php echo htmlEscape( $value ); ?>"
+       <?php
+       foreach ( $this->getParams() as $key => $value ) :
+           echo sprintf( '%s="%s"', $key, htmlEscape( $value ) );
+       endforeach;
+       ?>
+       />

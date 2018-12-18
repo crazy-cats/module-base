@@ -15,12 +15,14 @@ $value = $this->getValue();
     <?php endif; ?>
     <select id="<?php echo $this->getFieldId(); ?>"
             name="<?php echo $this->getFieldName(); ?>"
-            <?php if ( $this->isMultiple() ) : ?>multiple="true" size="8"<?php endif; ?>>
-                <?php
-                if ( !empty( $field['options'] ) ) :
-                    echo selectOptionsHtml( $field['options'], $value );
-                endif;
-                ?>
+            class="<?php echo $this->getClasses(); ?>"
+            <?php if ( $this->isMultiple() ) : ?>multiple="true" size="8"<?php endif; ?>
+            <?php
+            foreach ( $this->getParams() as $key => $value ) :
+                echo sprintf( '%s="%s"', $key, htmlEscape( $value ) );
+            endforeach;
+            ?>>
+                <?php echo selectOptionsHtml( $this->getOptions(), $value ); ?>
     </select>
     <?php if ( $this->withWrapper() ) : ?>
     </div>

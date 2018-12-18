@@ -13,11 +13,17 @@ $value = $this->getValue();
 <?php if ( $this->withWrapper() ) : ?>
     <div class="field-content">
     <?php endif; ?>
-    <input type="text" class="input-text"
+    <input type="text" class="input-text <?php echo $this->getClasses(); ?>"
            id="<?php echo $this->getFieldId(); ?>"
            name="<?php echo $this->getFieldName(); ?>"
            value="<?php echo htmlEscape( $value ) ?>"
-           <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?> />
+           <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?>
+           <?php
+           foreach ( $this->getParams() as $key => $value ) :
+               echo sprintf( '%s="%s"', $key, htmlEscape( $value ) );
+           endforeach;
+           ?>
+           />
            <?php if ( $this->withWrapper() ) : ?>
     </div>
 <?php endif; ?>

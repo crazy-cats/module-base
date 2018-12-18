@@ -26,6 +26,11 @@ abstract class abstractRenderer extends \CrazyCat\Core\Block\Template {
     protected $isMultiple = false;
 
     /**
+     * @var array
+     */
+    protected $params = [];
+
+    /**
      * @var boolean
      */
     protected $withLabel = false;
@@ -70,6 +75,24 @@ abstract class abstractRenderer extends \CrazyCat\Core\Block\Template {
         else {
             return $fieldName;
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * @param array $params
+     * @return $this
+     */
+    public function setParams( array $params )
+    {
+        $this->params = $params;
+        return $this;
     }
 
     /**

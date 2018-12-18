@@ -4,12 +4,8 @@
  * See COPYRIGHT.txt for license details.
  */
 
-use CrazyCat\Core\Block\Backend\AbstractGrid;
-use CrazyCat\Framework\Utility\StaticVariable;
-
 /* @var $this \CrazyCat\Core\Block\Backend\AbstractGrid */
 $fields = $this->getFields();
-$filters = $this->getFilters();
 $sortings = $this->getSortings();
 $sourceUrl = $this->getSourceUrl();
 ?>
@@ -59,38 +55,7 @@ $sourceUrl = $this->getSourceUrl();
                 <tr class="field-filter">
                     <?php foreach ( $fields as $field ) : ?>
                         <th class="<?php echo isset( $field['actions'] ) ? 'actions' : ( isset( $field['ids'] ) ? 'ids' : 'item' ) ?>">
-                            <?php
-                            if ( isset( $field['ids'] ) ) {
-                                echo '<input type="checkbox" class="input-ids" data-selector=".input-ids" />';
-                                continue;
-                            }
-                            if ( isset( $field['actions'] ) ) {
-                                echo '&nbsp;';
-                                continue;
-                            }
-                            switch ( $field['filter']['type'] ) :
-
-                                case AbstractGrid::FIELD_TYPE_TEXT :
-                                    ?>
-                                    <input type="text" class="input-text filter-<?php echo $field['name'] ?>" data-selector=".filter-<?php echo $field['name'] ?>" name="filter[<?php echo $field['name'] ?>]" value="<?php echo htmlEscape( empty( $filters[$field['name']] ) ? '' : $filters[$field['name']]  ) ?>" />
-                                    <?php
-                                    break;
-
-                                case AbstractGrid::FIELD_TYPE_SELECT :
-                                    ?>
-                                    <select name="filter[<?php echo $field['name'] ?>]" class="filter-<?php echo $field['name'] ?>" data-selector=".filter-<?php echo $field['name'] ?>">
-                                        <option value="<?php echo StaticVariable::NO_SELECTION ?>"></option>
-                                        <?php
-                                        if ( !empty( $field['filter']['options'] ) ) :
-                                            echo selectOptionsHtml( $field['filter']['options'], isset( $filters[$field['name']] ) ? $filters[$field['name']] : null  );
-                                        endif;
-                                        ?>
-                                    </select>
-                                    <?php
-                                    break;
-
-                            endswitch;
-                            ?>
+                            <?php echo $this->renderField( $field ); ?>
                         </th>
                     <?php endforeach; ?>
                 </tr>

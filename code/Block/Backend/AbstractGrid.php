@@ -7,7 +7,11 @@
 
 namespace CrazyCat\Core\Block\Backend;
 
+use CrazyCat\Core\Block\Form\Renderer\Select as SelectRenderer;
+use CrazyCat\Core\Block\Form\Renderer\Text as TextRenderer;
+use CrazyCat\Framework\App\ObjectManager;
 use CrazyCat\Framework\App\Session\Backend as Session;
+use CrazyCat\Framework\Utility\StaticVariable;
 
 /**
  * @category CrazyCat
@@ -29,6 +33,11 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
     protected $template = 'CrazyCat\Core::grid';
 
     /**
+     * @var \CrazyCat\Framework\App\ObjectManager
+     */
+    protected $objectManager;
+
+    /**
      * @var \CrazyCat\Framework\App\Session\Backend
      */
     protected $session;
@@ -38,10 +47,11 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
      */
     protected $bookmarks;
 
-    public function __construct( Session $session, Context $context, array $data = array() )
+    public function __construct( Session $session, ObjectManager $objectManager, Context $context, array $data = array() )
     {
         parent::__construct( $context, $data );
 
+        $this->objectManager = $objectManager;
         $this->session = $session;
     }
 
@@ -95,6 +105,45 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
             }
         }
         return null;
+    }
+
+    /**
+     * @param array $field
+     * @param mixed $value
+     * @return string
+     */
+    public function renderField( $field )
+    {
+        if ( isset( $field['ids'] ) ) {
+            return '<input type="checkbox" class="input-ids" data-selector=".input-ids" />';
+        }
+        else if ( isset( $field['actions'] ) ) {
+            return '&nbsp;';
+        }
+
+        switch ( $field['filter']['type'] ) {
+
+            case self::FIELD_TYPE_SELECT :
+                $renderer = $this->objectManager->create( SelectRenderer::class );
+                $options = isset( $field['filter']['options'] ) ? $field['filter']['options'] :
+                        ( isset( $field['filter']['source'] ) ? $this->objectManager->create( $field['filter']['source'] )->toOptionArray() : [] );
+                array_unshift( $options, [ 'label' => '', 'value' => StaticVariable::NO_SELECTION ] );
+                $renderer->setData( 'options', $options );
+                break;
+
+            case self::FIELD_TYPE_TEXT :
+                $renderer = $this->objectManager->create( TextRenderer::class );
+                break;
+        }
+
+        $filters = $this->getFilters();
+        $value = isset( $filters[$field['name']] ) ? $filters[$field['name']] : null;
+
+        return $renderer->addData( [ 'field' => $field, 'value' => $value ] )
+                        ->setFieldNamePrefix( 'filter' )
+                        ->setClasses( 'filter-' . $field['name'] )
+                        ->setParams( [ 'data-selector' => '.filter-' . $field['name'] ] )
+                        ->toHtml();
     }
 
     /**
