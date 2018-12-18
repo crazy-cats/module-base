@@ -18,7 +18,7 @@ return [
     'events' => [
         'controller_execute_before' => 'CrazyCat\Core\Observer\MergeDbConfig',
         'verify_api_token' => 'CrazyCat\Core\Observer\VerifyApiToken',
-        'theme_init_after' => 'CrazyCat\Core\Observer\InitStage'
+        'themes_init_after' => 'CrazyCat\Core\Observer\InitStage'
     ],
     'routes' => [
         'backend' => 'system',
@@ -33,6 +33,16 @@ return [
                     'label' => 'Timezone',
                     'type' => 'select',
                     'source' => 'CrazyCat\Core\Model\Source\Timezone'
+                ],
+                'allowed_languages' => [
+                    'label' => 'Allowed Languages',
+                    'type' => 'multiselect',
+                    'source' => 'CrazyCat\Core\Model\Source\Languages'
+                ],
+                'default_language' => [
+                    'label' => 'Default Languages',
+                    'type' => 'select',
+                    'source' => 'CrazyCat\Core\Model\Source\Languages'
                 ]
             ]
         ]
