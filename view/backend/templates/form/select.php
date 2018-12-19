@@ -18,8 +18,8 @@ $value = $this->getValue();
             class="<?php echo $this->getClasses(); ?>"
             <?php if ( $this->isMultiple() ) : ?>multiple="true" size="8"<?php endif; ?>
             <?php
-            foreach ( $this->getParams() as $key => $value ) :
-                echo sprintf( '%s="%s"', $key, htmlEscape( $value ) );
+            foreach ( $this->getParams() as $k => $v ) :
+                echo sprintf( '%s="%s"', $k, htmlEscape( $v ) );
             endforeach;
             ?>>
                 <?php echo selectOptionsHtml( $this->getOptions(), $value ); ?>

@@ -55,7 +55,7 @@ $sourceUrl = $this->getSourceUrl();
                 <tr class="field-filter">
                     <?php foreach ( $fields as $field ) : ?>
                         <th class="<?php echo isset( $field['actions'] ) ? 'actions' : ( isset( $field['ids'] ) ? 'ids' : 'item' ) ?>">
-                            <?php echo $this->renderField( $field ); ?>
+                            <?php echo $this->renderFilter( $field ); ?>
                         </th>
                     <?php endforeach; ?>
                 </tr>

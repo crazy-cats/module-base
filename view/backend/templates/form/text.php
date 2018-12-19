@@ -19,11 +19,10 @@ $value = $this->getValue();
            value="<?php echo htmlEscape( $value ) ?>"
            <?php echo (!empty( $this->getData( 'placeholder' ) ) ) ? ( 'placeholder="' . htmlEscape( $this->getData( 'placeholder' ) ) . '"' ) : ''; ?>
            <?php
-           foreach ( $this->getParams() as $key => $value ) :
-               echo sprintf( '%s="%s"', $key, htmlEscape( $value ) );
+           foreach ( $this->getParams() as $k => $v ) :
+               echo sprintf( '%s="%s"', $k, htmlEscape( $v ) );
            endforeach;
-           ?>
-           />
+           ?> />
            <?php if ( $this->withWrapper() ) : ?>
     </div>
 <?php endif; ?>

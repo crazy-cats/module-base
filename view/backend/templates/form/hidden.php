@@ -13,8 +13,7 @@ $value = $this->getValue();
        class="<?php echo $this->getClasses(); ?>"
        value="<?php echo htmlEscape( $value ); ?>"
        <?php
-       foreach ( $this->getParams() as $key => $value ) :
-           echo sprintf( '%s="%s"', $key, htmlEscape( $value ) );
+       foreach ( $this->getParams() as $k => $v ) :
+           echo sprintf( '%s="%s"', $k, htmlEscape( $v ) );
        endforeach;
-       ?>
-       />
+       ?> />

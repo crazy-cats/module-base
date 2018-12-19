@@ -112,7 +112,7 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
      * @param mixed $value
      * @return string
      */
-    public function renderField( $field )
+    public function renderFilter( $field )
     {
         if ( isset( $field['ids'] ) ) {
             return '<input type="checkbox" class="input-ids" data-selector=".input-ids" />';
