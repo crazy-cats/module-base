@@ -56,6 +56,24 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
     }
 
     /**
+     * @param array $options
+     * @return array
+     */
+    protected function processOptions( $options )
+    {
+        /**
+         * PHP transforms all request variables to string type,
+         *     so we need to process the option value for comparison purposes.
+         */
+        foreach ( $options as &$option ) {
+            if ( is_numeric( $option['value'] ) ) {
+                $option['value'] = (string) $option['value'];
+            }
+        }
+        return $options;
+    }
+
+    /**
      * @return array
      */
     public function getBookmarks()
@@ -128,7 +146,7 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
                 $options = isset( $field['filter']['options'] ) ? $field['filter']['options'] :
                         ( isset( $field['filter']['source'] ) ? $this->objectManager->create( $field['filter']['source'] )->toOptionArray() : [] );
                 array_unshift( $options, [ 'label' => '', 'value' => StaticVariable::NO_SELECTION ] );
-                $renderer->setData( 'options', $options );
+                $renderer->setData( 'options', $this->processOptions( $options ) );
                 break;
 
             case self::FIELD_TYPE_TEXT :

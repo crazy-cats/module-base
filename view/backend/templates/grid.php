@@ -43,7 +43,7 @@ $sourceUrl = $this->getSourceUrl();
                                 $sorting = $this->getSorting( $field['name'] );
                                 ?>
                                 <a href="javascript:;" data-field="<?php echo $field['name'] ?>"
-                                   <?php $sorting ? ( 'class="' . strtolower( $sorting['dir'] ) . '"' ) : '' ?>>
+                                   <?php echo $sorting ? ( 'class="' . strtolower( $sorting['dir'] ) . '"' ) : '' ?>>
                                     <span><?php echo htmlEscape( $field['label'] ) ?></span>
                                 </a>
                             <?php else : ?>
