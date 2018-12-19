@@ -57,7 +57,7 @@ class InitStage {
         if ( ( $stageCode = $observer->getAction()->getRequest()->getParam( 'stage', $this->cookies->getData( 'stage' ) ) ) ) {
             $this->stageManager->setCurrentStageCode( $stageCode );
         }
-        $this->config->addData( [ Area::CODE_FRONTEND => $this->dbConfig->getFromDb( Area::CODE_FRONTEND, $this->stageManager->getCurrentStage()->getId() ) ] );
+        $this->config->addData( [ Area::CODE_FRONTEND => $this->dbConfig->getConfigurations( Area::CODE_FRONTEND, $this->stageManager->getCurrentStage()->getId() ) ] );
     }
 
 }

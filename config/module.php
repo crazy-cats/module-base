@@ -19,7 +19,8 @@ return [
         'controller_execute_before' => 'CrazyCat\Core\Observer\MergeDbConfig',
         'frontend_controller_execute_before' => 'CrazyCat\Core\Observer\InitStage',
         'verify_api_token' => 'CrazyCat\Core\Observer\VerifyApiToken',
-        'themes_init_after' => 'CrazyCat\Core\Observer\PrepareForView'
+        'themes_init_after' => 'CrazyCat\Core\Observer\PrepareTheme',
+        'page_render_before' => 'CrazyCat\Core\Observer\PrepareForRender'
     ],
     'routes' => [
         'backend' => 'system',
@@ -44,6 +45,29 @@ return [
                     'label' => 'Default Languages',
                     'type' => 'select',
                     'source' => 'CrazyCat\Core\Model\Source\Languages'
+                ]
+            ]
+        ],
+        'website' => [
+            'label' => 'Website',
+            'sort_order' => 2,
+            'fields' => [
+                'default_page_title' => [
+                    'label' => 'Default Page Title',
+                    'type' => 'text'
+                ],
+                'default_meta_keywords' => [
+                    'label' => 'Default Meta Keywords',
+                    'type' => 'text'
+                ],
+                'default_meta_description' => [
+                    'label' => 'Default Meta Description',
+                    'type' => 'textarea'
+                ],
+                'default_meta_robots' => [
+                    'label' => 'Default Robots',
+                    'type' => 'select',
+                    'source' => 'CrazyCat\Core\Model\Source\MetaRobots'
                 ]
             ]
         ]

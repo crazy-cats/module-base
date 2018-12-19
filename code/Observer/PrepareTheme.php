@@ -16,7 +16,7 @@ use CrazyCat\Framework\App\Config;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class PrepareForView {
+class PrepareTheme {
 
     /**
      * @var \CrazyCat\Framework\App\Area

@@ -66,7 +66,7 @@ class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
                 }
             }
         }
-        uksort( $settings, function( $a, $b ) {
+        uasort( $settings, function( $a, $b ) {
             return $a['sort_order'] > $b['sort_order'] ? 1 : ( $a['sort_order'] < $b['sort_order'] ? -1 : 0 );
         } );
 
