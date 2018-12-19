@@ -1,6 +1,6 @@
 {
     "name": "crazycat/module-core",
-    "description": "CrazyCat Core Module",
+    "description": "CrazyCat Module - Core",
     "type": "crazycat-module",
     "license": [
         "proprietary"
