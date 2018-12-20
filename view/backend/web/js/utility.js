@@ -82,17 +82,6 @@ define( [ 'jquery' ], function( $ ) {
             } else {
                 $( 'body > .loader' ).hide();
             }
-        },
-
-        mainMenu: function( options ) {
-            var opts = $.extend( true, {
-                el: null
-            }, options );
-            var menu = $( opts.el );
-            menu.find( 'a.current' ).parents( 'li' ).addClass( 'active' );
-            menu.find( 'li' ).not( '.active' ).on( 'click', '> a', function() {
-                $( this ).closest( 'li' ).find( '> ul' ).slideToggle();
-            } );
         }
 
     };
