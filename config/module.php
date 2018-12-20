@@ -34,7 +34,7 @@ return [
                 'timezone' => [
                     'label' => 'Timezone',
                     'type' => 'select',
-                    'source' => 'CrazyCat\Core\Model\Source\Timezone'
+                    'source' => 'CrazyCat\Core\Model\Source\TimeZones'
                 ],
                 'allowed_languages' => [
                     'label' => 'Allowed Languages',
