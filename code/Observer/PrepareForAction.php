@@ -12,6 +12,7 @@ use CrazyCat\Core\Model\Stage\Manager as StageManager;
 use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Config;
 use CrazyCat\Framework\App\Cookies;
+use CrazyCat\Framework\App\Timezone;
 
 /**
  * @category CrazyCat
