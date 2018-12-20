@@ -19,7 +19,7 @@ use CrazyCat\Framework\App\Cookies;
  * @author Bruce Z <152416319@qq.com>
  * @link http://crazy-cat.co
  */
-class InitStage {
+class PrepareForAction {
 
     /**
      * @var \CrazyCat\Framework\App\Config
@@ -41,12 +41,18 @@ class InitStage {
      */
     private $stageManager;
 
-    public function __construct( Cookies $cookies, StageManager $stageManager, DbConfig $dbConfig, Config $config )
+    /**
+     * @var \CrazyCat\Framework\App\Timezone
+     */
+    private $timezone;
+
+    public function __construct( Timezone $timezone, Cookies $cookies, StageManager $stageManager, DbConfig $dbConfig, Config $config )
     {
         $this->config = $config;
         $this->cookies = $cookies;
         $this->dbConfig = $dbConfig;
         $this->stageManager = $stageManager;
+        $this->timezone = $timezone;
     }
 
     /**
@@ -54,10 +60,18 @@ class InitStage {
      */
     public function execute( $observer )
     {
+        /**
+         * Initialize stage
+         */
         if ( ( $stageCode = $observer->getAction()->getRequest()->getParam( 'stage', $this->cookies->getData( 'stage' ) ) ) ) {
             $this->stageManager->setCurrentStageCode( $stageCode );
         }
         $this->config->addData( [ Area::CODE_FRONTEND => $this->dbConfig->getConfigurations( Area::CODE_FRONTEND, $this->stageManager->getCurrentStage()->getId() ) ] );
+
+        /**
+         * Initialize timezone
+         */
+        $this->timezone->setTimezone( new \DateTimeZone( $this->config->getValue( 'general/timezone' ) ) );
     }
 
 }
