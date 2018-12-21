@@ -15,7 +15,7 @@ return [
     'template' => '2columns_left',
     'blocks' => [
         'header' => [
-            'buttons' => [
+            'header-buttons' => [
                 'class' => 'CrazyCat\Core\Block\Template',
                 'data' => [
                     'template' => 'CrazyCat\Core::header_buttons',
@@ -29,7 +29,9 @@ return [
             ]
         ],
         'main' => [
-            'main-content' => [ 'class' => 'CrazyCat\Core\Block\Backend\Config\Edit' ]
+            'main-content' => [
+                'class' => 'CrazyCat\Core\Block\Backend\Config\Edit'
+            ]
         ]
     ]
 ];
