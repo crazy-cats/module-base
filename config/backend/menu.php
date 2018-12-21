@@ -15,7 +15,7 @@ return [
     'system/stage/index' => [
         'label' => __( 'Front Stage' ),
         'url' => getUrl( 'system/stage' ),
-        'sort_order' => 3
+        'sort_order' => 997
     ],
     'system/config/index' => [
         'label' => __( 'Configuration' ),
