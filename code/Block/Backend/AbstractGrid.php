@@ -157,7 +157,7 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
         $filters = $this->getFilters();
         $value = isset( $filters[$field['name']] ) ? $filters[$field['name']] : null;
 
-        return $renderer->addData( [ 'field' => $field, 'value' => $value ] )
+        return $renderer->addData( [ 'name' => 'filter_' . $field['name'], 'field' => $field, 'value' => $value ] )
                         ->setFieldNamePrefix( 'filter' )
                         ->setClasses( 'filter-' . $field['name'] )
                         ->setParams( [ 'data-selector' => '.filter-' . $field['name'] ] )

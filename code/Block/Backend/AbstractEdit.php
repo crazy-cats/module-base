@@ -108,7 +108,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
             }
         }
 
-        return $renderer->addData( [ 'field' => $field, 'value' => $this->getFieldValue( $field, $value ) ] )
+        return $renderer->addData( [ 'name' => $field['name'], 'field' => $field, 'value' => $this->getFieldValue( $field, $value ) ] )
                         ->setFieldNamePrefix( 'data' )
                         ->withLabel( true )
                         ->withWrapper( true )
