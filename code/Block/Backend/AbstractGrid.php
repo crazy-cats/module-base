@@ -138,6 +138,9 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
         else if ( isset( $field['actions'] ) ) {
             return '&nbsp;';
         }
+        else if ( !isset( $field['filter'] ) ) {
+            return '&nbsp;';
+        }
 
         switch ( $field['filter']['type'] ) {
 

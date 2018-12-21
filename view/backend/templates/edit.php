@@ -19,7 +19,7 @@ $model = $this->getModel();
                 </div>
                 <div class="field-group-content">
                     <?php foreach ( $fieldGroup['fields'] as $field ) : ?>
-                        <?php if ( $field['type'] === AbstractEdit::FIELD_TYPE_HIDDEN ) : ?>
+                        <?php if ( isset( $field['type'] ) && $field['type'] === AbstractEdit::FIELD_TYPE_HIDDEN ) : ?>
                             <?php echo $this->renderField( $field ); ?>
                         <?php else : ?>
                             <div class="row">
