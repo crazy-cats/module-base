@@ -12,9 +12,19 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
             fields: [ ],
             sortings: [ ],
             rowActions: {
-                view: function( action ) {
+                redirect: function( action ) {
                     utility.loading( true );
-                    window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + 'id=' + action.item.id;
+                    var query = [ ];
+                    if ( action.params ) {
+                        for ( var k in action.params ) {
+                            var param = action.params[k];
+                            if ( action.params[k].indexOf( ':' ) === 0 ) {
+                                param = action.item[action.params[k].substr( 1 )] || param;
+                            }
+                            query.push( k + '=' + encodeURIComponent( param ) );
+                        }
+                    }
+                    window.location.href = action.url + (action.url.indexOf( '?' ) === -1 ? '?' : '&') + query.join( '&' );
                 },
                 edit: function( action ) {
                     utility.loading( true );
