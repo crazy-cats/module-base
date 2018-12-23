@@ -15,6 +15,7 @@
             jquery: '<?php echo getStaticUrl( 'CrazyCat\Core::js/jquery' ); ?>',
             text: '<?php echo getStaticUrl( 'CrazyCat\Core::js/text' ); ?>',
             utility: '<?php echo getStaticUrl( 'CrazyCat\Core::js/utility' ); ?>',
+            translator: '<?php echo getStaticUrl( 'CrazyCat\Core::js/translator' ); ?>',
             editor: '<?php echo getStaticUrl( 'CrazyCat/Core/js/tinymce/tinymce.min' ); ?>'
         },
         shim: {

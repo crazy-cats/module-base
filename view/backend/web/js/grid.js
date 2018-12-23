@@ -2,7 +2,7 @@
  * Copyright © 2018 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
-define( [ 'jquery', 'utility' ], function( $, utility ) {
+define( [ 'jquery', 'translator', 'utility' ], function( $, $t, utility ) {
 
     return function( options ) {
 
@@ -77,13 +77,13 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
                         if ( field.ids ) {
                             bodyHtml += '<td class="ids"><input type="checkbox" name="id" value="' + item.id + '" /></td>';
                         } else if ( field.actions ) {
-                            bodyHtml += '<td class="actions"><select><option></option>';
+                            bodyHtml += '<td class="actions"><ul style="z-index:' + (result.items.length - i) + ';"><li><a class="toggler" href="javascript:;"><span>' + $t( 'Action' ) + '</span></a><ul>';
                             for ( var a = 0; a < field.actions.length; a++ ) {
                                 var action = field.actions[a];
                                 action.item = item;
-                                bodyHtml += '<option value="' + utility.encodeAttr( JSON.stringify( action ) ) + '">' + field.actions[a].label + '</option>';
+                                bodyHtml += '<li><a class="action" href="javascript:;" data-action="' + utility.encodeAttr( JSON.stringify( action ) ) + '"><span>' + field.actions[a].label + '</span></a></li>';
                             }
-                            bodyHtml += '</select></td>';
+                            bodyHtml += '</ul></li></ul></td>';
                         } else {
                             bodyHtml += '<td>' + item[field.name] + '</td>';
                         }
@@ -194,12 +194,9 @@ define( [ 'jquery', 'utility' ], function( $, utility ) {
         /**
          * Actions of each line in the list
          */
-        form.on( 'change', 'tbody .actions select', function() {
+        form.on( 'click', 'tbody .actions a.action', function() {
             var el = $( this );
-            if ( !el.val() ) {
-                return;
-            }
-            var action = JSON.parse( el.val() );
+            var action = el.data( 'action' );
             if ( action.confirm && !confirm( action.confirm ) ) {
                 return;
             }
