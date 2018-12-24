@@ -61,6 +61,7 @@ class Edit extends \CrazyCat\Core\Block\Backend\AbstractEdit {
                     }
                     foreach ( $settingGroup['fields'] as $fieldName => &$field ) {
                         $field['name'] = $groupName . '/' . $fieldName;
+                        $field['label'] = __( $field['label'] );
                     }
                     $settings[$groupName]['fields'] = array_merge( $settings[$groupName]['fields'], $settingGroup['fields'] );
                 }
