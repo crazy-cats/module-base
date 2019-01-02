@@ -2,7 +2,7 @@
  * Copyright © 2018 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
-define( [ 'jquery', 'translator', 'utility' ], function( $, $t, utility ) {
+define( [ 'jquery', 'translator', 'utility' ], function( $, __, utility ) {
 
     return function( options ) {
 
@@ -77,7 +77,7 @@ define( [ 'jquery', 'translator', 'utility' ], function( $, $t, utility ) {
                         if ( field.ids ) {
                             bodyHtml += '<td class="ids"><input type="checkbox" name="id" value="' + item.id + '" /></td>';
                         } else if ( field.actions ) {
-                            bodyHtml += '<td class="actions"><ul style="z-index:' + (result.items.length - i) + ';"><li><a class="toggler" href="javascript:;"><span>' + $t( 'Action' ) + '</span></a><ul>';
+                            bodyHtml += '<td class="actions"><ul style="z-index:' + (result.items.length - i) + ';"><li><a class="toggler" href="javascript:;"><span>' + __( 'Action' ) + '</span></a><ul>';
                             for ( var a = 0; a < field.actions.length; a++ ) {
                                 var action = field.actions[a];
                                 action.item = item;
