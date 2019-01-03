@@ -71,7 +71,9 @@ class PrepareForArea {
                 /**
                  * Initialize stage
                  */
-                $stageManager->setCurrentStageCode( $request->getParam( 'stage', $cookies->getData( 'stage' ) ) );
+                if ( ( $stageCode = $request->getParam( 'stage', $cookies->getData( 'stage' ) ) ) ) {
+                    $stageManager->setCurrentStageCode( $stageCode );
+                }
                 $this->config->addData( [ $areaCode => $this->dbConfig->getConfigurations( $areaCode, $stageManager->getCurrentStage()->getId() ) ] );
             }
 
