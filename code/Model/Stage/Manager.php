@@ -89,6 +89,14 @@ class Manager {
     }
 
     /**
+     * @return string
+     */
+    public function getCurrentStageCode()
+    {
+        return $this->currentStageCode;
+    }
+
+    /**
      * @param string $code
      * @return $this
      */
