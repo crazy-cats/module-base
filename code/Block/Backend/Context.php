@@ -15,6 +15,7 @@ use CrazyCat\Framework\App\Module\Manager as ModuleManager;
 use CrazyCat\Framework\App\ObjectManager;
 use CrazyCat\Framework\App\Registry;
 use CrazyCat\Framework\App\Theme\Manager as ThemeManager;
+use CrazyCat\Framework\App\Translator;
 use CrazyCat\Framework\App\Url;
 
 /**
@@ -30,9 +31,9 @@ class Context extends \CrazyCat\Framework\App\Theme\Block\Context {
      */
     protected $objectManager;
 
-    public function __construct( ObjectManager $objectManager, Area $area, Request $request, Registry $registry, CacheFactory $cacheFactory, ModuleManager $moduleManager, ThemeManager $themeManager, Url $url, EventManager $eventManager )
+    public function __construct( ObjectManager $objectManager, Area $area, Request $request, Registry $registry, CacheFactory $cacheFactory, ModuleManager $moduleManager, Translator $translator, ThemeManager $themeManager, Url $url, EventManager $eventManager )
     {
-        parent::__construct( $area, $request, $registry, $cacheFactory, $moduleManager, $themeManager, $url, $eventManager );
+        parent::__construct( $area, $request, $registry, $cacheFactory, $moduleManager, $translator, $themeManager, $url, $eventManager );
 
         $this->objectManager = $objectManager;
     }

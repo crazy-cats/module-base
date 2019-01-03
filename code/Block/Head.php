@@ -17,4 +17,12 @@ class Head extends Template {
 
     protected $template = 'CrazyCat\Core::head';
 
+    /**
+     * @return string
+     */
+    public function getLangCode()
+    {
+        return $this->translator->getLangCode();
+    }
+
 }

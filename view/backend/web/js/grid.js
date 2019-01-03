@@ -91,7 +91,7 @@ define( [ 'jquery', 'translator', 'utility' ], function( $, __, utility ) {
                     bodyHtml += '</tr>';
                 }
             } else {
-                bodyHtml = '<tr><td class="no-record" colspan="' + opts.fields.length + '">' + 'No matched record found.' + '</td></tr>';
+                bodyHtml = '<tr><td class="no-record" colspan="' + opts.fields.length + '">' + __( 'No matched record found.' ) + '</td></tr>';
             }
 
             var currentPageHtml = '<select name="p" class="toolbarInputs-pagination" data-selector=".toolbarInputs-pagination">';
