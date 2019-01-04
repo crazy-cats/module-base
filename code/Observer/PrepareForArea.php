@@ -83,7 +83,7 @@ class PrepareForArea {
             /**
              * Initialize timezone
              */
-            $timezone->setTimezone( new \DateTimeZone( $this->config->getValue( 'general/timezone' ) ) );
+            $timezone->setTimezone( new \DateTimeZone( $this->config->getValue( 'general/timezone' ) ?: 'UTC'  ) );
         }
     }
 
