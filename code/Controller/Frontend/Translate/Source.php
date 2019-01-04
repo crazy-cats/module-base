@@ -5,7 +5,7 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Backend\Translate;
+namespace CrazyCat\Core\Controller\Frontend\Translate;
 
 use CrazyCat\Framework\App\Io\Http\Response;
 
