@@ -9,6 +9,8 @@
 <script type="text/javascript" src="<?php echo getStaticUrl( 'CrazyCat\Core::js/require.js' ); ?>"></script>
 <script type="text/javascript">
     // <![CDATA[
+    window.localStoragePrefix = '<?php echo $this->getLocalStoragePrefix(); ?>';
+
     require.config( {
         baseUrl: '<?php echo getStaticUrl( '' ); ?>',
         waitSeconds: 0,
@@ -29,7 +31,7 @@
     require.config( {
         deps: [ 'translator' ],
         callback: function() {
-            window.translationStorageName = 'crazycat-translations-<?php echo $this->getLangCode(); ?>';
+            window.translationStorageName = window.localStoragePrefix + 'crazycat-translations-<?php echo $this->getLangCode(); ?>';
             if ( !window.localStorage.getItem( window.translationStorageName ) ) {
                 require( [ 'text!<?php echo getUrl( 'system/translate/source' ) ?>' ], function( translations ) {
                     window.localStorage.setItem( window.translationStorageName, translations );

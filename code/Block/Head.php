@@ -25,4 +25,12 @@ class Head extends Template {
         return $this->translator->getLangCode();
     }
 
+    /**
+     * @return string
+     */
+    public function getLocalStoragePrefix()
+    {
+        return md5( getUrl( '' ) ) . ' :: ';
+    }
+
 }
