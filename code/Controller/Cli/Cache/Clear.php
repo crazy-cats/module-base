@@ -29,7 +29,7 @@ class Clear extends \CrazyCat\Framework\App\Module\Controller\Cli\AbstractAction
     protected function configure( Command $command )
     {
         $command->setDefinition( [
-            new InputArgument( self::INPUT_KEY_CACHE_NAME, InputArgument::REQUIRED, 'Type of cache to clear' )
+            new InputArgument( self::INPUT_KEY_CACHE_NAME, InputArgument::OPTIONAL, 'Type of cache to clear' )
         ] );
         $command->setDescription( 'Clear cache of specified type' );
         $command->setHelp( 'Types: modules, events' );
@@ -44,6 +44,21 @@ class Clear extends \CrazyCat\Framework\App\Module\Controller\Cli\AbstractAction
         if ( ( $cacheName = $input->getArgument( self::INPUT_KEY_CACHE_NAME ) ) ) {
             $this->objectManager->get( CacheFactory::class )->create( $cacheName )->clear();
             $output->writeln( sprintf( 'Cache `%s` cleared.', $cacheName ) );
+        }
+        else {
+            $caches = [
+                'components', 'modules', 'di', 'languages',
+                'backend_menu_data'
+            ];
+            foreach ( $caches as $cacheName ) {
+                try {
+                    $this->objectManager->get( CacheFactory::class )->create( $cacheName )->clear();
+                    $output->writeln( sprintf( 'Cache `%s` cleared.', $cacheName ) );
+                }
+                catch ( \Exception $e ) {
+                    
+                }
+            }
         }
     }
 
