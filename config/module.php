@@ -22,6 +22,7 @@ return [
         'page_render_before' => 'CrazyCat\Core\Observer\PrepareForRender'
     ],
     'routes' => [
+        'cli' => 'system',
         'backend' => 'system',
         'frontend' => 'index'
     ],
