@@ -14,17 +14,17 @@
 return [
     'system/stage/index' => [
         'label' => 'Front Stage',
-        'url' => getUrl( 'system/stage' ),
+        'url' => 'system/stage',
         'sort_order' => 997
     ],
     'system/config/index' => [
         'label' => 'Configuration',
-        'url' => getUrl( 'system/config' ),
+        'url' => 'system/config',
         'sort_order' => 998
     ],
     'system/index/logout' => [
         'label' => 'Logout',
-        'url' => getUrl( 'system/index/logout' ),
+        'url' => 'system/index/logout',
         'sort_order' => 999
     ]
 ];
