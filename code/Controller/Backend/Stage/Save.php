@@ -1,26 +1,26 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Backend\Stage;
+namespace CrazyCat\Base\Controller\Backend\Stage;
 
-use CrazyCat\Core\Model\Stage as Model;
+use CrazyCat\Base\Model\Stage as Model;
 use CrazyCat\Framework\App\Url;
 
 /**
  * @category CrazyCat
  * @package CrazyCat\Admin
  * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @link https://crazy-cat.cn
  */
-class Save extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAction {
+class Save extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction {
 
     protected function run()
     {
-        /* @var $model \CrazyCat\Framework\App\Module\Model\AbstractModel */
+        /* @var $model \CrazyCat\Framework\App\Component\Module\Model\AbstractModel */
         $model = $this->objectManager->create( Model::class );
 
         $data = $this->request->getPost( 'data' );

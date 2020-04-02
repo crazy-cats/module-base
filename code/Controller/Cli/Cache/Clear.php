@@ -1,11 +1,11 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Cli\Cache;
+namespace CrazyCat\Base\Controller\Cli\Cache;
 
 use CrazyCat\Framework\App\Cache\Factory as CacheFactory;
 use Symfony\Component\Console\Command\Command;
@@ -17,9 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @category CrazyCat
  * @package CrazyCat\Developer
  * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @link https://crazy-cat.cn
  */
-class Clear extends \CrazyCat\Framework\App\Module\Controller\Cli\AbstractAction {
+class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\AbstractAction {
 
     const INPUT_KEY_CACHE_NAME = 'cache_name';
 

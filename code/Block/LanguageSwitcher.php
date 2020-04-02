@@ -1,24 +1,24 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block;
+namespace CrazyCat\Base\Block;
 
 use CrazyCat\Framework\App\Theme\Block\Context;
 use CrazyCat\Framework\App\Translator;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-class LanguageSwitcher extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
+class LanguageSwitcher extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
 
-    protected $template = 'CrazyCat\Core::language_switcher';
+    protected $template = 'CrazyCat\Base::language_switcher';
 
     /**
      * @var \CrazyCat\Framework\App\Translator

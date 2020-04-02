@@ -1,34 +1,34 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Backend;
+namespace CrazyCat\Base\Controller\Backend;
 
-use CrazyCat\Core\Block\Backend\AbstractGrid;
+use CrazyCat\Base\Block\Backend\AbstractGrid;
 use CrazyCat\Framework\App\Io\Http\Response;
-use CrazyCat\Framework\App\Module\Controller\Backend\Context;
+use CrazyCat\Framework\App\Component\Module\Controller\Backend\Context;
 use CrazyCat\Framework\Utility\StaticVariable;
 
 /**
  * @category CrazyCat
  * @package CrazyCat\Framework
  * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @link https://crazy-cat.cn
  */
-abstract class AbstractGridAction extends \CrazyCat\Framework\App\Module\Controller\Backend\AbstractAction {
+abstract class AbstractGridAction extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction {
 
     const DEFAULT_PAGE_SIZE = 20;
 
     /**
-     * @var \CrazyCat\Core\Block\Backend\AbstractGrid
+     * @var \CrazyCat\Base\Block\Backend\AbstractGrid
      */
     protected $block;
 
     /**
-     * @var \CrazyCat\Framework\App\Module\Model\AbstractCollection
+     * @var \CrazyCat\Framework\App\Component\Module\Model\AbstractCollection
      */
     protected $collection;
 

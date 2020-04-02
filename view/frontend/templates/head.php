@@ -1,12 +1,12 @@
 <?php
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-/* @var $this \CrazyCat\Core\Block\Head */
+/* @var $this \CrazyCat\Base\Block\Head */
 ?>
-<script type="text/javascript" src="<?php echo getStaticUrl( 'CrazyCat\Core::js/require.js' ); ?>"></script>
+<script type="text/javascript" src="<?php echo getStaticUrl( 'CrazyCat\Base::js/require.js' ); ?>"></script>
 <script type="text/javascript">
     // <![CDATA[
     window.languageCode = '<?php echo $this->getLangCode(); ?>';
@@ -16,9 +16,9 @@
         baseUrl: '<?php echo getStaticUrl( '' ); ?>',
         waitSeconds: 0,
         paths: {
-            jquery: '<?php echo getStaticUrl( 'CrazyCat\Core::js/jquery' ); ?>',
-            text: '<?php echo getStaticUrl( 'CrazyCat\Core::js/text' ); ?>',
-            translator: '<?php echo getStaticUrl( 'CrazyCat\Core::js/translator' ); ?>'
+            jquery: '<?php echo getStaticUrl( 'CrazyCat\Base::js/jquery' ); ?>',
+            text: '<?php echo getStaticUrl( 'CrazyCat\Base::js/text' ); ?>',
+            translator: '<?php echo getStaticUrl( 'CrazyCat\Base::js/translator' ); ?>'
         }
     } );
 

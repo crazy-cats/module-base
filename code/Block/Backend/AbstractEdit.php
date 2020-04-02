@@ -1,26 +1,26 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block\Backend;
+namespace CrazyCat\Base\Block\Backend;
 
-use CrazyCat\Core\Block\Form\Renderer\Hidden as HiddenRenderer;
-use CrazyCat\Core\Block\Form\Renderer\Password as PasswordRenderer;
-use CrazyCat\Core\Block\Form\Renderer\Select as SelectRenderer;
-use CrazyCat\Core\Block\Form\Renderer\Text as TextRenderer;
-use CrazyCat\Core\Block\Form\Renderer\Textarea as TextareaRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Hidden as HiddenRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Password as PasswordRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Select as SelectRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Text as TextRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Textarea as TextareaRenderer;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
-
+abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock
+{
     /**
      * field types
      */
@@ -32,16 +32,16 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
     const FIELD_TYPE_TEXT = 'text';
     const FIELD_TYPE_TEXTAREA = 'textarea';
 
-    protected $template = 'CrazyCat\Core::edit';
+    protected $template = 'CrazyCat\Base::edit';
 
     /**
      * @var \CrazyCat\Framework\App\ObjectManager
      */
     protected $objectManager;
 
-    public function __construct( Context $context, array $data = [] )
+    public function __construct(Context $context, array $data = [])
     {
-        parent::__construct( $context, $data );
+        parent::__construct($context, $data);
 
         $this->objectManager = $context->getObjectManager();
     }
@@ -50,21 +50,21 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
      * @param array $field
      * @return mixed
      */
-    protected function getFieldValue( array $field, $value = null )
+    protected function getFieldValue(array $field, $value = null)
     {
-        return ( $value === null ) ?
-                ( $this->getModel()->hasData( $field['name'] ) ?
-                $this->getModel()->getData( $field['name'] ) :
-                ( isset( $field['default_value'] ) ? $field['default_value'] : null ) ) :
-                $value;
+        return ($value === null) ?
+            ($this->getModel()->hasData($field['name']) ?
+                $this->getModel()->getData($field['name']) :
+                (isset($field['default_value']) ? $field['default_value'] : null)) :
+            $value;
     }
 
     /**
-     * @return \CrazyCat\Framework\App\Module\Model\AbstractModel
+     * @return \CrazyCat\Framework\App\Component\Module\Model\AbstractModel
      */
     public function getModel()
     {
-        return $this->registry->registry( 'current_model' );
+        return $this->registry->registry('current_model');
     }
 
     /**
@@ -72,59 +72,64 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Module\Block\Abstrac
      * @param mixed $value
      * @return string
      */
-    public function renderField( $field, $value = null )
+    public function renderField($field, $value = null)
     {
-        if ( isset( $field['renderer'] ) ) {
-            $renderer = $this->objectManager->create( $field['renderer'] );
-        }
-        else {
-            switch ( $field['type'] ) {
-
-                case self::FIELD_TYPE_HIDDEN :
-                    $renderer = $this->objectManager->create( HiddenRenderer::class );
+        if (isset($field['renderer'])) {
+            $renderer = $this->objectManager->create($field['renderer']);
+        } else {
+            switch ($field['type']) {
+                case self::FIELD_TYPE_HIDDEN:
+                    $renderer = $this->objectManager->create(HiddenRenderer::class);
                     break;
 
-                case self::FIELD_TYPE_PASSWORD :
-                    $renderer = $this->objectManager->create( PasswordRenderer::class );
+                case self::FIELD_TYPE_PASSWORD:
+                    $renderer = $this->objectManager->create(PasswordRenderer::class);
                     break;
 
-                case self::FIELD_TYPE_SELECT :
-                case self::FIELD_TYPE_MULTISELECT :
-                    $renderer = $this->objectManager->create( SelectRenderer::class )
-                            ->isMultiple( $field['type'] == self::FIELD_TYPE_MULTISELECT );
-                    $options = isset( $field['options'] ) ? $field['options'] :
-                            ( isset( $field['source'] ) ? $this->objectManager->create( $field['source'] )->toOptionArray() : [] );
-                    $renderer->setData( 'options', $options );
+                case self::FIELD_TYPE_SELECT:
+                case self::FIELD_TYPE_MULTISELECT:
+                    $renderer = $this->objectManager->create(SelectRenderer::class)
+                        ->isMultiple($field['type'] == self::FIELD_TYPE_MULTISELECT);
+                    $options = isset($field['options'])
+                        ? $field['options']
+                        : (
+                        isset($field['source'])
+                            ? $this->objectManager->create($field['source'])->toOptionArray()
+                            : []
+                        );
+                    $renderer->setData('options', $options);
                     break;
 
-                case self::FIELD_TYPE_TEXT :
-                    $renderer = $this->objectManager->create( TextRenderer::class );
+                case self::FIELD_TYPE_TEXT:
+                    $renderer = $this->objectManager->create(TextRenderer::class);
                     break;
 
-                case self::FIELD_TYPE_TEXTAREA :
-                case self::FIELD_TYPE_EDITOR :
-                    $renderer = $this->objectManager->create( TextareaRenderer::class );
+                case self::FIELD_TYPE_TEXTAREA:
+                case self::FIELD_TYPE_EDITOR:
+                    $renderer = $this->objectManager->create(TextareaRenderer::class);
                     break;
             }
         }
 
-        return $renderer->addData( [ 'name' => $field['name'], 'field' => $field, 'value' => $this->getFieldValue( $field, $value ) ] )
-                        ->setFieldNamePrefix( 'data' )
-                        ->withLabel( true )
-                        ->withWrapper( true )
-                        ->toHtml();
+        return $renderer->addData(
+            ['name' => $field['name'], 'field' => $field, 'value' => $this->getFieldValue($field, $value)]
+        )
+            ->setFieldNamePrefix('data')
+            ->withLabel(true)
+            ->withWrapper(true)
+            ->toHtml();
     }
 
     /**
      * Return array structure is like:
      * [
      *     [
-     *         'name' => string,
-     *         'label' => string,
-     *         'type' => string,
+     *         'name'     => string,
+     *         'label'    => string,
+     *         'type'     => string,
      *         'renderer' => string,
-     *         'source' => string,
-     *         'options' => array
+     *         'source'   => string,
+     *         'options'  => array
      *     ]
      * ]
      *

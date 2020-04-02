@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
@@ -9,28 +9,28 @@
  * @category CrazyCat
  * @package CrazyCat\Admin
  * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @link https://crazy-cat.cn
  */
 return [
     'template' => '2columns_left',
     'blocks' => [
         'header' => [
             'header-buttons' => [
-                'class' => 'CrazyCat\Core\Block\Template',
+                'class' => 'CrazyCat\Base\Block\Template',
                 'data' => [
-                    'template' => 'CrazyCat\Core::header_buttons',
+                    'template' => 'CrazyCat\Base::header_buttons',
                     'buttons' => [
                         'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#edit-form' ] ] ],
                     ]
                 ]
             ],
             'scopes' => [
-                'class' => 'CrazyCat\Core\Block\Backend\Scopes'
+                'class' => 'CrazyCat\Base\Block\Backend\Scopes'
             ]
         ],
         'main' => [
             'main-content' => [
-                'class' => 'CrazyCat\Core\Block\Backend\Config\Edit'
+                'class' => 'CrazyCat\Base\Block\Backend\Config\Edit'
             ]
         ]
     ]

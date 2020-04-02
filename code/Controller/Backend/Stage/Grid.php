@@ -1,23 +1,23 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Backend\Stage;
+namespace CrazyCat\Base\Controller\Backend\Stage;
 
-use CrazyCat\Core\Block\Backend\Stage\Grid as GridBlock;
-use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
-use CrazyCat\Core\Model\Stage\Collection;
+use CrazyCat\Base\Block\Backend\Stage\Grid as GridBlock;
+use CrazyCat\Base\Model\Source\YesNo as SourceYesNo;
+use CrazyCat\Base\Model\Stage\Collection;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-class Grid extends \CrazyCat\Core\Controller\Backend\AbstractGridAction {
+class Grid extends \CrazyCat\Base\Controller\Backend\AbstractGridAction {
 
     protected function construct()
     {

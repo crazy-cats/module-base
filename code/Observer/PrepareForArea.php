@@ -1,14 +1,14 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Observer;
+namespace CrazyCat\Base\Observer;
 
-use CrazyCat\Core\Model\DbConfig;
-use CrazyCat\Core\Model\Stage\Manager as StageManager;
+use CrazyCat\Base\Model\DbConfig;
+use CrazyCat\Base\Model\Stage\Manager as StageManager;
 use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Config;
 use CrazyCat\Framework\App\Cookies;
@@ -18,9 +18,9 @@ use CrazyCat\Framework\App\Timezone;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
 class PrepareForArea {
 
@@ -30,7 +30,7 @@ class PrepareForArea {
     private $config;
 
     /**
-     * @var \CrazyCat\Core\Model\DbConfig
+     * @var \CrazyCat\Base\Model\DbConfig
      */
     private $dbConfig;
 
@@ -65,7 +65,7 @@ class PrepareForArea {
                 /* @var $request \CrazyCat\Framework\App\Io\Http\Request */
                 $request = $this->objectManager->get( HttpRequest::class );
 
-                /* @var $stageManager \CrazyCat\Core\Model\Stage\Manager */
+                /* @var $stageManager \CrazyCat\Base\Model\Stage\Manager */
                 $stageManager = $this->objectManager->get( StageManager::class );
 
                 /**

@@ -1,26 +1,20 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
 return [
-    'namespace' => 'CrazyCat\Core',
+    'namespace' => 'CrazyCat\Base',
     'version' => '1.0.0',
     'depends' => [],
-    'events' => [
-        'set_area_code_after' => 'CrazyCat\Core\Observer\PrepareForArea',
-        'verify_api_token' => 'CrazyCat\Core\Observer\VerifyApiToken',
-        'themes_init_after' => 'CrazyCat\Core\Observer\PrepareTheme',
-        'page_render_before' => 'CrazyCat\Core\Observer\PrepareForRender'
-    ],
     'routes' => [
         'cli' => 'system',
         'backend' => 'system',
@@ -34,17 +28,17 @@ return [
                 'timezone' => [
                     'label' => 'Timezone',
                     'type' => 'select',
-                    'source' => 'CrazyCat\Core\Model\Source\TimeZones'
+                    'source' => 'CrazyCat\Base\Model\Source\TimeZones'
                 ],
                 'allowed_languages' => [
                     'label' => 'Allowed Languages',
                     'type' => 'multiselect',
-                    'source' => 'CrazyCat\Core\Model\Source\Languages'
+                    'source' => 'CrazyCat\Base\Model\Source\Languages'
                 ],
                 'default_language' => [
                     'label' => 'Default Languages',
                     'type' => 'select',
-                    'source' => 'CrazyCat\Core\Model\Source\Languages'
+                    'source' => 'CrazyCat\Base\Model\Source\Languages'
                 ]
             ]
         ],
@@ -67,7 +61,7 @@ return [
                 'default_meta_robots' => [
                     'label' => 'Default Robots',
                     'type' => 'select',
-                    'source' => 'CrazyCat\Core\Model\Source\MetaRobots'
+                    'source' => 'CrazyCat\Base\Model\Source\MetaRobots'
                 ]
             ]
         ]

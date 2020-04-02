@@ -1,19 +1,19 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Model\Stage;
+namespace CrazyCat\Base\Model\Stage;
 
 use CrazyCat\Framework\App\ObjectManager;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
 class Manager {
 
@@ -38,7 +38,7 @@ class Manager {
     }
 
     /**
-     * @return \CrazyCat\Core\Model\Stage[]
+     * @return \CrazyCat\Base\Model\Stage[]
      */
     public function getAllStages()
     {
@@ -55,7 +55,7 @@ class Manager {
 
     /**
      * @param string $code
-     * @return \CrazyCat\Core\Model\Stage
+     * @return \CrazyCat\Base\Model\Stage
      */
     public function getStage( $code )
     {
@@ -67,7 +67,7 @@ class Manager {
     }
 
     /**
-     * @return \CrazyCat\Core\Model\Stage
+     * @return \CrazyCat\Base\Model\Stage
      */
     public function getCurrentStage()
     {

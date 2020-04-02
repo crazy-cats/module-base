@@ -5,16 +5,13 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Base\Block\Form\Renderer;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
  * @author   Liwei Zeng <zengliwei@com.com>
  * @link     https://crazy-cat.cn
  */
-class Select extends abstractRenderer {
-
-    protected $template = 'CrazyCat\Base::form/select';
-
-}
+return [
+    'themes_init_after'   => 'CrazyCat\Base\Observer\PrepareTheme',
+    'page_render_before'  => 'CrazyCat\Base\Observer\PrepareForRender'
+];

@@ -1,12 +1,12 @@
 <?php
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-use CrazyCat\Core\Block\Backend\AbstractEdit;
+use CrazyCat\Base\Block\Backend\AbstractEdit;
 
-/* @var $this \CrazyCat\Core\Block\Backend\AbstractEdit */
+/* @var $this \CrazyCat\Base\Block\Backend\AbstractEdit */
 $fields = $this->getFields();
 $model = $this->getModel();
 ?>
@@ -42,7 +42,7 @@ $model = $this->getModel();
             editor: {
                 baseUrl: '<?php echo getBaseUrl() ?>',
                 imageUploadUrl: '<?php echo $this->getImageUploadUrl() ?>',
-                skinUrl: '<?php echo getStaticUrl( 'CrazyCat\Core::css/tinymce/skins/lightgray' ) ?>'
+                skinUrl: '<?php echo getStaticUrl( 'CrazyCat\Base::css/tinymce/skins/lightgray' ) ?>'
             }
         } );
     } );

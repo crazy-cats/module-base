@@ -1,23 +1,23 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block\Backend\Stage;
+namespace CrazyCat\Base\Block\Backend\Stage;
 
-use CrazyCat\Core\Block\Backend\Context;
-use CrazyCat\Core\Model\Source\YesNo as SourceYesNo;
+use CrazyCat\Base\Block\Backend\Context;
+use CrazyCat\Base\Model\Source\YesNo as SourceYesNo;
 use CrazyCat\Framework\App\Session\Backend as Session;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-class Grid extends \CrazyCat\Core\Block\Backend\AbstractGrid {
+class Grid extends \CrazyCat\Base\Block\Backend\AbstractGrid {
 
     const BOOKMARK_KEY = 'stage';
 

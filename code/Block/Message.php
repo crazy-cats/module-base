@@ -1,24 +1,24 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block;
+namespace CrazyCat\Base\Block;
 
 use CrazyCat\Framework\App\Session\Messenger;
 use CrazyCat\Framework\App\Theme\Block\Context;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-class Message extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
+class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
 
-    protected $template = 'CrazyCat\Core::message';
+    protected $template = 'CrazyCat\Base::message';
 
     /**
      * @var \CrazyCat\Framework\App\Session\Messenger

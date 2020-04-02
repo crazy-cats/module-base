@@ -1,28 +1,28 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block\Backend;
+namespace CrazyCat\Base\Block\Backend;
 
-use CrazyCat\Core\Model\Source\Scope as SourceScope;
+use CrazyCat\Base\Model\Source\Scope as SourceScope;
 use CrazyCat\Framework\App\Area;
 use CrazyCat\Framework\App\Theme\Block\Context;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-class Scopes extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
+class Scopes extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
 
-    protected $template = 'CrazyCat\Core::scopes';
+    protected $template = 'CrazyCat\Base::scopes';
 
     /**
-     * @var \CrazyCat\Core\Model\Source\Scope
+     * @var \CrazyCat\Base\Model\Source\Scope
      */
     protected $sourceScope;
 

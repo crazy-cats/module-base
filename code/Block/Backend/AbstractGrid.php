@@ -1,25 +1,25 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Block\Backend;
+namespace CrazyCat\Base\Block\Backend;
 
-use CrazyCat\Core\Block\Form\Renderer\Select as SelectRenderer;
-use CrazyCat\Core\Block\Form\Renderer\Text as TextRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Select as SelectRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Text as TextRenderer;
 use CrazyCat\Framework\App\ObjectManager;
 use CrazyCat\Framework\App\Session\Backend as Session;
 use CrazyCat\Framework\Utility\StaticVariable;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\AbstractBlock {
+abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
 
     const BOOKMARK_FILTER = 'filter';
     const BOOKMARK_SORTING = 'sorting';
@@ -30,7 +30,7 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Module\Block\Abstrac
     const FIELD_TYPE_SELECT = 'select';
     const FIELD_TYPE_TEXT = 'text';
 
-    protected $template = 'CrazyCat\Core::grid';
+    protected $template = 'CrazyCat\Base::grid';
 
     /**
      * @var \CrazyCat\Framework\App\ObjectManager

@@ -1,19 +1,19 @@
 <?php
 
 /*
- * Copyright © 2018 CrazyCat, Inc. All rights reserved.
+ * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Core\Controller\Frontend\Index;
+namespace CrazyCat\Base\Controller\Frontend\Index;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Core
- * @author Bruce Z <152416319@qq.com>
- * @link http://crazy-cat.co
+ * @package  CrazyCat\Base
+ * @author   Liwei Zeng <zengliwei@com.com>
+ * @link     https://crazy-cat.cn
  */
-class Index extends \CrazyCat\Framework\App\Module\Controller\Frontend\AbstractAction {
+class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Frontend\AbstractAction {
 
     protected function run()
     {
