@@ -9,12 +9,12 @@ namespace CrazyCat\Base\Block\Backend;
 
 use CrazyCat\Base\Model\Source\Scope as SourceScope;
 use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Theme\Block\Context;
+use CrazyCat\Framework\App\Component\Theme\Block\Context;
 
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Scopes extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {

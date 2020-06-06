@@ -9,23 +9,25 @@ namespace CrazyCat\Base\Controller\Backend\Index;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Admin
- * @author Bruce Z <152416319@qq.com>
- * @link https://crazy-cat.cn
+ * @package  CrazyCat\Base
+ * @author   Bruce Z <152416319@qq.com>
+ * @link     https://crazy-cat.cn
  */
-class Login extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction {
-
-    protected function run()
+class Login extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction
+{
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
+    protected function execute()
     {
-        if ( $this->session->isLoggedIn() ) {
-            $this->redirect( 'system/index' );
-        }
-        else {
-            $this->setPageTitle( __( 'Administrator Login' ) )
-                    ->setMetaKeywords( [ 'CrazyCat', 'CMS', __( 'dynamic portal' ) ] )
-                    ->setMetaDescription( 'CrazyCat' )
-                    ->render();
+        if ($this->session->isLoggedIn()) {
+            $this->redirect('system/index');
+        } else {
+            $this->setPageTitle(__('Administrator Login'))
+                ->setMetaKeywords(['CrazyCat', 'CMS', __('dynamic portal')])
+                ->setMetaDescription('CrazyCat')
+                ->render();
         }
     }
-
 }

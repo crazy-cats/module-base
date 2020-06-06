@@ -14,7 +14,7 @@ use CrazyCat\Framework\App\ObjectManager;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Scope extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource {

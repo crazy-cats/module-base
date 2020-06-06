@@ -10,13 +10,13 @@ namespace CrazyCat\Base\Block\Backend;
 use CrazyCat\Base\Block\Form\Renderer\Select as SelectRenderer;
 use CrazyCat\Base\Block\Form\Renderer\Text as TextRenderer;
 use CrazyCat\Framework\App\ObjectManager;
-use CrazyCat\Framework\App\Session\Backend as Session;
+use CrazyCat\Framework\App\Io\Http\Session\Backend as Session;
 use CrazyCat\Framework\Utility\StaticVariable;
 
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
@@ -38,7 +38,7 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
     protected $objectManager;
 
     /**
-     * @var \CrazyCat\Framework\App\Session\Backend
+     * @var \CrazyCat\Framework\App\Io\Http\Session\Backend
      */
     protected $session;
 

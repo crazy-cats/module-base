@@ -5,15 +5,15 @@
  */
 
 /* @var $this \CrazyCat\Base\Block\Template */
-if ( empty( $buttons = $this->getData( 'buttons' ) ) ) {
+if (empty($buttons = $this->getData('buttons'))) {
     return;
 }
 ?>
 <div class="block block-header-buttons">
     <div class="block-content">
-        <?php foreach ( $buttons as $name => $button ) : ?>
+        <?php foreach ($buttons as $name => $button) : ?>
             <button class="button btn-<?php echo $name ?>"
-                    data-action="<?php echo htmlEscape( json_encode( $button['action'] ) ) ?>">
+                    data-action="<?= htmlEscape(json_encode($button['action'])) ?>">
                 <span><?php echo $button['label'] ?></span>
             </button>
         <?php endforeach; ?>
@@ -21,9 +21,9 @@ if ( empty( $buttons = $this->getData( 'buttons' ) ) ) {
 </div>
 
 <script type="text/javascript">
-// <![CDATA[
-    require( [ 'utility' ], function( utility ) {
-        utility.actButton( {wrapper: '.block-header-buttons'} );
-    } );
-// ]]>
+    // <![CDATA[
+    require(['utility'], function (utility) {
+        utility.actButton({wrapper: '.block-header-buttons'});
+    });
+    // ]]>
 </script>

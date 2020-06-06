@@ -10,7 +10,7 @@ namespace CrazyCat\Base\Model\Stage;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Collection extends \CrazyCat\Framework\App\Component\Module\Model\AbstractCollection {

@@ -8,7 +8,7 @@
 ?>
 <div class="block block-scopes">
     <div class="block-content">
-        <form method="get" action="<?php echo getUrl( 'system/config/index' ) ?>">
+        <form method="get" action="<?php echo $this->getUrl( 'system/config/index' ) ?>">
             <select name="scope">
                 <?php echo selectOptionsHtml( $this->getScopeOptions(), $this->getCurrentScope() ); ?>
             </select>

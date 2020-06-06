@@ -7,45 +7,22 @@
 
 namespace CrazyCat\Base\Controller\Backend\Config;
 
-use CrazyCat\Base\Model\DbConfig;
 use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Component\Module\Controller\Backend\Context;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Admin
- * @author Bruce Z <152416319@qq.com>
- * @link https://crazy-cat.cn
+ * @package  CrazyCat\Base
+ * @author   Bruce Z <152416319@qq.com>
+ * @link     https://crazy-cat.cn
  */
-class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction {
-
+class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction
+{
     /**
-     * @var \CrazyCat\Base\Model\DbConfig
+     * @return void
+     * @throws \ReflectionException
      */
-    protected $dbConfig;
-
-    public function __construct( DbConfig $dbConfig, Context $context )
+    protected function execute()
     {
-        parent::__construct( $context );
-
-        $this->dbConfig = $dbConfig;
+        $this->setPageTitle(__('Configuration'))->render();
     }
-
-    /**
-     * @return array
-     */
-    protected function getConfigurations()
-    {
-        list( $scope, $scopeId ) = array_pad( explode( '-', $this->request->getParam( 'scope', Area::CODE_GLOBAL ) ), 2, 0 );
-
-        return $this->dbConfig->getConfigurations( $scope, $scopeId );
-    }
-
-    protected function run()
-    {
-        $this->registry->register( 'configurations', $this->getConfigurations() );
-
-        $this->setPageTitle( __( 'Configuration' ) )->render();
-    }
-
 }

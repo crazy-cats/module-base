@@ -414,7 +414,7 @@ var media = (function () {
         return pattern.regex.test(url);
       });
       if (pattern.length > 0) {
-        return global$2.extend({}, pattern[0], { url: getUrl(pattern[0], url) });
+        return global$2.extend({}, pattern[0], { url: $this->getUrl(pattern[0], url) });
       } else {
         return null;
       }

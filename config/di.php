@@ -5,16 +5,12 @@
  * See COPYRIGHT.txt for license details.
  */
 
-namespace CrazyCat\Base\Block\Form\Renderer;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Hidden extends abstractRenderer {
-
-    protected $template = 'CrazyCat\Base::form/hidden';
-
-}
+return [
+    'CrazyCat\Framework\App\Config' => 'CrazyCat\Base\Model\Config'
+];

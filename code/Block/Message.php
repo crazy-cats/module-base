@@ -7,13 +7,13 @@
 
 namespace CrazyCat\Base\Block;
 
-use CrazyCat\Framework\App\Session\Messenger;
-use CrazyCat\Framework\App\Theme\Block\Context;
+use CrazyCat\Framework\App\Io\Http\Session\Messenger;
+use CrazyCat\Framework\App\Component\Theme\Block\Context;
 
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
@@ -21,7 +21,7 @@ class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlo
     protected $template = 'CrazyCat\Base::message';
 
     /**
-     * @var \CrazyCat\Framework\App\Session\Messenger
+     * @var \CrazyCat\Framework\App\Io\Http\Session\Messenger
      */
     protected $messenger;
 

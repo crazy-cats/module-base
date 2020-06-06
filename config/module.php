@@ -8,62 +8,64 @@
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 return [
     'namespace' => 'CrazyCat\Base',
-    'version' => '1.0.0',
-    'depends' => [],
-    'routes' => [
-        'cli' => 'system',
-        'backend' => 'system',
+    'depends'   => [],
+    'routes'    => [
+        'cli'      => 'system',
+        'backend'  => 'system',
         'frontend' => 'index'
     ],
-    'settings' => [
+    'settings'  => [
         'general' => [
-            'label' => 'General',
+            'label'      => 'General',
             'sort_order' => 1,
-            'fields' => [
-                'timezone' => [
-                    'label' => 'Timezone',
-                    'type' => 'select',
+            'fields'     => [
+                'timezone'          => [
+                    'label'  => 'Timezone',
+                    'type'   => 'select',
                     'source' => 'CrazyCat\Base\Model\Source\TimeZones'
                 ],
                 'allowed_languages' => [
-                    'label' => 'Allowed Languages',
-                    'type' => 'multiselect',
+                    'label'  => 'Allowed Languages',
+                    'type'   => 'multiselect',
                     'source' => 'CrazyCat\Base\Model\Source\Languages'
                 ],
-                'default_language' => [
-                    'label' => 'Default Languages',
-                    'type' => 'select',
+                'default_language'  => [
+                    'label'  => 'Default Languages',
+                    'type'   => 'select',
                     'source' => 'CrazyCat\Base\Model\Source\Languages'
                 ]
             ]
         ],
         'website' => [
-            'label' => 'Website',
+            'label'      => 'Website',
             'sort_order' => 2,
-            'fields' => [
-                'default_page_title' => [
+            'fields'     => [
+                'default_page_title'       => [
                     'label' => 'Default Page Title',
-                    'type' => 'text'
+                    'type'  => 'text'
                 ],
-                'default_meta_keywords' => [
+                'default_meta_keywords'    => [
                     'label' => 'Default Meta Keywords',
-                    'type' => 'text'
+                    'type'  => 'text'
                 ],
                 'default_meta_description' => [
                     'label' => 'Default Meta Description',
-                    'type' => 'textarea'
+                    'type'  => 'textarea'
                 ],
-                'default_meta_robots' => [
-                    'label' => 'Default Robots',
-                    'type' => 'select',
+                'default_meta_robots'      => [
+                    'label'  => 'Default Robots',
+                    'type'   => 'select',
                     'source' => 'CrazyCat\Base\Model\Source\MetaRobots'
                 ]
             ]
         ]
+    ],
+    'setup'     => [
+        'CrazyCat\Base\Setup\Install'
     ]
 ];

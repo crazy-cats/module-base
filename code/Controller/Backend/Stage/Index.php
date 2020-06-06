@@ -10,14 +10,13 @@ namespace CrazyCat\Base\Controller\Backend\Stage;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction {
-
-    protected function run()
+class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction
+{
+    protected function execute()
     {
-        $this->setPageTitle( __( 'Front Stage List' ) )->render();
+        $this->setPageTitle(__('Front Stage List'))->render();
     }
-
 }

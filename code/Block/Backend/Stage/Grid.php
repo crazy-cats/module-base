@@ -9,12 +9,12 @@ namespace CrazyCat\Base\Block\Backend\Stage;
 
 use CrazyCat\Base\Block\Backend\Context;
 use CrazyCat\Base\Model\Source\YesNo as SourceYesNo;
-use CrazyCat\Framework\App\Session\Backend as Session;
+use CrazyCat\Framework\App\Io\Http\Session\Backend as Session;
 
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Grid extends \CrazyCat\Base\Block\Backend\AbstractGrid {
@@ -33,8 +33,8 @@ class Grid extends \CrazyCat\Base\Block\Backend\AbstractGrid {
                 [ 'name' => 'enabled', 'label' => __( 'Enabled' ), 'sort' => true, 'width' => 130, 'filter' => [ 'type' => 'select', 'source' => SourceYesNo::class, 'condition' => 'eq' ] ],
                 [ 'name' => 'is_default', 'label' => __( 'Is Default' ), 'sort' => true, 'width' => 130, 'filter' => [ 'type' => 'select', 'source' => SourceYesNo::class, 'condition' => 'eq' ] ],
                 [ 'label' => __( 'Actions' ), 'actions' => [
-                        [ 'name' => 'edit', 'label' => __( 'Edit' ), 'url' => getUrl( 'system/stage/edit' ) ],
-                        [ 'name' => 'delete', 'label' => __( 'Delete' ), 'confirm' => __( 'Sure you want to remove this item?' ), 'url' => getUrl( 'system/stage/delete' ) ]
+                        [ 'name' => 'edit', 'label' => __( 'Edit' ), 'url' => $this->getUrl( 'system/stage/edit' ) ],
+                        [ 'name' => 'delete', 'label' => __( 'Delete' ), 'confirm' => __( 'Sure you want to remove this item?' ), 'url' => $this->getUrl( 'system/stage/delete' ) ]
                 ] ] ];
     }
 
@@ -43,7 +43,7 @@ class Grid extends \CrazyCat\Base\Block\Backend\AbstractGrid {
      */
     public function getSourceUrl()
     {
-        return getUrl( 'system/stage/grid' );
+        return $this->getUrl( 'system/stage/grid' );
     }
 
 }

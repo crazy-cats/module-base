@@ -7,33 +7,42 @@
 
 namespace CrazyCat\Base\Block\Backend;
 
-use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Cache\Factory as CacheFactory;
-use CrazyCat\Framework\App\EventManager;
-use CrazyCat\Framework\App\Io\Http\Request;
-use CrazyCat\Framework\App\Component\Module\Manager as ModuleManager;
-use CrazyCat\Framework\App\ObjectManager;
-use CrazyCat\Framework\App\Registry;
-use CrazyCat\Framework\App\Theme\Manager as ThemeManager;
-use CrazyCat\Framework\App\Translator;
-use CrazyCat\Framework\App\Url;
-
 /**
  * @category CrazyCat
- * @package CrazyCat\Framework
- * @author Bruce Z <152416319@qq.com>
- * @link https://crazy-cat.cn
+ * @package  CrazyCat\Framework
+ * @author   Bruce Z <152416319@qq.com>
+ * @link     https://crazy-cat.cn
  */
-class Context extends \CrazyCat\Framework\App\Theme\Block\Context {
-
+class Context extends \CrazyCat\Framework\App\Component\Theme\Block\Context
+{
     /**
      * @var \CrazyCat\Framework\App\ObjectManager
      */
     protected $objectManager;
 
-    public function __construct( ObjectManager $objectManager, Area $area, Request $request, Registry $registry, CacheFactory $cacheFactory, ModuleManager $moduleManager, Translator $translator, ThemeManager $themeManager, Url $url, EventManager $eventManager )
-    {
-        parent::__construct( $area, $request, $registry, $cacheFactory, $moduleManager, $translator, $themeManager, $url, $eventManager );
+    public function __construct(
+        \CrazyCat\Framework\App\ObjectManager $objectManager,
+        \CrazyCat\Framework\App\Area $area,
+        \CrazyCat\Framework\App\Io\Http\Request $request,
+        \CrazyCat\Framework\App\Registry $registry,
+        \CrazyCat\Framework\App\Cache\Manager $cacheFactory,
+        \CrazyCat\Framework\App\Component\Module\Manager $moduleManager,
+        \CrazyCat\Framework\App\Component\Language\Translator $translator,
+        \CrazyCat\Framework\App\Component\Theme\Manager $themeManager,
+        \CrazyCat\Framework\App\Io\Http\Url $url,
+        \CrazyCat\Framework\App\EventManager $eventManager
+    ) {
+        parent::__construct(
+            $area,
+            $cacheFactory,
+            $translator,
+            $themeManager,
+            $eventManager,
+            $request,
+            $moduleManager,
+            $registry,
+            $url
+        );
 
         $this->objectManager = $objectManager;
     }
@@ -45,5 +54,4 @@ class Context extends \CrazyCat\Framework\App\Theme\Block\Context {
     {
         return $this->objectManager;
     }
-
 }

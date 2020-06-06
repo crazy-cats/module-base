@@ -14,28 +14,28 @@ use CrazyCat\Base\Model\Stage\Collection;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Grid extends \CrazyCat\Base\Controller\Backend\AbstractGridAction {
-
+class Grid extends \CrazyCat\Base\Controller\Backend\AbstractGridAction
+{
     protected function construct()
     {
-        $this->init( Collection::class, GridBlock::class );
+        $this->init(Collection::class, GridBlock::class);
     }
 
     /**
      * @param array $collectionData
      * @return array
+     * @throws \ReflectionException
      */
-    protected function processData( $collectionData )
+    protected function processData($collectionData)
     {
-        $sourceYesNo = $this->objectManager->get( SourceYesNo::class );
-        foreach ( $collectionData['items'] as &$item ) {
-            $item['enabled'] = $sourceYesNo->getLabel( $item['enabled'] );
-            $item['is_default'] = $sourceYesNo->getLabel( $item['is_default'] );
+        $sourceYesNo = $this->objectManager->get(SourceYesNo::class);
+        foreach ($collectionData['items'] as &$item) {
+            $item['enabled'] = $sourceYesNo->getLabel($item['enabled']);
+            $item['is_default'] = $sourceYesNo->getLabel($item['is_default']);
         }
         return $collectionData;
     }
-
 }

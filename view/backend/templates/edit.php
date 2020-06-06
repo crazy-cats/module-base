@@ -11,19 +11,19 @@ $fields = $this->getFields();
 $model = $this->getModel();
 ?>
 <div class="backend-edit">
-    <form id="edit-form" method="post" action="<?php echo $this->getActionUrl(); ?>" enctype="multipart/form-data">
-        <?php foreach ( $fields as $groupName => $fieldGroup ) : ?>
-            <div class="field-group group-<?php echo $groupName ?>">
+    <form id="edit-form" method="post" action="<?= $this->getActionUrl(); ?>" enctype="multipart/form-data">
+        <?php foreach ($fields as $groupName => $fieldGroup) : ?>
+            <div class="field-group group-<?= $groupName ?>">
                 <div class="field-group-label">
-                    <?php echo __( $fieldGroup['label'] ) ?>
+                    <?= __($fieldGroup['label']) ?>
                 </div>
                 <div class="field-group-content">
-                    <?php foreach ( $fieldGroup['fields'] as $field ) : ?>
-                        <?php if ( isset( $field['type'] ) && $field['type'] === AbstractEdit::FIELD_TYPE_HIDDEN ) : ?>
-                            <?php echo $this->renderField( $field ); ?>
+                    <?php foreach ($fieldGroup['fields'] as $field) : ?>
+                        <?php if (isset($field['type']) && $field['type'] === AbstractEdit::FIELD_TYPE_HIDDEN) : ?>
+                            <?= $this->renderField($field); ?>
                         <?php else : ?>
                             <div class="row">
-                                <?php echo $this->renderField( $field ); ?>
+                                <?= $this->renderField($field); ?>
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -35,16 +35,16 @@ $model = $this->getModel();
 
 <script type="text/javascript">
     // <![CDATA[
-    require( [ 'CrazyCat/Core/js/form' ], function( form ) {
-        form( {
+    require(['CrazyCat/Core/js/form'], function (form) {
+        form({
             el: '#edit-form',
-            fields: <?php echo json_encode( $fields ); ?>,
+            fields: <?= json_encode($fields); ?>,
             editor: {
-                baseUrl: '<?php echo getBaseUrl() ?>',
-                imageUploadUrl: '<?php echo $this->getImageUploadUrl() ?>',
-                skinUrl: '<?php echo getStaticUrl( 'CrazyCat\Base::css/tinymce/skins/lightgray' ) ?>'
+                baseUrl: '<?= $this->getBaseUrl() ?>',
+                imageUploadUrl: '<?= $this->getImageUploadUrl() ?>',
+                skinUrl: '<?= $this->getStaticUrl('CrazyCat\Base::css/tinymce/skins/lightgray') ?>'
             }
-        } );
-    } );
+        });
+    });
     // ]]>
 </script>

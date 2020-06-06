@@ -12,22 +12,22 @@ use CrazyCat\Framework\App\Db\MySql;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Upgrade extends \CrazyCat\Framework\App\Component\Module\Setup\AbstractUpgrade
+class Install extends \CrazyCat\Framework\App\Component\Module\Setup\AbstractSetup
 {
     private function createConfigTable()
     {
         $columns = [
             ['name' => 'scope', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 8, 'null' => false],
-            ['name' => 'scope_id', 'type' => MySql::COL_TYPE_INT, 'unsign' => true, 'null' => false, 'default' => 0],
+            ['name' => 'stage_id', 'type' => MySql::COL_TYPE_INT, 'unsign' => true],
             ['name' => 'path', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 64, 'null' => false],
             ['name' => 'value', 'type' => MySql::COL_TYPE_TEXT, 'null' => false]
         ];
         $indexes = [
-            ['columns' => ['scope', 'scope_id'], 'type' => MySql::INDEX_NORMAL],
-            ['columns' => ['scope', 'scope_id', 'path'], 'type' => MySql::INDEX_UNIQUE]
+            ['columns' => ['scope', 'stage_id'], 'type' => MySql::INDEX_NORMAL],
+            ['columns' => ['scope', 'stage_id', 'path'], 'type' => MySql::INDEX_UNIQUE]
         ];
         $this->conn->createTable('config', $columns, $indexes);
     }
@@ -35,27 +35,30 @@ class Upgrade extends \CrazyCat\Framework\App\Component\Module\Setup\AbstractUpg
     private function createStageTable()
     {
         $columns = [
-            ['name'           => 'id',
-             'type'           => MySql::COL_TYPE_INT,
-             'unsign'         => true,
-             'null'           => false,
-             'auto_increment' => true
+            [
+                'name'           => 'id',
+                'type'           => MySql::COL_TYPE_INT,
+                'unsign'         => true,
+                'null'           => false,
+                'auto_increment' => true
             ],
             ['name' => 'name', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 256, 'null' => false],
             ['name' => 'code', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 32, 'null' => false],
-            ['name'    => 'enabled',
-             'type'    => MySql::COL_TYPE_TINYINT,
-             'length'  => 1,
-             'unsign'  => true,
-             'null'    => false,
-             'default' => 0
+            [
+                'name'    => 'enabled',
+                'type'    => MySql::COL_TYPE_TINYINT,
+                'length'  => 1,
+                'unsign'  => true,
+                'null'    => false,
+                'default' => 0
             ],
-            ['name'    => 'is_default',
-             'type'    => MySql::COL_TYPE_TINYINT,
-             'length'  => 1,
-             'unsign'  => true,
-             'null'    => false,
-             'default' => 0
+            [
+                'name'    => 'is_default',
+                'type'    => MySql::COL_TYPE_TINYINT,
+                'length'  => 1,
+                'unsign'  => true,
+                'null'    => false,
+                'default' => 0
             ]
         ];
         $indexes = [
@@ -81,14 +84,12 @@ class Upgrade extends \CrazyCat\Framework\App\Component\Module\Setup\AbstractUpg
     }
 
     /**
-     * @param string|null $currentVersion
+     * @return void
      */
-    public function execute($currentVersion)
+    public function execute()
     {
-        if ($currentVersion === null) {
-            $this->createConfigTable();
-            $this->createStageTable();
-            $this->createDefaultStage();
-        }
+        $this->createConfigTable();
+        $this->createStageTable();
+        $this->createDefaultStage();
     }
 }

@@ -7,7 +7,7 @@
 
 namespace CrazyCat\Base\Controller\Cli\Cache;
 
-use CrazyCat\Framework\App\Cache\Factory as CacheFactory;
+use CrazyCat\Framework\App\Cache\Manager as CacheManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,51 +15,55 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Developer
- * @author Bruce Z <152416319@qq.com>
- * @link https://crazy-cat.cn
+ * @package  CrazyCat\Developer
+ * @author   Bruce Z <152416319@qq.com>
+ * @link     https://crazy-cat.cn
  */
-class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\AbstractAction {
-
+class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\AbstractAction
+{
     const INPUT_KEY_CACHE_NAME = 'cache_name';
 
     /**
      * @param \Symfony\Component\Console\Command\Command $command
+     * @throws \ReflectionException
      */
-    protected function configure( Command $command )
+    protected function configure(Command $command)
     {
-        $command->setDefinition( [
-            new InputArgument( self::INPUT_KEY_CACHE_NAME, InputArgument::OPTIONAL, 'Type of cache to clear' )
-        ] );
-        $command->setDescription( 'Clear cache of specified type' );
-        $command->setHelp( 'Types: modules, events' );
+        $cacheManager = $this->objectManager->get(CacheManager::class);
+        $command->setDefinition(
+            [
+                new InputArgument(self::INPUT_KEY_CACHE_NAME, InputArgument::OPTIONAL, 'Type of cache to clear')
+            ]
+        );
+        $command->setDescription('Clear cache of specified type');
+        $command->setHelp('Types: ' . implode(', ', $cacheManager->getAllCacheNames()));
     }
 
     /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @throws \ReflectionException
      */
-    protected function run( InputInterface $input, OutputInterface $output )
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ( ( $cacheName = $input->getArgument( self::INPUT_KEY_CACHE_NAME ) ) ) {
-            $this->objectManager->get( CacheFactory::class )->create( $cacheName )->clear();
-            $output->writeln( sprintf( 'Cache `%s` cleared.', $cacheName ) );
-        }
-        else {
-            $caches = [
-                'components', 'modules', 'di', 'languages',
-                'backend_menu_data'
-            ];
-            foreach ( $caches as $cacheName ) {
+        /* @var $cacheManager \CrazyCat\Framework\App\Cache\Manager */
+        $cacheManager = $this->objectManager->get(CacheManager::class);
+        if (($cacheName = $input->getArgument(self::INPUT_KEY_CACHE_NAME))) {
+            if (($cache = $cacheManager->get($cacheName)) === null) {
+                $output->writeln(sprintf('<error>Specified cache `%s` does not exist.</error>', $cacheName));
+            } else {
+                $output->writeln(sprintf('<info>Cache `%s` cleared.</info>', $cacheName));
+            }
+        } else {
+            foreach ($cacheManager->getAllCacheNames() as $cacheName) {
                 try {
-                    $this->objectManager->get( CacheFactory::class )->create( $cacheName )->clear();
-                    $output->writeln( sprintf( 'Cache `%s` cleared.', $cacheName ) );
-                }
-                catch ( \Exception $e ) {
-                    
+                    $cacheManager->get($cacheName)->clear();
+                    $output->writeln(sprintf('<info>Cache `%s` cleared.</info>', $cacheName));
+                } catch (\Exception $e) {
+                    $output->writeln(sprintf('<error>Failed to clear `%s`.</error>', $cacheName));
                 }
             }
         }
+        $output->writeln('');
     }
-
 }

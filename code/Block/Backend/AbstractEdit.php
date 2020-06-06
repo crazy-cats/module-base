@@ -16,7 +16,7 @@ use CrazyCat\Base\Block\Form\Renderer\Textarea as TextareaRenderer;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock

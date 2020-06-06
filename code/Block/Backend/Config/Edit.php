@@ -12,7 +12,7 @@ use CrazyCat\Framework\App\Area;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
@@ -94,6 +94,6 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
      */
     public function getActionUrl()
     {
-        return getUrl('system/config/save');
+        return $this->getUrl('system/config/save');
     }
 }

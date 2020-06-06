@@ -7,30 +7,27 @@
 
 namespace CrazyCat\Base\Observer;
 
-use CrazyCat\Base\Model\DbConfig;
 use CrazyCat\Base\Model\Stage\Manager as StageManager;
 use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Config;
-use CrazyCat\Framework\App\Cookies;
+use CrazyCat\Framework\App\Io\Http\Cookies;
 use CrazyCat\Framework\App\Io\Http\Request as HttpRequest;
-use CrazyCat\Framework\App\ObjectManager;
 use CrazyCat\Framework\App\Timezone;
 
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Liwei Zeng <zengliwei@com.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class PrepareForArea {
-
+class PrepareForArea
+{
     /**
      * @var \CrazyCat\Framework\App\Config
      */
     private $config;
 
     /**
-     * @var \CrazyCat\Base\Model\DbConfig
+     * @var \CrazyCat\Base\Model\Config
      */
     private $dbConfig;
 
@@ -39,52 +36,48 @@ class PrepareForArea {
      */
     private $objectManager;
 
-    public function __construct( ObjectManager $objectManager, Config $config, DbConfig $dbConfig )
-    {
+    public function __construct(
+        \CrazyCat\Framework\App\Config $config,
+        \CrazyCat\Framework\App\ObjectManager $objectManager
+    ) {
         $this->config = $config;
-        $this->dbConfig = $dbConfig;
         $this->objectManager = $objectManager;
     }
 
     /**
      * @return void
+     * @throws \ReflectionException
      */
-    public function execute( $observer )
+    public function execute($observer)
     {
         $areaCode = $observer->getArea()->getCode();
 
-        $this->config->addData( [ Area::CODE_GLOBAL => $this->dbConfig->getConfigurations() ] );
-
-        if ( $areaCode == Area::CODE_FRONTEND || $areaCode == Area::CODE_BACKEND ) {
-
-            if ( $areaCode == Area::CODE_FRONTEND ) {
-
-                /* @var $cookies \CrazyCat\Framework\App\Cookies */
-                $cookies = $this->objectManager->get( Cookies::class );
+        if ($areaCode == Area::CODE_FRONTEND || $areaCode == Area::CODE_BACKEND) {
+            if ($areaCode == Area::CODE_FRONTEND) {
+                /* @var $cookies \CrazyCat\Framework\App\Io\Http\Cookies */
+                $cookies = $this->objectManager->get(Cookies::class);
 
                 /* @var $request \CrazyCat\Framework\App\Io\Http\Request */
-                $request = $this->objectManager->get( HttpRequest::class );
+                $request = $this->objectManager->get(HttpRequest::class);
 
                 /* @var $stageManager \CrazyCat\Base\Model\Stage\Manager */
-                $stageManager = $this->objectManager->get( StageManager::class );
+                $stageManager = $this->objectManager->get(StageManager::class);
 
                 /**
                  * Initialize stage
                  */
-                if ( ( $stageCode = $request->getParam( 'stage', $cookies->getData( 'stage' ) ) ) ) {
-                    $stageManager->setCurrentStageCode( $stageCode );
+                if (($stageCode = $request->getParam('stage', $cookies->getData('stage')))) {
+                    $stageManager->setCurrentStageCode($stageCode);
                 }
-                $this->config->addData( [ $areaCode => $this->dbConfig->getConfigurations( $areaCode, $stageManager->getCurrentStage()->getId() ) ] );
             }
 
             /* @var $timezone \CrazyCat\Framework\App\Timezone */
-            $timezone = $this->objectManager->get( Timezone::class );
+            $timezone = $this->objectManager->get(Timezone::class);
 
             /**
              * Initialize timezone
              */
-            $timezone->setTimezone( new \DateTimeZone( $this->config->getValue( 'general/timezone' ) ?: 'UTC'  ) );
+            $timezone->setTimezone(new \DateTimeZone($this->config->getValue('general/timezone') ?: 'UTC'));
         }
     }
-
 }
