@@ -13,11 +13,10 @@ namespace CrazyCat\Base\Controller\Frontend\Index;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Frontend\AbstractAction {
-
-    protected function run()
+class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Frontend\AbstractAction
+{
+    protected function execute()
     {
         $this->render();
     }
-
 }

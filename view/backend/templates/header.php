@@ -7,5 +7,5 @@
 /* @var $this \CrazyCat\Base\Block\Template */
 ?>
 <h1 class="page-title">
-    <?php echo $this->getPage()->getPageTitle(); ?>
+    <?= $this->getPage()->getPageTitle(); ?>
 </h1>

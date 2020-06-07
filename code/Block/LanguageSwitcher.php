@@ -16,8 +16,8 @@ use CrazyCat\Framework\App\Component\Language\Translator;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class LanguageSwitcher extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
-
+class LanguageSwitcher extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock
+{
     protected $template = 'CrazyCat\Base::language_switcher';
 
     /**
@@ -25,9 +25,9 @@ class LanguageSwitcher extends \CrazyCat\Framework\App\Component\Module\Block\Ab
      */
     protected $translator;
 
-    public function __construct( Translator $translator, Context $context, array $data = [] )
+    public function __construct(Translator $translator, Context $context, array $data = [])
     {
-        parent::__construct( $context, $data );
+        parent::__construct($context, $data);
 
         $this->translator = $translator;
     }
@@ -47,5 +47,4 @@ class LanguageSwitcher extends \CrazyCat\Framework\App\Component\Module\Block\Ab
     {
         return $this->translator->getLangCode();
     }
-
 }

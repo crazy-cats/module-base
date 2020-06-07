@@ -1,14 +1,14 @@
-/* 
+/*
  * Copyright © 2020 CrazyCat, Inc. All rights reserved.
  * See COPYRIGHT.txt for license details.
  */
-define( [ 'jquery', 'utility', 'editor', 'CrazyCat/Core/js/validation' ], function( $, utility, editor ) {
+define(['jquery', 'utility', 'editor', 'CrazyCat/Base/js/validation'], function ($, utility, editor) {
 
-    return function( options ) {
+    return function (options) {
 
-        var opts = $.extend( true, {
+        let opts = $.extend(true, {
             el: null,
-            fields: [ ],
+            fields: [],
             editor: {
                 baseUrl: null,
                 imageUploadUrl: null,
@@ -17,20 +17,20 @@ define( [ 'jquery', 'utility', 'editor', 'CrazyCat/Core/js/validation' ], functi
             },
             validation: {
                 rules: {},
-                invalidHandler: function() {
-                    utility.loading( false );
+                invalidHandler: function () {
+                    utility.loading(false);
                 }
             }
-        }, options );
+        }, options);
 
-        var form = $( opts.el );
+        let form = $(opts.el);
 
-        var multiValueTypes = [ 'multiselect' ];
-        for ( var groupName in opts.fields ) {
-            var fields = opts.fields[groupName].fields;
-            for ( var i = 0; i < fields.length; i++ ) {
-                if ( fields[i].type === 'editor' ) {
-                    editor.init( {
+        let multiValueTypes = ['multiselect'];
+        for (let groupName in opts.fields) {
+            let fields = opts.fields[groupName].fields;
+            for (let i = 0; i < fields.length; i++) {
+                if (fields[i].type === 'editor') {
+                    editor.init({
                         selector: '#data_' + fields[i].name,
                         height: opts.editor.height,
                         theme: 'modern',
@@ -40,21 +40,21 @@ define( [ 'jquery', 'utility', 'editor', 'CrazyCat/Core/js/validation' ], functi
                         images_upload_url: opts.editor.imageUploadUrl,
                         skin_url: opts.editor.skinUrl,
                         images_upload_credentials: true
-                    } );
+                    });
                 }
-                if ( fields[i].validation ) {
-                    var fieldName = multiValueTypes.indexOf( fields[i].type ) ? ('data[' + fields[i].name + ']') : ('data[' + fields[i].name + '][]');
-                    opts.validation.rules[ fieldName ] = fields[i].validation;
+                if (fields[i].validation) {
+                    let fieldName = multiValueTypes.indexOf(fields[i].type) ? ('data[' + fields[i].name + ']') : ('data[' + fields[i].name + '][]');
+                    opts.validation.rules[fieldName] = fields[i].validation;
                 }
             }
         }
-        form.validate( opts.validation );
+        form.validate(opts.validation);
 
-        form.find( '.field-group-label' ).on( 'click', function() {
-            $( this ).siblings( '.field-group-content' ).slideDown();
-            $( this ).closest( '.field-group' ).siblings().find( '.field-group-content' ).slideUp();
-        } ).eq( 0 ).click();
+        form.find('.field-group-label').on('click', function () {
+            $(this).siblings('.field-group-content').slideDown();
+            $(this).closest('.field-group').siblings().find('.field-group-content').slideUp();
+        }).eq(0).click();
 
     };
 
-} );
+});

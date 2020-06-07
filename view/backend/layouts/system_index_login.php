@@ -7,15 +7,18 @@
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Admin
- * @author Bruce Z <152416319@qq.com>
- * @link https://crazy-cat.cn
+ * @package  CrazyCat\Admin
+ * @author   Bruce Z <152416319@qq.com>
+ * @link     https://crazy-cat.cn
  */
 return [
     'template' => 'home',
-    'blocks' => [
+    'blocks'   => [
         'main' => [
-            'login' => [ 'class' => 'CrazyCat\Base\Block\Template', 'data' => [ 'template' => 'CrazyCat\Base::login' ] ]
+            'login' => [
+                'class' => 'CrazyCat\Base\Block\Template',
+                'data'  => ['template' => 'CrazyCat\Base::login']
+            ]
         ]
     ]
 ];

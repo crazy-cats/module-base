@@ -15,8 +15,8 @@ use CrazyCat\Framework\App\ObjectManager;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Manager {
-
+class Manager
+{
     /**
      * @var \CrazyCat\Framework\App\ObjectManager
      */
@@ -32,22 +32,23 @@ class Manager {
      */
     private $currentStageCode;
 
-    public function __construct( ObjectManager$objectManager )
+    public function __construct(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
     /**
      * @return \CrazyCat\Base\Model\Stage[]
+     * @throws \ReflectionException
      */
     public function getAllStages()
     {
-        if ( $this->stages === null ) {
-            $stageCollection = $this->objectManager->create( Collection::class )
-                    ->addFieldToFilter( 'enabled', [ 'eq' => 1 ] );
+        if ($this->stages === null) {
+            $stageCollection = $this->objectManager->create(Collection::class)
+                ->addFieldToFilter('enabled', ['eq' => 1]);
             $this->stages = [];
-            foreach ( $stageCollection as $stage ) {
-                $this->stages[$stage->getData( 'code' )] = $stage;
+            foreach ($stageCollection as $stage) {
+                $this->stages[$stage->getData('code')] = $stage;
             }
         }
         return $this->stages;
@@ -56,34 +57,36 @@ class Manager {
     /**
      * @param string $code
      * @return \CrazyCat\Base\Model\Stage
+     * @throws \Exception
      */
-    public function getStage( $code )
+    public function getStage($code)
     {
         $stages = $this->getAllStages();
-        if ( !isset( $stages[$code] ) ) {
-            throw new \Exception( 'Stage with specified code does not exist.' );
+        if (!isset($stages[$code])) {
+            throw new \Exception('Stage with specified code does not exist.');
         }
         return $stages[$code];
     }
 
     /**
      * @return \CrazyCat\Base\Model\Stage
+     * @throws \ReflectionException
      */
     public function getCurrentStage()
     {
-        if ( $this->currentStageCode === null ) {
-            foreach ( $this->getAllStages() as $stage ) {
-                if ( $stage->getIsDefault() ) {
-                    $this->currentStageCode = $stage->getData( 'code' );
+        if ($this->currentStageCode === null) {
+            foreach ($this->getAllStages() as $stage) {
+                if ($stage->getIsDefault()) {
+                    $this->currentStageCode = $stage->getData('code');
                     break;
                 }
             }
-            if ( $this->currentStageCode === null ) {
-                throw new \Exception( 'No default enabled stage specified.' );
+            if ($this->currentStageCode === null) {
+                throw new \Exception('No default enabled stage specified.');
             }
         }
-        if ( !isset( $this->stages[$this->currentStageCode] ) ) {
-            throw new \Exception( 'Stage with specified code does not exist.' );
+        if (!isset($this->stages[$this->currentStageCode])) {
+            throw new \Exception('Stage with specified code does not exist.');
         }
         return $this->stages[$this->currentStageCode];
     }
@@ -99,12 +102,12 @@ class Manager {
     /**
      * @param string $code
      * @return $this
+     * @throws \Exception
      */
-    public function setCurrentStageCode( $code )
+    public function setCurrentStageCode($code)
     {
-        $this->getStage( $code );
+        $this->getStage($code);
         $this->currentStageCode = $code;
         return $this;
     }
-
 }

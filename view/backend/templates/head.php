@@ -20,7 +20,7 @@
             text: '<?= $this->getStaticUrl('CrazyCat\Base::js/text'); ?>',
             utility: '<?= $this->getStaticUrl('CrazyCat\Base::js/utility'); ?>',
             translator: '<?= $this->getStaticUrl('CrazyCat\Base::js/translator'); ?>',
-            editor: '<?= $this->getStaticUrl('CrazyCat/Core/js/tinymce/tinymce.min'); ?>'
+            editor: '<?= $this->getStaticUrl('CrazyCat/Base/js/tinymce/tinymce.min'); ?>'
         },
         shim: {
             editor: {

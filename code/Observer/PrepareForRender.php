@@ -7,16 +7,14 @@
 
 namespace CrazyCat\Base\Observer;
 
-use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Config;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class PrepareForRender {
+class PrepareForRender
+{
 
     /**
      * @var \CrazyCat\Framework\App\Area
@@ -28,8 +26,10 @@ class PrepareForRender {
      */
     private $config;
 
-    public function __construct( Area $area, Config $config )
-    {
+    public function __construct(
+        \CrazyCat\Framework\App\Area $area,
+        \CrazyCat\Framework\App\Config $config
+    ) {
         $this->area = $area;
         $this->config = $config;
     }
@@ -37,14 +37,13 @@ class PrepareForRender {
     /**
      * @param \CrazyCat\Framework\Data\DataObject $observer
      */
-    public function execute( $observer )
+    public function execute($observer)
     {
         $page = $observer->getPage();
 
-        $page->setData( 'meta_keywords', $this->config->getValue( 'website/default_meta_keywords' ) );
-        $page->setData( 'meta_description', $this->config->getValue( 'website/default_meta_description' ) );
-        $page->setData( 'meta_robots', $this->config->getValue( 'website/default_meta_robots' ) );
-        $page->setData( 'page_title', $this->config->getValue( 'website/default_page_title' ) );
+        $page->setData('meta_keywords', $this->config->getValue('website/default_meta_keywords'));
+        $page->setData('meta_description', $this->config->getValue('website/default_meta_description'));
+        $page->setData('meta_robots', $this->config->getValue('website/default_meta_robots'));
+        $page->setData('page_title', $this->config->getValue('website/default_page_title'));
     }
-
 }

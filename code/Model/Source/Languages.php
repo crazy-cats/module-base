@@ -15,13 +15,12 @@ use CrazyCat\Framework\App\Component\Language\Translator;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Languages extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource {
-
-    public function __construct( Translator $translator )
+class Languages extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
+{
+    public function __construct(Translator $translator)
     {
-        foreach ( $translator->getLanguages() as $language ) {
+        foreach ($translator->getLanguages() as $language) {
             $this->sourceData[$language['name']] = $language['code'];
         }
     }
-
 }

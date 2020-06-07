@@ -6,4 +6,3 @@
  */
 
 /* @var $this \CrazyCat\Base\Block\Template */
-?>

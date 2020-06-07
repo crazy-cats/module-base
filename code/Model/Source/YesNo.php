@@ -13,14 +13,13 @@ namespace CrazyCat\Base\Model\Source;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class YesNo extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource {
-
+class YesNo extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
+{
     public function __construct()
     {
         $this->sourceData = [
-            __( 'Yes' ) => '1',
-            __( 'No' ) => '0',
+            __('Yes') => '1',
+            __('No')  => '0',
         ];
     }
-
 }

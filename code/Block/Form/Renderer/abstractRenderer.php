@@ -13,15 +13,15 @@ namespace CrazyCat\Base\Block\Form\Renderer;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
-
+abstract class AbstractRenderer extends \CrazyCat\Base\Block\Template
+{
     /**
      * @var string|null
      */
     protected $fieldNamePrefix = null;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $isMultiple = false;
 
@@ -31,12 +31,12 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
     protected $params = [];
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $withLabel = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $withWrapper = false;
 
@@ -44,7 +44,7 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
      * @param string|null $prefix
      * @return $this
      */
-    public function setFieldNamePrefix( $prefix )
+    public function setFieldNamePrefix($prefix)
     {
         $this->fieldNamePrefix = $prefix;
         return $this;
@@ -55,11 +55,15 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
      */
     public function getFieldName()
     {
-        if ( $this->fieldNamePrefix !== null ) {
-            return sprintf( '%s[%s]%s', $this->fieldNamePrefix, $this->getField()['name'], ( $this->isMultiple ? '[]' : '' ) );
-        }
-        else {
-            return $this->getField()['name'] . ( $this->isMultiple ? '[]' : '' );
+        if ($this->fieldNamePrefix !== null) {
+            return sprintf(
+                '%s[%s]%s',
+                $this->fieldNamePrefix,
+                $this->getField()['name'],
+                ($this->isMultiple ? '[]' : '')
+            );
+        } else {
+            return $this->getField()['name'] . ($this->isMultiple ? '[]' : '');
         }
     }
 
@@ -68,11 +72,10 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
      */
     public function getFieldId()
     {
-        $fieldName = preg_replace( '/\W/', '_', $this->getField()['name'] );
-        if ( $this->fieldNamePrefix !== null ) {
-            return sprintf( '%s_%s', $this->fieldNamePrefix, $fieldName );
-        }
-        else {
+        $fieldName = preg_replace('/\W/', '_', $this->getField()['name']);
+        if ($this->fieldNamePrefix !== null) {
+            return sprintf('%s_%s', $this->fieldNamePrefix, $fieldName);
+        } else {
             return $fieldName;
         }
     }
@@ -89,19 +92,19 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
      * @param array $params
      * @return $this
      */
-    public function setParams( array $params )
+    public function setParams(array $params)
     {
         $this->params = $params;
         return $this;
     }
 
     /**
-     * @param boolean|null $isMultiple
-     * @return boolean|$this
+     * @param bool|null $isMultiple
+     * @return bool|$this
      */
-    public function isMultiple( $isMultiple = null )
+    public function isMultiple($isMultiple = null)
     {
-        if ( $isMultiple === null ) {
+        if ($isMultiple === null) {
             return $this->isMultiple;
         }
 
@@ -110,12 +113,12 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
     }
 
     /**
-     * @param boolean|null $withLabel
-     * @return boolean|$this
+     * @param bool|null $withLabel
+     * @return bool|$this
      */
-    public function withLabel( $withLabel = null )
+    public function withLabel($withLabel = null)
     {
-        if ( $withLabel === null ) {
+        if ($withLabel === null) {
             return $this->withLabel;
         }
 
@@ -124,17 +127,16 @@ abstract class abstractRenderer extends \CrazyCat\Base\Block\Template {
     }
 
     /**
-     * @param boolean|null $withWrapper
-     * @return boolean|$this
+     * @param bool|null $withWrapper
+     * @return bool|$this
      */
-    public function withWrapper( $withWrapper = null )
+    public function withWrapper($withWrapper = null)
     {
-        if ( $withWrapper === null ) {
+        if ($withWrapper === null) {
             return $this->withWrapper;
         }
 
         $this->withWrapper = $withWrapper;
         return $this;
     }
-
 }

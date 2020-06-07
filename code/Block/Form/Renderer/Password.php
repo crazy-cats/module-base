@@ -13,8 +13,7 @@ namespace CrazyCat\Base\Block\Form\Renderer;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Password extends abstractRenderer {
-
+class Password extends AbstractRenderer
+{
     protected $template = 'CrazyCat\Base::form/password';
-
 }

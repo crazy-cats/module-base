@@ -9,7 +9,6 @@ namespace CrazyCat\Base\Model\Source;
 
 use CrazyCat\Base\Model\Stage\Collection as StageCollection;
 use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\ObjectManager;
 
 /**
  * @category CrazyCat
@@ -17,18 +16,18 @@ use CrazyCat\Framework\App\ObjectManager;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Scope extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource {
-
-    public function __construct( ObjectManager $objectManager )
-    {
+class Scope extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
+{
+    public function __construct(
+        \CrazyCat\Framework\App\ObjectManager $objectManager
+    ) {
         $frontendOptions = [];
-        foreach ( $objectManager->create( StageCollection::class ) as $frontStage ) {
-            $frontendOptions[$frontStage->getData( 'name' )] = Area::CODE_FRONTEND . '-' . $frontStage->getId();
+        foreach ($objectManager->create(StageCollection::class) as $frontStage) {
+            $frontendOptions[$frontStage->getData('name')] = Area::CODE_FRONTEND . '-' . $frontStage->getId();
         }
         $this->sourceData = [
-            __( 'Global' ) => Area::CODE_GLOBAL,
-            __( 'Frontend' ) => $frontendOptions
+            __('Global')   => Area::CODE_GLOBAL,
+            __('Frontend') => $frontendOptions
         ];
     }
-
 }

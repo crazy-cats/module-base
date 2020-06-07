@@ -29,7 +29,7 @@ $settings = $this->getFields();
 
 <script type="text/javascript">
     // <![CDATA[
-    require(['CrazyCat/Core/js/form'], function (form) {
+    require(['CrazyCat/Base/js/form'], function (form) {
         form({
             el: '#edit-form',
             fields: <?= json_encode($settings); ?>,

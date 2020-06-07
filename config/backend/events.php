@@ -12,6 +12,6 @@
  * @link     https://crazy-cat.cn
  */
 return [
-    'themes_init_after'   => 'CrazyCat\Base\Observer\PrepareTheme',
-    'page_render_before'  => 'CrazyCat\Base\Observer\PrepareForRender'
+    'themes_init_after'  => 'CrazyCat\Base\Observer\PrepareTheme',
+    'page_render_before' => 'CrazyCat\Base\Observer\PrepareForRender'
 ];

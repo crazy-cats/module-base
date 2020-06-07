@@ -7,17 +7,14 @@
 
 namespace CrazyCat\Base\Observer;
 
-use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Config;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class PrepareTheme {
-
+class PrepareTheme
+{
     /**
      * @var \CrazyCat\Framework\App\Area
      */
@@ -28,8 +25,10 @@ class PrepareTheme {
      */
     private $config;
 
-    public function __construct( Area $area, Config $config )
-    {
+    public function __construct(
+        \CrazyCat\Framework\App\Area $area,
+        \CrazyCat\Framework\App\Config $config
+    ) {
         $this->area = $area;
         $this->config = $config;
     }
@@ -37,11 +36,10 @@ class PrepareTheme {
     /**
      * @param \CrazyCat\Framework\Data\DataObject $observer
      */
-    public function execute( $observer )
+    public function execute($observer)
     {
-        if ( isset( $this->config->getData( $this->area->getCode() )['theme'] ) ) {
-            $observer->getThemeManager()->setCurrentTheme( $this->config->getData( $this->area->getCode() )['theme'] );
+        if (isset($this->config->getData($this->area->getCode())['theme'])) {
+            $observer->getThemeManager()->setCurrentTheme($this->config->getData($this->area->getCode())['theme']);
         }
     }
-
 }

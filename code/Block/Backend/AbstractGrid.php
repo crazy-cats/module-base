@@ -19,8 +19,8 @@ use CrazyCat\Framework\Utility\StaticVariable;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
-
+abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock
+{
     const BOOKMARK_FILTER = 'filter';
     const BOOKMARK_SORTING = 'sorting';
 
@@ -47,9 +47,9 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      */
     protected $bookmarks;
 
-    public function __construct( Session $session, ObjectManager $objectManager, Context $context, array $data = array() )
+    public function __construct(Session $session, ObjectManager $objectManager, Context $context, array $data = [])
     {
-        parent::__construct( $context, $data );
+        parent::__construct($context, $data);
 
         $this->objectManager = $objectManager;
         $this->session = $session;
@@ -59,15 +59,15 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      * @param array $options
      * @return array
      */
-    protected function processOptions( $options )
+    protected function processOptions($options)
     {
         /**
          * PHP transforms all request variables to string type,
          *     so we need to process the option value for comparison purposes.
          */
-        foreach ( $options as &$option ) {
-            if ( is_numeric( $option['value'] ) ) {
-                $option['value'] = (string) $option['value'];
+        foreach ($options as &$option) {
+            if (is_numeric($option['value'])) {
+                $option['value'] = (string)$option['value'];
             }
         }
         return $options;
@@ -78,9 +78,9 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      */
     public function getBookmarks()
     {
-        if ( $this->bookmarks === null ) {
-            $this->bookmarks = $this->session->getGridBookmarks( static::BOOKMARK_KEY ) ?:
-                    [ self::BOOKMARK_FILTER => [], self::BOOKMARK_SORTING => [] ];
+        if ($this->bookmarks === null) {
+            $this->bookmarks = $this->session->getGridBookmarks(static::BOOKMARK_KEY) ?:
+                [self::BOOKMARK_FILTER => [], self::BOOKMARK_SORTING => []];
         }
         return $this->bookmarks;
     }
@@ -89,9 +89,9 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      * @param array $bookmarks
      * @return $this
      */
-    public function setBookmarks( array $bookmarks )
+    public function setBookmarks(array $bookmarks)
     {
-        $this->session->setGridBookmarks( static::BOOKMARK_KEY, $bookmarks );
+        $this->session->setGridBookmarks(static::BOOKMARK_KEY, $bookmarks);
         return $this;
     }
 
@@ -115,10 +115,10 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      * @param string $fieldName
      * @return array|null
      */
-    public function getSorting( $fieldName )
+    public function getSorting($fieldName)
     {
-        foreach ( $this->getBookmarks()[self::BOOKMARK_SORTING] as $sorting ) {
-            if ( $sorting['field'] == $fieldName ) {
+        foreach ($this->getBookmarks()[self::BOOKMARK_SORTING] as $sorting) {
+            if ($sorting['field'] == $fieldName) {
                 return $sorting;
             }
         }
@@ -129,42 +129,42 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      * @param array $field
      * @param mixed $value
      * @return string
+     * @throws \ReflectionException
      */
-    public function renderFilter( $field )
+    public function renderFilter($field)
     {
-        if ( isset( $field['ids'] ) ) {
+        if (isset($field['ids'])) {
             return '<input type="checkbox" class="input-ids" data-selector=".input-ids" />';
-        }
-        else if ( isset( $field['actions'] ) ) {
+        } elseif (isset($field['actions'])) {
             return '&nbsp;';
-        }
-        else if ( !isset( $field['filter'] ) ) {
+        } elseif (!isset($field['filter'])) {
             return '&nbsp;';
         }
 
-        switch ( $field['filter']['type'] ) {
-
-            case self::FIELD_TYPE_SELECT :
-                $renderer = $this->objectManager->create( SelectRenderer::class );
-                $options = isset( $field['filter']['options'] ) ? $field['filter']['options'] :
-                        ( isset( $field['filter']['source'] ) ? $this->objectManager->create( $field['filter']['source'] )->toOptionArray() : [] );
-                array_unshift( $options, [ 'label' => '', 'value' => StaticVariable::NO_SELECTION ] );
-                $renderer->setData( 'options', $this->processOptions( $options ) );
+        switch ($field['filter']['type']) {
+            case self::FIELD_TYPE_SELECT:
+                $renderer = $this->objectManager->create(SelectRenderer::class);
+                $options = isset($field['filter']['options']) ? $field['filter']['options'] :
+                    (isset($field['filter']['source']) ? $this->objectManager->create(
+                        $field['filter']['source']
+                    )->toOptionArray() : []);
+                array_unshift($options, ['label' => '', 'value' => StaticVariable::NO_SELECTION]);
+                $renderer->setData('options', $this->processOptions($options));
                 break;
 
-            case self::FIELD_TYPE_TEXT :
-                $renderer = $this->objectManager->create( TextRenderer::class );
+            case self::FIELD_TYPE_TEXT:
+                $renderer = $this->objectManager->create(TextRenderer::class);
                 break;
         }
 
         $filters = $this->getFilters();
-        $value = isset( $filters[$field['name']] ) ? $filters[$field['name']] : null;
+        $value = isset($filters[$field['name']]) ? $filters[$field['name']] : null;
 
-        return $renderer->addData( [ 'name' => 'filter_' . $field['name'], 'field' => $field, 'value' => $value ] )
-                        ->setFieldNamePrefix( 'filter' )
-                        ->setClasses( 'filter-' . $field['name'] )
-                        ->setParams( [ 'data-selector' => '.filter-' . $field['name'] ] )
-                        ->toHtml();
+        return $renderer->addData(['name' => 'filter_' . $field['name'], 'field' => $field, 'value' => $value])
+            ->setFieldNamePrefix('filter')
+            ->setClasses('filter-' . $field['name'])
+            ->setParams(['data-selector' => '.filter-' . $field['name']])
+            ->toHtml();
     }
 
     /**

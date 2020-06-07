@@ -13,19 +13,25 @@
  */
 return [
     'template' => '2columns_left',
-    'blocks' => [
+    'blocks'   => [
         'header' => [
             'header-buttons' => [
                 'class' => 'CrazyCat\Base\Block\Template',
-                'data' => [
+                'data'  => [
                     'template' => 'CrazyCat\Base::header_buttons',
-                    'buttons' => [
-                        'new' => [ 'label' => __( 'Create New' ), 'action' => [ 'type' => 'redirect', 'params' => [ 'url' => $this->getUrl( 'system/stage/edit' ) ] ] ]
+                    'buttons'  => [
+                        'new' => [
+                            'label'  => __('Create New'),
+                            'action' => [
+                                'type'   => 'redirect',
+                                'params' => ['url' => $this->getUrl('system/stage/edit')]
+                            ]
+                        ]
                     ]
                 ]
             ]
         ],
-        'main' => [
+        'main'   => [
             'gird-form' => [
                 'class' => 'CrazyCat\Base\Block\Backend\Stage\Grid'
             ]

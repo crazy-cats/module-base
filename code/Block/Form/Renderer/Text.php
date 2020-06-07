@@ -13,8 +13,7 @@ namespace CrazyCat\Base\Block\Form\Renderer;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Text extends abstractRenderer {
-
+class Text extends AbstractRenderer
+{
     protected $template = 'CrazyCat\Base::form/text';
-
 }

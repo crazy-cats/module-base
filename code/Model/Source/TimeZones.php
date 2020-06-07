@@ -15,11 +15,10 @@ use CrazyCat\Framework\Utility\Timezone;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class TimeZones extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource {
-
+class TimeZones extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
+{
     public function __construct()
     {
-        $this->sourceData = array_flip( Timezone::zones() );
+        $this->sourceData = array_flip(Timezone::zones());
     }
-
 }

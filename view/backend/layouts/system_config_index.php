@@ -7,28 +7,34 @@
 
 /**
  * @category CrazyCat
- * @package CrazyCat\Admin
- * @author Bruce Z <152416319@qq.com>
- * @link https://crazy-cat.cn
+ * @package  CrazyCat\Admin
+ * @author   Bruce Z <152416319@qq.com>
+ * @link     https://crazy-cat.cn
  */
 return [
     'template' => '2columns_left',
-    'blocks' => [
+    'blocks'   => [
         'header' => [
             'header-buttons' => [
                 'class' => 'CrazyCat\Base\Block\Template',
-                'data' => [
+                'data'  => [
                     'template' => 'CrazyCat\Base::header_buttons',
-                    'buttons' => [
-                        'save' => [ 'label' => __( 'Save' ), 'action' => [ 'type' => 'save', 'params' => [ 'target' => '#edit-form' ] ] ],
+                    'buttons'  => [
+                        'save' => [
+                            'label'  => __('Save'),
+                            'action' => [
+                                'type'   => 'save',
+                                'params' => ['target' => '#edit-form']
+                            ]
+                        ],
                     ]
                 ]
             ],
-            'scopes' => [
+            'scopes'         => [
                 'class' => 'CrazyCat\Base\Block\Backend\Scopes'
             ]
         ],
-        'main' => [
+        'main'   => [
             'main-content' => [
                 'class' => 'CrazyCat\Base\Block\Backend\Config\Edit'
             ]

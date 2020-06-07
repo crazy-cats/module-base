@@ -7,9 +7,7 @@
 
 namespace CrazyCat\Base\Block\Backend;
 
-use CrazyCat\Base\Model\Source\Scope as SourceScope;
 use CrazyCat\Framework\App\Area;
-use CrazyCat\Framework\App\Component\Theme\Block\Context;
 
 /**
  * @category CrazyCat
@@ -17,8 +15,8 @@ use CrazyCat\Framework\App\Component\Theme\Block\Context;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Scopes extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
-
+class Scopes extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock
+{
     protected $template = 'CrazyCat\Base::scopes';
 
     /**
@@ -26,9 +24,12 @@ class Scopes extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBloc
      */
     protected $sourceScope;
 
-    public function __construct( SourceScope $sourceScope, Context $context, array $data = [] )
-    {
-        parent::__construct( $context, $data );
+    public function __construct(
+        \CrazyCat\Base\Model\Source\Scope $sourceScope,
+        \CrazyCat\Framework\App\Component\Theme\Block\Context $context,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
 
         $this->sourceScope = $sourceScope;
     }
@@ -46,7 +47,6 @@ class Scopes extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBloc
      */
     public function getCurrentScope()
     {
-        return $this->request->getParam( 'scope', Area::CODE_GLOBAL );
+        return $this->request->getParam('scope', Area::CODE_GLOBAL);
     }
-
 }

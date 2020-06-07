@@ -16,13 +16,13 @@ use CrazyCat\Framework\App\ObjectManager;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Stage extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource {
-
-    public function __construct( ObjectManager $objectManager )
+class Stage extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
+{
+    public function __construct(ObjectManager $objectManager)
     {
-        foreach ( $objectManager->create( StageCollection::class ) as $frontStage ) {
-            $this->sourceData[sprintf( '%s ( ID: %d )', $frontStage->getData( 'name' ), $frontStage->getId() )] = $frontStage->getId();
+        foreach ($objectManager->create(StageCollection::class) as $frontStage) {
+            $label = sprintf('%s ( ID: %d )', $frontStage->getData('name'), $frontStage->getId());
+            $this->sourceData[$label] = $frontStage->getId();
         }
     }
-
 }

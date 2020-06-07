@@ -16,8 +16,8 @@ use CrazyCat\Framework\App\Component\Theme\Block\Context;
  * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
-class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock {
-
+class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock
+{
     protected $template = 'CrazyCat\Base::message';
 
     /**
@@ -25,9 +25,9 @@ class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlo
      */
     protected $messenger;
 
-    public function __construct( Messenger $messenger, Context $context, array $data = [] )
+    public function __construct(Messenger $messenger, Context $context, array $data = [])
     {
-        parent::__construct( $context, $data );
+        parent::__construct($context, $data);
 
         $this->messenger = $messenger;
     }
@@ -37,7 +37,6 @@ class Message extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlo
      */
     public function getMessages()
     {
-        return $this->messenger->getMessages( true );
+        return $this->messenger->getMessages(true);
     }
-
 }
