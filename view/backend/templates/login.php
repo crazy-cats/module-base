@@ -11,7 +11,7 @@
         <h1><?= __('Login') ?></h1>
     </div>
     <div class="block-content">
-        <form method="post" action="<?= $this->getUrl('system/index/login_post') ?>">
+        <form method="post" action="<?= getUrl('system/index/login_post') ?>">
             <div class="field">
                 <input type="text" name="username" class="input-text" autocomplete="off"
                        placeholder="<?= htmlEscape(__('Username')) ?>"/>

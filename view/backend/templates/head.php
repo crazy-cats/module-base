@@ -35,7 +35,7 @@
             window.translationStorageName = '<?= md5($this->getBaseUrl()); ?> :: crazycat-translations-'
                 + window.languageCode;
             if (!window.localStorage.getItem(window.translationStorageName)) {
-                require(['text!<?= $this->getUrl('system/translate/source') ?>'], function (translations) {
+                require(['text!<?= getUrl('system/translate/source') ?>'], function (translations) {
                     window.localStorage.setItem(window.translationStorageName, translations);
                 });
             }

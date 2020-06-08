@@ -24,7 +24,7 @@ return [
                             'label'  => __('Create New'),
                             'action' => [
                                 'type'   => 'redirect',
-                                'params' => ['url' => $this->getUrl('system/stage/edit')]
+                                'params' => ['url' => getUrl('system/stage/edit')]
                             ]
                         ]
                     ]
