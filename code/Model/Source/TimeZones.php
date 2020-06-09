@@ -7,8 +7,6 @@
 
 namespace CrazyCat\Base\Model\Source;
 
-use CrazyCat\Framework\Utility\Timezone;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
@@ -17,8 +15,9 @@ use CrazyCat\Framework\Utility\Timezone;
  */
 class TimeZones extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
 {
-    public function __construct()
-    {
-        $this->sourceData = array_flip(Timezone::zones());
+    public function __construct(
+        \CrazyCat\Framework\Utility\Timezone $timezone
+    ) {
+        $this->sourceData = array_flip($timezone->zones());
     }
 }

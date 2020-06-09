@@ -35,11 +35,12 @@ class PrepareTheme
 
     /**
      * @param \CrazyCat\Framework\Data\DataObject $observer
+     * @throws \Exception
      */
     public function execute($observer)
     {
-        if (isset($this->config->getData($this->area->getCode())['theme'])) {
-            $observer->getThemeManager()->setCurrentTheme($this->config->getData($this->area->getCode())['theme']);
+        if (isset($this->config->getValue($this->area->getCode())['theme'])) {
+            $observer->getThemeManager()->setCurrentTheme($this->config->getValue($this->area->getCode())['theme']);
         }
     }
 }

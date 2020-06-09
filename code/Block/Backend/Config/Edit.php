@@ -7,6 +7,7 @@
 
 namespace CrazyCat\Base\Block\Backend\Config;
 
+use CrazyCat\Base\Framework\Config;
 use CrazyCat\Framework\App\Area;
 
 /**
@@ -31,12 +32,11 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
     /**
      * @param string $path
      * @return mixed
+     * @throws \ReflectionException
      */
     public function getConfig($path)
     {
-        $configurations = $this->registry->registry('configurations');
-
-        return isset($configurations[$path]) ? $configurations[$path] : null;
+        return $this->objectManager->get(Config::class)->getValue($path);
     }
 
     /**

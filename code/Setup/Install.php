@@ -21,7 +21,7 @@ class Install extends \CrazyCat\Framework\App\Component\Module\Setup\AbstractSet
     {
         $columns = [
             ['name' => 'scope', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 8, 'null' => false],
-            ['name' => 'stage_id', 'type' => MySql::COL_TYPE_INT, 'unsign' => true],
+            ['name' => 'stage_id', 'type' => MySql::COL_TYPE_INT, 'unsign' => true, 'null' => false, 'default' => 0],
             ['name' => 'path', 'type' => MySql::COL_TYPE_VARCHAR, 'length' => 64, 'null' => false],
             ['name' => 'value', 'type' => MySql::COL_TYPE_TEXT, 'null' => false]
         ];

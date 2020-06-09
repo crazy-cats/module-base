@@ -9,8 +9,6 @@ namespace CrazyCat\Base\Block\Backend;
 
 use CrazyCat\Base\Block\Form\Renderer\Select as SelectRenderer;
 use CrazyCat\Base\Block\Form\Renderer\Text as TextRenderer;
-use CrazyCat\Framework\App\ObjectManager;
-use CrazyCat\Framework\App\Io\Http\Session\Backend as Session;
 use CrazyCat\Framework\Utility\StaticVariable;
 
 /**
@@ -21,14 +19,14 @@ use CrazyCat\Framework\Utility\StaticVariable;
  */
 abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Block\AbstractBlock
 {
-    const BOOKMARK_FILTER = 'filter';
-    const BOOKMARK_SORTING = 'sorting';
+    public const BOOKMARK_FILTER = 'filter';
+    public const BOOKMARK_SORTING = 'sorting';
 
     /**
      * field types
      */
-    const FIELD_TYPE_SELECT = 'select';
-    const FIELD_TYPE_TEXT = 'text';
+    public const FIELD_TYPE_SELECT = 'select';
+    public const FIELD_TYPE_TEXT = 'text';
 
     protected $template = 'CrazyCat\Base::grid';
 
@@ -47,8 +45,12 @@ abstract class AbstractGrid extends \CrazyCat\Framework\App\Component\Module\Blo
      */
     protected $bookmarks;
 
-    public function __construct(Session $session, ObjectManager $objectManager, Context $context, array $data = [])
-    {
+    public function __construct(
+        \CrazyCat\Base\Block\Backend\Context $context,
+        \CrazyCat\Framework\App\Io\Http\Session\Backend $session,
+        \CrazyCat\Framework\App\ObjectManager $objectManager,
+        array $data = []
+    ) {
         parent::__construct($context, $data);
 
         $this->objectManager = $objectManager;

@@ -7,10 +7,6 @@
 
 namespace CrazyCat\Base\Controller\Backend\Config;
 
-use CrazyCat\Base\Model\Config;
-use CrazyCat\Framework\App\Component\Module\Controller\Backend\Context;
-use CrazyCat\Framework\App\Component\Module\Manager as ModuleManager;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
@@ -20,20 +16,23 @@ use CrazyCat\Framework\App\Component\Module\Manager as ModuleManager;
 class Save extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction
 {
     /**
-     * @var \CrazyCat\Base\Model\Config
+     * @var \CrazyCat\Base\Framework\Config
      */
-    protected $dbConfig;
+    protected $scopeConfig;
 
     /**
      * @var \CrazyCat\Framework\App\Component\Module\Manager
      */
     protected $moduleManager;
 
-    public function __construct(Config $dbConfig, ModuleManager $moduleManager, Context $context)
-    {
+    public function __construct(
+        \CrazyCat\Base\Framework\Config $scopeConfig,
+        \CrazyCat\Framework\App\Component\Module\Manager $moduleManager,
+        \CrazyCat\Framework\App\Component\Module\Controller\Backend\Context $context
+    ) {
         parent::__construct($context);
 
-        $this->dbConfig = $dbConfig;
+        $this->scopeConfig = $scopeConfig;
         $this->moduleManager = $moduleManager;
     }
 
@@ -43,9 +42,9 @@ class Save extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\A
     protected function execute()
     {
         try {
-            list($scope, $scopeId) = array_pad(explode('-', $this->request->getPost('scope')), 2, 0);
+            [$scope, $scopeId] = array_pad(explode('-', $this->request->getPost('scope')), 2, 0);
             $data = $this->request->getPost('data');
-            $this->dbConfig->saveConfig($data, $scope, $scopeId);
+            $this->scopeConfig->saveConfig($data, $scope, $scopeId);
             $this->messenger->addSuccess(__('Configurations saved successfully.'));
         } catch (\Exception $e) {
             $this->messenger->addError($e->getMessage());
