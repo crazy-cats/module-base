@@ -22,6 +22,7 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
 
     /**
      * @param array $field
+     * @param mixed $value
      * @return mixed
      */
     protected function getFieldValue(array $field, $value = null)
@@ -36,7 +37,8 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
      */
     public function getConfig($path)
     {
-        return $this->objectManager->get(Config::class)->getValue($path);
+        [$scope, $scopeId] = array_pad(explode('-', $this->getScope()), 2, 0);
+        return $this->objectManager->get(Config::class)->getValue($path, $scope, $scopeId);
     }
 
     /**
