@@ -15,6 +15,8 @@ namespace CrazyCat\Base\Model\Stage;
  */
 class Manager
 {
+    public const GLOBAL_STAGE_ID = 0;
+
     /**
      * @var \CrazyCat\Framework\App\ObjectManager
      */

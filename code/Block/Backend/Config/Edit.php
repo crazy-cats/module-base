@@ -8,7 +8,6 @@
 namespace CrazyCat\Base\Block\Backend\Config;
 
 use CrazyCat\Base\Framework\Config;
-use CrazyCat\Framework\App\Area;
 
 /**
  * @category CrazyCat
@@ -48,9 +47,13 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
     public function getFields()
     {
         $settings = [];
+        [$scope] = explode('-', $this->getScope());
         foreach ($this->moduleManager->getEnabledModules() as $module) {
             if (isset($module->getData('config')['settings'])) {
                 foreach ($module->getData('config')['settings'] as $groupName => $settingGroup) {
+                    if (!in_array($scope, $settingGroup['scopes'])) {
+                        continue;
+                    }
                     if (!isset($settings[$groupName])) {
                         $settings[$groupName] = [
                             'fields' => []
@@ -62,13 +65,18 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
                     if (isset($settingGroup['sort_order'])) {
                         $settings[$groupName]['sort_order'] = $settingGroup['sort_order'];
                     }
-                    foreach ($settingGroup['fields'] as $fieldName => &$field) {
+                    $fields = [];
+                    foreach ($settingGroup['fields'] as $fieldName => $field) {
+                        if (!in_array($scope, $field['scopes'])) {
+                            continue;
+                        }
                         $field['name'] = $groupName . '/' . $fieldName;
                         $field['label'] = __($field['label']);
+                        $fields[$fieldName] = $field;
                     }
                     $settings[$groupName]['fields'] = array_merge(
                         $settings[$groupName]['fields'],
-                        $settingGroup['fields']
+                        $fields
                     );
                 }
             }
@@ -88,7 +96,7 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
      */
     public function getScope()
     {
-        return $this->request->getParam('scope', Area::CODE_GLOBAL);
+        return $this->request->getParam('scope', Config::SCOPE_GLOBAL);
     }
 
     /**

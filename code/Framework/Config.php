@@ -3,6 +3,8 @@
 
 namespace CrazyCat\Base\Framework;
 
+use CrazyCat\Base\Model\Stage\Manager as StageManager;
+
 class Config
 {
     public const CACHE_NAME = 'config';
@@ -68,7 +70,7 @@ class Config
      * @return mixed
      * @throws \Exception
      */
-    public function getValue($path, $scope = self::SCOPE_GLOBAL, $stageId = 0)
+    public function getValue($path, $scope = self::SCOPE_GLOBAL, $stageId = StageManager::GLOBAL_STAGE_ID)
     {
         $cacheKey = $this->getCacheKey($scope, $stageId);
         if (!$this->cache->hasData($cacheKey)) {

@@ -72,11 +72,10 @@ class PrepareForArea
             }
 
             $scope = Config::SCOPE_STAGE;
-            $stageId = $this->objectManager->get(\CrazyCat\Base\Model\Stage\Manager::class)
-                ->getCurrentStage()->getId();
+            $stageId = $stageManager->getCurrentStage()->getId();
         } else {
             $scope = Config::SCOPE_GLOBAL;
-            $stageId = 0;
+            $stageId = StageManager::GLOBAL_STAGE_ID;
         }
 
         /**

@@ -8,6 +8,7 @@
 namespace CrazyCat\Base\Observer;
 
 use CrazyCat\Base\Framework\Config;
+use CrazyCat\Base\Model\Stage\Manager as StageManager;
 use CrazyCat\Framework\App\Area;
 
 /**
@@ -54,11 +55,10 @@ class PrepareForRender
 
         if ($this->area->getCode() == Area::CODE_BACKEND) {
             $scope = Config::SCOPE_GLOBAL;
-            $stageId = 0;
+            $stageId = StageManager::GLOBAL_STAGE_ID;
         } else {
             $scope = Config::SCOPE_STAGE;
-            $stageId = $this->objectManager->get(\CrazyCat\Base\Model\Stage\Manager::class)
-                ->getCurrentStage()->getId();
+            $stageId = $this->objectManager->get(StageManager::class)->getCurrentStage()->getId();
         }
 
         $page->setData(

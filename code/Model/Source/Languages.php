@@ -7,8 +7,6 @@
 
 namespace CrazyCat\Base\Model\Source;
 
-use CrazyCat\Framework\App\Component\Language\Translator;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
@@ -17,8 +15,9 @@ use CrazyCat\Framework\App\Component\Language\Translator;
  */
 class Languages extends \CrazyCat\Framework\App\Component\Module\Model\Source\AbstractSource
 {
-    public function __construct(Translator $translator)
-    {
+    public function __construct(
+        \CrazyCat\Framework\App\Component\Language\Translator $translator
+    ) {
         foreach ($translator->getLanguages() as $language) {
             $this->sourceData[$language['name']] = $language['code'];
         }
