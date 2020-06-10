@@ -30,12 +30,13 @@ class VerifyApiToken
 
     /**
      * @param \CrazyCat\Framework\Data\DataObject $observer
+     * @throws \Exception
      */
     public function execute($observer)
     {
         $observer['verify_object']->setData(
             'token_validated',
-            $observer['token'] == $this->config[Area::CODE_API]['token']
+            $observer['token'] == $this->config->getValue(Area::CODE_API)['token']
         );
     }
 }
