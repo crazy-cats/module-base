@@ -7,8 +7,6 @@
 
 namespace CrazyCat\Base\Model\Stage;
 
-use CrazyCat\Framework\App\ObjectManager;
-
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
@@ -23,7 +21,7 @@ class Manager
     private $objectManager;
 
     /**
-     * @var \CrazyCat\Framework\App\ObjectManager[]
+     * @var \CrazyCat\Base\Model\Stage[]
      */
     private $stages;
 
@@ -32,8 +30,9 @@ class Manager
      */
     private $currentStageCode;
 
-    public function __construct(ObjectManager $objectManager)
-    {
+    public function __construct(
+        \CrazyCat\Framework\App\ObjectManager $objectManager
+    ) {
         $this->objectManager = $objectManager;
     }
 
@@ -71,6 +70,7 @@ class Manager
     /**
      * @return \CrazyCat\Base\Model\Stage
      * @throws \ReflectionException
+     * @throws \Exception
      */
     public function getCurrentStage()
     {

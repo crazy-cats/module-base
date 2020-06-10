@@ -15,6 +15,10 @@ namespace CrazyCat\Base\Controller\Frontend\Index;
  */
 class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Frontend\AbstractAction
 {
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
     protected function execute()
     {
         $this->render();

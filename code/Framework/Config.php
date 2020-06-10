@@ -72,7 +72,7 @@ class Config
     {
         $cacheKey = $this->getCacheKey($scope, $stageId);
         if (!$this->cache->hasData($cacheKey)) {
-            if ($stageId === null) {
+            if ($scope === self::SCOPE_GLOBAL) {
                 $sql = sprintf(
                     'SELECT `path`, `value` FROM %s WHERE `scope` = ?',
                     $this->conn->getTableName('config')
@@ -81,16 +81,22 @@ class Config
             } else {
                 $sql = sprintf(
                     'SELECT `path`, `value` FROM %s WHERE `scope` = ? AND `stage_id` = ?',
-                    $this->conn->getTableName('config')
+                    $this->conn->getTableName('config'),
+                    $stageId
                 );
                 $data = $this->conn->fetchPairs($sql, [$scope, $stageId]);
             }
-            foreach ($data as $path => $value) {
-                $data[$path] = $this->decodeValue($value);
+            foreach ($data as $key => $value) {
+                $data[$key] = $this->decodeValue($value);
             }
             $this->cache->setData($cacheKey, $data)->save();
         }
-        return $this->cache->getData($cacheKey)[$path] ?? null;
+
+        $configData = $this->cache->getData($cacheKey);
+        if (!isset($configData[$path]) && $scope == self::SCOPE_STAGE) {
+            return $this->getValue($path);
+        }
+        return $configData[$path] ?? null;
     }
 
     /**

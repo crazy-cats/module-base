@@ -7,6 +7,9 @@
 
 namespace CrazyCat\Base\Observer;
 
+use CrazyCat\Base\Framework\Config;
+use CrazyCat\Framework\App\Area;
+
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
@@ -15,35 +18,64 @@ namespace CrazyCat\Base\Observer;
  */
 class PrepareForRender
 {
-
     /**
      * @var \CrazyCat\Framework\App\Area
      */
     private $area;
 
     /**
-     * @var \CrazyCat\Framework\App\Config
+     * @var \CrazyCat\Base\Framework\Config
      */
     private $config;
 
+    /**
+     * @var \CrazyCat\Framework\App\ObjectManager
+     */
+    private $objectManager;
+
     public function __construct(
+        \CrazyCat\Base\Framework\Config $config,
         \CrazyCat\Framework\App\Area $area,
-        \CrazyCat\Framework\App\Config $config
+        \CrazyCat\Framework\App\ObjectManager $objectManager
     ) {
         $this->area = $area;
         $this->config = $config;
+        $this->objectManager = $objectManager;
     }
 
     /**
      * @param \CrazyCat\Framework\Data\DataObject $observer
+     * @throws \Exception
      */
     public function execute($observer)
     {
+        /* @var $page \CrazyCat\Framework\App\Component\Theme\Page */
         $page = $observer->getPage();
 
-        $page->setData('meta_keywords', $this->config->getValue('website/default_meta_keywords'));
-        $page->setData('meta_description', $this->config->getValue('website/default_meta_description'));
-        $page->setData('meta_robots', $this->config->getValue('website/default_meta_robots'));
-        $page->setData('page_title', $this->config->getValue('website/default_page_title'));
+        if ($this->area->getCode() == Area::CODE_BACKEND) {
+            $scope = Config::SCOPE_GLOBAL;
+            $stageId = 0;
+        } else {
+            $scope = Config::SCOPE_STAGE;
+            $stageId = $this->objectManager->get(\CrazyCat\Base\Model\Stage\Manager::class)
+                ->getCurrentStage()->getId();
+        }
+
+        $page->setData(
+            'meta_keywords',
+            $this->config->getValue('website/default_meta_keywords', $scope, $stageId)
+        );
+        $page->setData(
+            'meta_description',
+            $this->config->getValue('website/default_meta_description', $scope, $stageId)
+        );
+        $page->setData(
+            'meta_robots',
+            $this->config->getValue('website/default_meta_robots', $scope, $stageId)
+        );
+        $page->setData(
+            'page_title',
+            $this->config->getValue('website/default_page_title', $scope, $stageId)
+        );
     }
 }
