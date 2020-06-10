@@ -14,7 +14,7 @@ use CrazyCat\Framework\Utility\StaticVariable;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Framework
- * @author   Bruce Z <152416319@qq.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 abstract class AbstractGridAction extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction

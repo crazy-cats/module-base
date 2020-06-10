@@ -12,7 +12,7 @@ use CrazyCat\Framework\App\Area;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Bruce Z <152416319@qq.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Index extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction

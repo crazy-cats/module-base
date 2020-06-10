@@ -10,7 +10,7 @@ namespace CrazyCat\Base\Controller\Backend\Index;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Bruce Z <152416319@qq.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class LoginPost extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\AbstractAction

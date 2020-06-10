@@ -16,12 +16,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Developer
- * @author   Bruce Z <152416319@qq.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\AbstractAction
 {
-    const INPUT_KEY_CACHE_NAME = 'cache_name';
+    public const INPUT_KEY_CACHE_NAME = 'cache_name';
 
     /**
      * @param \Symfony\Component\Console\Command\Command $command
@@ -57,7 +57,8 @@ class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\Abst
         } else {
             foreach ($cacheManager->getAllCacheNames() as $cacheName) {
                 try {
-                    $cacheManager->get($cacheName)->clear();
+                    $cache = $cacheManager->get($cacheName) ?: $cacheManager->create($cacheName);
+                    $cache->clear(true);
                     $output->writeln(sprintf('<info>Cache `%s` cleared.</info>', $cacheName));
                 } catch (\Exception $e) {
                     $output->writeln(sprintf('<error>Failed to clear `%s`.</error>', $cacheName));

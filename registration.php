@@ -10,7 +10,7 @@ use CrazyCat\Framework\App\Component\Manager as ComponentManager;
 /**
  * @category CrazyCat
  * @package  CrazyCat\Base
- * @author   Bruce Z <152416319@qq.com>
+ * @author   Liwei Zeng <zengliwei@163.com>
  * @link     https://crazy-cat.cn
  */
 ComponentManager::getInstance()->register('CrazyCat\Base', ComponentManager::TYPE_MODULE, __DIR__);

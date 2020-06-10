@@ -1,3 +1,3 @@
-# CrazyCat Core Module
+# CrazyCat Base Module
 
-Core module of CrazyCat platform
+Base module of CrazyCat platform
