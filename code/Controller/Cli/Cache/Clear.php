@@ -36,7 +36,10 @@ class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\Abst
             ]
         );
         $command->setDescription('Clear cache of specified type');
-        $command->setHelp('Types: ' . implode(', ', $cacheManager->getAllCacheNames()));
+
+        $cacheNames = $cacheManager->getAllCacheNames();
+        sort($cacheNames);
+        $command->setHelp('Types: ' . implode(', ', $cacheNames));
     }
 
     /**
@@ -55,7 +58,9 @@ class Clear extends \CrazyCat\Framework\App\Component\Module\Controller\Cli\Abst
                 $output->writeln(sprintf('<info>Cache `%s` cleared.</info>', $cacheName));
             }
         } else {
-            foreach ($cacheManager->getAllCacheNames() as $cacheName) {
+            $cacheNames = $cacheManager->getAllCacheNames();
+            sort($cacheNames);
+            foreach ($cacheNames as $cacheName) {
                 try {
                     $cache = $cacheManager->get($cacheName) ?: $cacheManager->create($cacheName);
                     $cache->clear(true);

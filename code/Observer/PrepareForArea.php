@@ -34,6 +34,7 @@ class PrepareForArea
 
     public function __construct(
         \CrazyCat\Base\Framework\Config $config,
+        \CrazyCat\Framework\App\Component\Language\Translator $translator,
         \CrazyCat\Framework\App\ObjectManager $objectManager
     ) {
         $this->config = $config;
@@ -41,9 +42,9 @@ class PrepareForArea
     }
 
     /**
+     * @param $observer
      * @return void
      * @throws \ReflectionException
-     * @throws \Exception
      */
     public function execute($observer)
     {

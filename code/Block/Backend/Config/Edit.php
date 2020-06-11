@@ -20,6 +20,21 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
     protected $template = 'CrazyCat\Base::config';
 
     /**
+     * @var \CrazyCat\Base\Framework\Config
+     */
+    protected $config;
+
+    public function __construct(
+        \CrazyCat\Base\Block\Backend\Context $context,
+        \CrazyCat\Base\Framework\Config $config,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+
+        $this->config = $config;
+    }
+
+    /**
      * @param array $field
      * @param mixed $value
      * @return mixed
@@ -32,12 +47,12 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
     /**
      * @param string $path
      * @return mixed
-     * @throws \ReflectionException
+     * @throws \Exception
      */
     public function getConfig($path)
     {
         [$scope, $scopeId] = array_pad(explode('-', $this->getScope()), 2, 0);
-        return $this->objectManager->get(Config::class)->getValue($path, $scope, $scopeId);
+        return $this->config->getValue($path, $scope, $scopeId);
     }
 
     /**
@@ -46,39 +61,21 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
      */
     public function getFields()
     {
-        $settings = [];
         [$scope] = explode('-', $this->getScope());
-        foreach ($this->moduleManager->getEnabledModules() as $module) {
-            if (isset($module->getData('config')['settings'])) {
-                foreach ($module->getData('config')['settings'] as $groupName => $settingGroup) {
-                    if (!in_array($scope, $settingGroup['scopes'])) {
-                        continue;
-                    }
-                    if (!isset($settings[$groupName])) {
-                        $settings[$groupName] = [
-                            'fields' => []
-                        ];
-                    }
-                    if (isset($settingGroup['label'])) {
-                        $settings[$groupName]['label'] = $settingGroup['label'];
-                    }
-                    if (isset($settingGroup['sort_order'])) {
-                        $settings[$groupName]['sort_order'] = $settingGroup['sort_order'];
-                    }
-                    $fields = [];
-                    foreach ($settingGroup['fields'] as $fieldName => $field) {
-                        if (!in_array($scope, $field['scopes'])) {
-                            continue;
-                        }
-                        $field['name'] = $groupName . '/' . $fieldName;
-                        $field['label'] = __($field['label']);
-                        $fields[$fieldName] = $field;
-                    }
-                    $settings[$groupName]['fields'] = array_merge(
-                        $settings[$groupName]['fields'],
-                        $fields
-                    );
+
+        $settings = [];
+        foreach ($this->config->getSettings() as $groupName => $settingGroup) {
+            if (!in_array($scope, $settingGroup['scopes'])) {
+                continue;
+            }
+            $settings[$groupName]['label'] = __($settingGroup['label']);
+            $settings[$groupName]['sort_order'] = $settingGroup['sort_order'];
+            foreach ($settingGroup['fields'] as $fieldName => $field) {
+                if (!in_array($scope, $field['scopes'])) {
+                    continue;
                 }
+                $field['label'] = __($field['label']);
+                $settings[$groupName]['fields'][$fieldName] = $field;
             }
         }
         uasort(

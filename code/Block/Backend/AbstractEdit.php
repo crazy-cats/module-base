@@ -24,13 +24,13 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
     /**
      * field types
      */
-    const FIELD_TYPE_EDITOR = 'editor';
-    const FIELD_TYPE_HIDDEN = 'hidden';
-    const FIELD_TYPE_MULTISELECT = 'multiselect';
-    const FIELD_TYPE_PASSWORD = 'password';
-    const FIELD_TYPE_SELECT = 'select';
-    const FIELD_TYPE_TEXT = 'text';
-    const FIELD_TYPE_TEXTAREA = 'textarea';
+    public const FIELD_TYPE_EDITOR = 'editor';
+    public const FIELD_TYPE_HIDDEN = 'hidden';
+    public const FIELD_TYPE_MULTISELECT = 'multiselect';
+    public const FIELD_TYPE_PASSWORD = 'password';
+    public const FIELD_TYPE_SELECT = 'select';
+    public const FIELD_TYPE_TEXT = 'text';
+    public const FIELD_TYPE_TEXTAREA = 'textarea';
 
     protected $template = 'CrazyCat\Base::edit';
 

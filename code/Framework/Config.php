@@ -4,10 +4,14 @@
 namespace CrazyCat\Base\Framework;
 
 use CrazyCat\Base\Model\Stage\Manager as StageManager;
+use CrazyCat\Framework\App\Config as AppConfig;
 
 class Config
 {
-    public const CACHE_NAME = 'config';
+    public const CACHE_NAME = 'scope_config';
+    public const CACHE_SETTINGS_NAME = 'scope_config_settings';
+
+    public const CONFIG_FILE = 'settings.php';
 
     public const SCOPE_GLOBAL = 'global';
     public const SCOPE_STAGE = 'stage';
@@ -18,9 +22,19 @@ class Config
     protected $cache;
 
     /**
+     * @var \CrazyCat\Framework\App\Cache\AbstractCache
+     */
+    protected $settingsCache;
+
+    /**
      * @var \CrazyCat\Framework\App\Db\MySql
      */
     protected $conn;
+
+    /**
+     * @var \CrazyCat\Framework\App\Component\Module\Manager
+     */
+    protected $moduleManager;
 
     /**
      * @var string
@@ -29,10 +43,15 @@ class Config
 
     public function __construct(
         \CrazyCat\Framework\App\Cache\Manager $cacheManager,
+        \CrazyCat\Framework\App\Component\Module\Manager $moduleManager,
         \CrazyCat\Framework\App\Db\Manager $dbManager
     ) {
-        $this->cache = $cacheManager->create(self::CACHE_NAME);
+        $this->moduleManager = $moduleManager;
+
         $this->conn = $dbManager->getConnection();
+
+        $this->cache = $cacheManager->create(self::CACHE_NAME);
+        $this->settingsCache = $cacheManager->create(self::CACHE_SETTINGS_NAME);
     }
 
     /**
@@ -61,6 +80,52 @@ class Config
     protected function getCacheKey($scope, $stageId)
     {
         return $scope . ($stageId === null ? '' : ('-' . $stageId));
+    }
+
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
+    public function getSettings()
+    {
+        if (empty($this->settingsCache->getData())) {
+            $settings = [];
+            foreach ($this->moduleManager->getEnabledModules() as $module) {
+                $configFile = $module->getData('dir') . DS . AppConfig::DIR . DS . self::CONFIG_FILE;
+                if (!is_file($configFile)) {
+                    continue;
+                }
+                $moduleSettings = require $configFile;
+                foreach ($moduleSettings as $groupName => $settingGroup) {
+                    if (!isset($settings[$groupName])) {
+                        $settings[$groupName] = [
+                            'fields' => []
+                        ];
+                    }
+                    if (isset($settingGroup['label'])) {
+                        $settings[$groupName]['label'] = $settingGroup['label'];
+                    }
+                    if (isset($settingGroup['scopes'])) {
+                        $settings[$groupName]['scopes'] = $settingGroup['scopes'];
+                    }
+                    if (isset($settingGroup['sort_order'])) {
+                        $settings[$groupName]['sort_order'] = $settingGroup['sort_order'];
+                    }
+                    $fields = [];
+                    foreach ($settingGroup['fields'] as $fieldName => $field) {
+                        $field['name'] = $groupName . '/' . $fieldName;
+                        $field['label'] = $field['label'];
+                        $fields[$fieldName] = $field;
+                    }
+                    $settings[$groupName]['fields'] = array_merge(
+                        $settings[$groupName]['fields'],
+                        $fields
+                    );
+                }
+            }
+            $this->settingsCache->setData($settings)->save();
+        }
+        return $this->settingsCache->getData();
     }
 
     /**

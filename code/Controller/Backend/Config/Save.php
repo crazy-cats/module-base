@@ -38,6 +38,7 @@ class Save extends \CrazyCat\Framework\App\Component\Module\Controller\Backend\A
 
     /**
      * @return void
+     * @throws \Exception
      */
     protected function execute()
     {
