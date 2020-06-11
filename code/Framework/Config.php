@@ -84,7 +84,6 @@ class Config
 
     /**
      * @return void
-     * @throws \ReflectionException
      */
     public function getSettings()
     {
@@ -159,10 +158,13 @@ class Config
         }
 
         $configData = $this->cache->getData($cacheKey);
-        if (!isset($configData[$path]) && $scope == self::SCOPE_STAGE) {
-            return $this->getValue($path);
+        if (!isset($configData[$path])) {
+            $settings = $this->getSettings();
+            [$groupName, $fieldName] = explode('/', $path);
+            $configData[$path] = $settings[$groupName]['fields'][$fieldName]['default']
+                ?? ($scope == self::SCOPE_STAGE ? $this->getValue($path, self::SCOPE_GLOBAL) : null);
         }
-        return $configData[$path] ?? null;
+        return $configData[$path];
     }
 
     /**
