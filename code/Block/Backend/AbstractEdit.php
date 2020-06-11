@@ -48,6 +48,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
 
     /**
      * @param array $field
+     * @param mixed  $value
      * @return mixed
      */
     protected function getFieldValue(array $field, $value = null)
@@ -71,6 +72,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
      * @param array $field
      * @param mixed $value
      * @return string
+     * @throws \ReflectionException
      */
     public function renderField($field, $value = null)
     {
@@ -124,12 +126,13 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
      * Return array structure is like:
      * [
      *     [
-     *         'name'     => string,
-     *         'label'    => string,
-     *         'type'     => string,
-     *         'renderer' => string,
-     *         'source'   => string,
-     *         'options'  => array
+     *         'name'          => string,
+     *         'label'         => string,
+     *         'type'          => string,
+     *         'renderer'      => string,
+     *         'source'        => string,
+     *         'options'       => array,
+     *         'default_value' => mixed
      *     ]
      * ]
      *

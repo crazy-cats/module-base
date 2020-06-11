@@ -114,7 +114,6 @@ class Config
                     $fields = [];
                     foreach ($settingGroup['fields'] as $fieldName => $field) {
                         $field['name'] = $groupName . '/' . $fieldName;
-                        $field['label'] = $field['label'];
                         $fields[$fieldName] = $field;
                     }
                     $settings[$groupName]['fields'] = array_merge(
