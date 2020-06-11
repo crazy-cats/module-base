@@ -32,10 +32,11 @@ return [
         'sort_order' => 2,
         'fields'     => [
             'theme'                    => [
-                'label'  => 'Theme',
-                'scopes' => ['global', 'stage'],
-                'type'   => 'select',
-                'source' => 'CrazyCat\Base\Model\Source\Themes'
+                'label'   => 'Theme',
+                'scopes'  => ['global', 'stage'],
+                'type'    => 'select',
+                'source'  => 'CrazyCat\Base\Model\Source\Themes',
+                'default' => 'default'
             ],
             'default_page_title'       => [
                 'label'  => 'Default Page Title',

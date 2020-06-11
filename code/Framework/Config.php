@@ -159,10 +159,14 @@ class Config
 
         $configData = $this->cache->getData($cacheKey);
         if (!isset($configData[$path])) {
-            $settings = $this->getSettings();
-            [$groupName, $fieldName] = explode('/', $path);
-            $configData[$path] = $settings[$groupName]['fields'][$fieldName]['default']
-                ?? ($scope == self::SCOPE_STAGE ? $this->getValue($path, self::SCOPE_GLOBAL) : null);
+            $configData[$path] = ($scope == self::SCOPE_STAGE)
+                ? $this->getValue($path, self::SCOPE_GLOBAL)
+                : null;
+            if ($configData[$path] === null) {
+                $settings = $this->getSettings();
+                [$groupName, $fieldName] = explode('/', $path);
+                $configData[$path] = $settings[$groupName]['fields'][$fieldName]['default'] ?? null;
+            }
         }
         return $configData[$path];
     }
