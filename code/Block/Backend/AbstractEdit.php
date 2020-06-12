@@ -7,7 +7,9 @@
 
 namespace CrazyCat\Base\Block\Backend;
 
+use CrazyCat\Base\Block\Form\Renderer\File as FileRenderer;
 use CrazyCat\Base\Block\Form\Renderer\Hidden as HiddenRenderer;
+use CrazyCat\Base\Block\Form\Renderer\Image as ImageRenderer;
 use CrazyCat\Base\Block\Form\Renderer\Password as PasswordRenderer;
 use CrazyCat\Base\Block\Form\Renderer\Select as SelectRenderer;
 use CrazyCat\Base\Block\Form\Renderer\Text as TextRenderer;
@@ -25,7 +27,9 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
      * field types
      */
     public const FIELD_TYPE_EDITOR = 'editor';
+    public const FIELD_TYPE_FILE = 'file';
     public const FIELD_TYPE_HIDDEN = 'hidden';
+    public const FIELD_TYPE_IMAGE = 'image';
     public const FIELD_TYPE_MULTISELECT = 'multiselect';
     public const FIELD_TYPE_PASSWORD = 'password';
     public const FIELD_TYPE_SELECT = 'select';
@@ -48,7 +52,7 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
 
     /**
      * @param array $field
-     * @param mixed  $value
+     * @param mixed $value
      * @return mixed
      */
     protected function getFieldValue(array $field, $value = null)
@@ -80,8 +84,16 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
             $renderer = $this->objectManager->create($field['renderer']);
         } else {
             switch ($field['type']) {
+                case self::FIELD_TYPE_FILE:
+                    $renderer = $this->objectManager->create(FileRenderer::class);
+                    break;
+
                 case self::FIELD_TYPE_HIDDEN:
                     $renderer = $this->objectManager->create(HiddenRenderer::class);
+                    break;
+
+                case self::FIELD_TYPE_IMAGE:
+                    $renderer = $this->objectManager->create(ImageRenderer::class);
                     break;
 
                 case self::FIELD_TYPE_PASSWORD:
