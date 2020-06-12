@@ -16,20 +16,23 @@ $value = $this->getValue();
 <?php endif; ?>
 <?php if ($value) : ?>
     <div class="file">
-        <a target="_blank" href="<?= $this->getFileUrl() ?>">
+        <a target="_blank" href="<?= htmlEscape($this->getFileUrl()) ?>">
             <?= $value ?>
         </a>
+        <input type="hidden"
+               name="<?= htmlEscape($this->getFieldName()) ?>"
+               value="<?= htmlEscape($value) ?>">
         <input type="checkbox"
                id="<?= $this->getFieldId(); ?>-remove"
-               name="<?= $this->getFieldName(); ?>[remove]"/>
+               name="<?= htmlEscape($this->getFieldName()) ?>[remove]"/>
         <label for="<?= $this->getFieldId(); ?>-remove"><?= __('Remove') ?></label>
     </div>
 <?php endif; ?>
     <div class="input-box">
         <input type="file"
-               class="input-file <?= $this->getClasses(); ?>"
-               id="<?= $this->getFieldId(); ?>"
-               name="<?= $this->getFieldName(); ?>"
+               class="input-file <?= $this->getClasses() ?>"
+               id="<?= $this->getFieldId() ?>"
+               name="<?= htmlEscape($this->getFieldName()) ?>"
             <?php
             foreach ($this->getParams() as $k => $v) :
                 echo sprintf('%s="%s"', $k, htmlEscape($v));
