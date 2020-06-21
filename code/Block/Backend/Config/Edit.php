@@ -41,7 +41,7 @@ class Edit extends \CrazyCat\Base\Block\Backend\AbstractEdit
      */
     protected function getFieldValue(array $field, $value = null)
     {
-        return $field['default'] ?? $value;
+        return ($value !== null) ? $value : ($field['default'] ?? null);
     }
 
     /**
