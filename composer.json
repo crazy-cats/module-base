@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CrazyCat\\Core\\": "code/"
+            "CrazyCat\\Base\\": "code/"
         },
         "files": [
             "registration.php"
