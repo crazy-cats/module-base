@@ -126,7 +126,11 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
         }
 
         return $renderer->addData(
-            ['name' => $field['name'], 'field' => $field, 'value' => $this->getFieldValue($field, $value)]
+            [
+                'name'  => $field['name'],
+                'field' => $field,
+                'value' => $this->getFieldValue($field, $value)
+            ]
         )
             ->setFieldNamePrefix('data')
             ->withLabel(true)

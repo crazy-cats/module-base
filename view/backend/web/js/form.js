@@ -32,7 +32,7 @@ define(['jquery', 'utility', 'editor', 'CrazyCat/Base/js/validation'], function 
                 if (fields[i].type === 'editor') {
                     editor.init({
                         selector: '#data_' + fields[i].name,
-                        height: opts.editor.height,
+                        height: fields[i].height || opts.editor.height,
                         theme: 'modern',
                         plugins: 'searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help code',
                         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | link image | removeformat code',
