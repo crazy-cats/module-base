@@ -15,16 +15,18 @@ return [
     'template' => '2columns_left',
     'blocks'   => [
         'header' => [
-            'header-buttons' => [
-                'class' => 'CrazyCat\Base\Block\Template',
-                'data'  => [
-                    'template' => 'CrazyCat\Base::header_buttons',
-                    'buttons'  => [
-                        'new' => [
-                            'label'  => __('Create New'),
-                            'action' => [
-                                'type'   => 'redirect',
-                                'params' => ['url' => getUrl('system/stage/edit')]
+            'children' => [
+                'header-buttons' => [
+                    'class' => 'CrazyCat\Base\Block\Template',
+                    'data'  => [
+                        'template' => 'CrazyCat\Base::header_buttons',
+                        'buttons'  => [
+                            'new' => [
+                                'label'  => __('Create New'),
+                                'action' => [
+                                    'type'   => 'redirect',
+                                    'params' => ['url' => getUrl('system/stage/edit')]
+                                ]
                             ]
                         ]
                     ]
@@ -32,8 +34,10 @@ return [
             ]
         ],
         'main'   => [
-            'gird-form' => [
-                'class' => 'CrazyCat\Base\Block\Backend\Stage\Grid'
+            'children' => [
+                'gird-form' => [
+                    'class' => 'CrazyCat\Base\Block\Backend\Stage\Grid'
+                ]
             ]
         ]
     ]

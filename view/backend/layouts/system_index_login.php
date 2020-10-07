@@ -15,9 +15,11 @@ return [
     'template' => 'home',
     'blocks'   => [
         'main' => [
-            'login' => [
-                'class' => 'CrazyCat\Base\Block\Template',
-                'data'  => ['template' => 'CrazyCat\Base::login']
+            'children' => [
+                'login' => [
+                    'class' => 'CrazyCat\Base\Block\Template',
+                    'data'  => ['template' => 'CrazyCat\Base::login']
+                ]
             ]
         ]
     ]

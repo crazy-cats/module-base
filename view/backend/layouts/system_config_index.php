@@ -15,28 +15,32 @@ return [
     'template' => '2columns_left',
     'blocks'   => [
         'header' => [
-            'header-buttons' => [
-                'class' => 'CrazyCat\Base\Block\Template',
-                'data'  => [
-                    'template' => 'CrazyCat\Base::header_buttons',
-                    'buttons'  => [
-                        'save' => [
-                            'label'  => __('Save'),
-                            'action' => [
-                                'type'   => 'save',
-                                'params' => ['target' => '#edit-form']
-                            ]
-                        ],
+            'children' => [
+                'header-buttons' => [
+                    'class' => 'CrazyCat\Base\Block\Template',
+                    'data'  => [
+                        'template' => 'CrazyCat\Base::header_buttons',
+                        'buttons'  => [
+                            'save' => [
+                                'label'  => __('Save'),
+                                'action' => [
+                                    'type'   => 'save',
+                                    'params' => ['target' => '#edit-form']
+                                ]
+                            ],
+                        ]
                     ]
+                ],
+                'scopes'         => [
+                    'class' => 'CrazyCat\Base\Block\Backend\Scopes'
                 ]
-            ],
-            'scopes'         => [
-                'class' => 'CrazyCat\Base\Block\Backend\Scopes'
             ]
         ],
         'main'   => [
-            'main-content' => [
-                'class' => 'CrazyCat\Base\Block\Backend\Config\Edit'
+            'children' => [
+                'main-content' => [
+                    'class' => 'CrazyCat\Base\Block\Backend\Config\Edit'
+                ]
             ]
         ]
     ]
