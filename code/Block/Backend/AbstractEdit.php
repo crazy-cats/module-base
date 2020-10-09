@@ -122,6 +122,9 @@ abstract class AbstractEdit extends \CrazyCat\Framework\App\Component\Module\Blo
                 case self::FIELD_TYPE_EDITOR:
                     $renderer = $this->objectManager->create(TextareaRenderer::class);
                     break;
+
+                default:
+                    throw(new \Exception('Invalid field type.'));
             }
         }
 
