@@ -25,7 +25,7 @@ class Context extends \CrazyCat\Framework\App\Component\Theme\Block\Context
         \CrazyCat\Framework\App\Area $area,
         \CrazyCat\Framework\App\Io\Http\Request $request,
         \CrazyCat\Framework\App\Registry $registry,
-        \CrazyCat\Framework\App\Cache\Manager $cacheFactory,
+        \CrazyCat\Framework\App\Cache\Manager $cacheManager,
         \CrazyCat\Framework\App\Component\Module\Manager $moduleManager,
         \CrazyCat\Framework\App\Component\Language\Translator $translator,
         \CrazyCat\Framework\App\Component\Theme\Manager $themeManager,
@@ -34,7 +34,7 @@ class Context extends \CrazyCat\Framework\App\Component\Theme\Block\Context
     ) {
         parent::__construct(
             $area,
-            $cacheFactory,
+            $cacheManager,
             $translator,
             $themeManager,
             $eventManager,
