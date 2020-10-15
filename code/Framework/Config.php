@@ -9,7 +9,8 @@ use CrazyCat\Framework\App\Config as AppConfig;
 class Config
 {
     public const CACHE_NAME = 'scope_config';
-    public const CACHE_SETTINGS_NAME = 'scope_config_settings';
+    public const CACHE_KEY_CONFIG = 'config';
+    public const CACHE_KEY_SETTINGS = 'settings';
 
     public const CONFIG_FILE = 'settings.php';
 
@@ -20,11 +21,6 @@ class Config
      * @var \CrazyCat\Framework\App\Cache\AbstractCache
      */
     protected $cache;
-
-    /**
-     * @var \CrazyCat\Framework\App\Cache\AbstractCache
-     */
-    protected $settingsCache;
 
     /**
      * @var \CrazyCat\Framework\App\Db\MySql
@@ -51,7 +47,6 @@ class Config
         $this->conn = $dbManager->getConnection();
 
         $this->cache = $cacheManager->create(self::CACHE_NAME);
-        $this->settingsCache = $cacheManager->create(self::CACHE_SETTINGS_NAME);
     }
 
     /**
@@ -87,7 +82,8 @@ class Config
      */
     public function getSettings()
     {
-        if (empty($this->settingsCache->getData())) {
+        $settings = $this->cache->getData(self::CACHE_KEY_SETTINGS);
+        if (empty($settings)) {
             $settings = [];
             foreach ($this->moduleManager->getEnabledModules() as $module) {
                 $configFile = $module->getData('dir') . DS . AppConfig::DIR . DS . self::CONFIG_FILE;
@@ -121,9 +117,9 @@ class Config
                     );
                 }
             }
-            $this->settingsCache->setData($settings)->save();
+            $this->cache->setData(self::CACHE_KEY_SETTINGS, $settings)->save();
         }
-        return $this->settingsCache->getData();
+        return $settings;
     }
 
     /**
@@ -135,8 +131,9 @@ class Config
      */
     public function getValue($path, $scope = self::SCOPE_GLOBAL, $stageId = StageManager::GLOBAL_STAGE_ID)
     {
+        $config = $this->cache->getData(self::CACHE_KEY_CONFIG);
         $cacheKey = $this->getCacheKey($scope, $stageId);
-        if (!$this->cache->hasData($cacheKey)) {
+        if (!isset($config[$cacheKey])) {
             if ($scope === self::SCOPE_GLOBAL) {
                 $sql = sprintf(
                     'SELECT `path`, `value` FROM %s WHERE `scope` = ?',
@@ -154,21 +151,21 @@ class Config
             foreach ($data as $key => $value) {
                 $data[$key] = $this->decodeValue($value);
             }
-            $this->cache->setData($cacheKey, $data)->save();
+            $config[$cacheKey] = $data;
+            $this->cache->setData(self::CACHE_KEY_CONFIG, $config)->save();
         }
 
-        $configData = $this->cache->getData($cacheKey);
-        if (!isset($configData[$path])) {
-            $configData[$path] = ($scope == self::SCOPE_STAGE)
+        if (!isset($config[$cacheKey][$path])) {
+            $config[$cacheKey][$path] = ($scope == self::SCOPE_STAGE)
                 ? $this->getValue($path, self::SCOPE_GLOBAL)
                 : null;
-            if ($configData[$path] === null) {
+            if ($config[$cacheKey][$path] === null) {
                 $settings = $this->getSettings();
                 [$groupName, $fieldName] = explode('/', $path);
-                $configData[$path] = $settings[$groupName]['fields'][$fieldName]['default'] ?? null;
+                $config[$cacheKey][$path] = $settings[$groupName]['fields'][$fieldName]['default'] ?? null;
             }
         }
-        return $configData[$path];
+        return $config[$cacheKey][$path];
     }
 
     /**
@@ -180,7 +177,7 @@ class Config
      */
     public function saveConfig($configData, $scope, $stageId = 0)
     {
-        $this->cache->setData($this->getCacheKey($scope, $stageId), $configData)->save();
+        $this->cache->setData(self::CACHE_KEY_CONFIG, $this->getCacheKey($scope, $stageId), $configData)->save();
 
         $data = [];
         foreach ($configData as $path => $value) {
